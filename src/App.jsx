@@ -75,18 +75,24 @@ export default function App() {
       </form>
       <ul className="search-suggestions">
         {suggestions
-          ? suggestions.map(suggestion => (
+          ? suggestions.map((suggestion, i) => (
               <button
                 key={suggestion + "-button"}
                 type="button"
-                className="js-search-suggestion search-suggestion"
-                data-suggestion={suggestion}
+                id={"search-suggestion-" + i}
+                className="search-suggestion"
+                //data-suggestion={suggestion}
+                onKeyDown={function(e) {
+                  if (e.keyCode === 27) {
+                    document.getElementById("search-input").value = search;
+                  }
+                }}
                 onMouseOver={() =>
                   (document.getElementById(
                     "search-input"
-                  ).value = document.getElementsByClassName(
-                    "search-suggestion"
-                  )[0].textContent)
+                  ).value = document.getElementById(
+                    "search-suggestion-" + i
+                  ).textContent)
                 }
                 onMouseOut={() =>
                   (document.getElementById("search-input").value = search)
@@ -94,9 +100,9 @@ export default function App() {
                 onFocus={() =>
                   (document.getElementById(
                     "search-input"
-                  ).value = document.getElementsByClassName(
-                    "search-suggestion"
-                  )[0].textContent)
+                  ).value = document.getElementById(
+                    "search-suggestion-" + i
+                  ).textContent)
                 }
                 onClick={() =>
                   (window.location.href =

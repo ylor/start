@@ -42,6 +42,12 @@ export default function App() {
     }
   }, [search]);
 
+  function parseInput(event) {
+    event.preventDefault();
+    console.log(event.target);
+    window.location.href = "https://www.google.com/search?q=" + search;
+  }
+
   return (
     <div className="App">
       <img src={logo} className="App-logo" alt="logo" />
@@ -53,12 +59,8 @@ export default function App() {
         autoComplete="off"
         autoCorrect="off"
         spellCheck="false"
-        onChange={e => setSearch(e.target.value)}
-        onSubmit={e => {
-          e.preventDefault();
-          console.log(e.target);
-          window.location.href = "https://www.google.com/search?q=" + search;
-        }}
+        onChange={event => setSearch(event.target.value)}
+        onSubmit={event => parseInput(event)}
       >
         <input
           className="search-input"
@@ -66,6 +68,9 @@ export default function App() {
           placeholder="Search"
           title="Search"
           type="text"
+          onFocus={() =>
+            (document.getElementById("search-input").value = search)
+          }
         />
       </form>
       <ul className="search-suggestions">
@@ -76,6 +81,23 @@ export default function App() {
                 type="button"
                 className="js-search-suggestion search-suggestion"
                 data-suggestion={suggestion}
+                onMouseOver={() =>
+                  (document.getElementById(
+                    "search-input"
+                  ).value = document.getElementsByClassName(
+                    "search-suggestion"
+                  )[0].textContent)
+                }
+                onMouseOut={() =>
+                  (document.getElementById("search-input").value = search)
+                }
+                onFocus={() =>
+                  (document.getElementById(
+                    "search-input"
+                  ).value = document.getElementsByClassName(
+                    "search-suggestion"
+                  )[0].textContent)
+                }
                 onClick={() =>
                   (window.location.href =
                     "https://google.com/search?q=" + suggestion)

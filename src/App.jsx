@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
 
+import config from "./js/config";
+import { clock } from "./js/utils";
+
+import Clock from "./components/Clock";
+//import Suggestions from "./components/Suggestions";
+//import Weather from "./components/Weather";
+
 import logo from "./logo.svg";
 import "./App.scss";
 
@@ -9,58 +16,68 @@ export default function App() {
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchSuggestions() {
       try {
         const response = await fetchJsonp(
-          "https://duckduckgo.com/ac/?q="+search+"&type=list",
+          "https://duckduckgo.com/ac/?q=" + search,
           {
             jsonpCallbackFunction: "autocompleteCallback"
           }
         );
 
-        const data = await response.json();
+        const json = await response.json();
+        const data = json.map(data => data.phrase);
 
         console.log(data);
-        setSuggestions(data[1]);
+        setSuggestions(data);
       } catch (e) {
-        console.log(e);
+        return null;
+        //console.log(e);
       }
-    };
-    fetchData();
+    }
+    if (search.length < 1) {
+      setSuggestions([]);
+    } else {
+      fetchSuggestions();
+    }
   }, [search]);
-
-  console.log(suggestions);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <form
-          autoComplete="off"
-          className="center overlay search-form"
-          id="search-form"
-          autoCorrect="off"
-          autoCapitalize="none"
-          spellCheck="false"
-        >
-          <div>
-            <input
-              className="search-input"
-              id="search-input"
-              title="search"
-              type="text"
-              placeholder="search"
-              onChange={e => setSearch(e.target.value)}
-            />
-            <ul className="search-suggestions" id="search-suggestions">
-              {suggestions ? suggestions.map(el => (
-                <li key={el}>{el}</li>
-              )):null}
-            </ul>
-          </div>
-        </form>
-        <aside className="center help overlay" id="help" />
-      </header>
+      <Clock />
+      <img src={logo} className="App-logo" alt="logo" />
+      <form
+        className="center overlay search-form"
+        id="search-form"
+        autoCapitalize="none"
+        autoComplete="off"
+        autoCorrect="off"
+        spellCheck="false"
+        onChange={e => setSearch(e.target.value)}
+        onSubmit={e => {
+          e.preventDefault();
+          console.log(e.target);
+          window.location.href = "https://www.google.com/search?q=" + search;
+        }}
+      >
+        <div>
+          <input
+            className="search-input"
+            id="search-input"
+            placeholder="search"
+            title="search"
+            type="text"
+          />
+          <ul className="search-suggestions" id="search-suggestions">
+            {suggestions
+              ? suggestions.map(suggestion => (
+                  <li key={suggestion}>{suggestion}</li>
+                ))
+              : null}
+          </ul>
+        </div>
+      </form>
+      <aside className="center help overlay" id="help" />
     </div>
   );
 }

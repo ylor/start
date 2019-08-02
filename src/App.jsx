@@ -44,8 +44,8 @@ export default function App() {
 
   return (
     <div className="App">
-      <Clock />
       <img src={logo} className="App-logo" alt="logo" />
+      <Clock />
       <form
         className="center overlay search-form"
         id="search-form"
@@ -60,23 +60,32 @@ export default function App() {
           window.location.href = "https://www.google.com/search?q=" + search;
         }}
       >
-        <div>
-          <input
-            className="search-input"
-            id="search-input"
-            placeholder="search"
-            title="search"
-            type="text"
-          />
-          <ul className="search-suggestions" id="search-suggestions">
-            {suggestions
-              ? suggestions.map(suggestion => (
-                  <li key={suggestion}>{suggestion}</li>
-                ))
-              : null}
-          </ul>
-        </div>
+        <input
+          className="search-input"
+          id="search-input"
+          placeholder="Search"
+          title="Search"
+          type="text"
+        />
       </form>
+      <ul className="search-suggestions">
+        {suggestions
+          ? suggestions.map(suggestion => (
+              <button
+                key={suggestion + "-button"}
+                type="button"
+                className="js-search-suggestion search-suggestion"
+                data-suggestion={suggestion}
+                onClick={() =>
+                  (window.location.href =
+                    "https://google.com/search?q=" + suggestion)
+                }
+              >
+                <li key={suggestion + "-li"}>{suggestion}</li>
+              </button>
+            ))
+          : null}
+      </ul>
       <aside className="center help overlay" id="help" />
     </div>
   );

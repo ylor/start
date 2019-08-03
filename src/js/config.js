@@ -186,7 +186,7 @@ export const config = {
     },
     {
       name: "Plex.tv",
-      key: "plex.tv",
+      key: "plex",
       url: "https://app.plex.tv"
     },
     {

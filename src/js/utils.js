@@ -51,9 +51,9 @@ export function parseInput() {
   const { commands } = config;
   //console.log("config commands", commands);
   const keys = commands.map(command => command.key);
-  //console.log("keys", keys);
+  console.log("keys", keys);
 
-  const input = "plex";
+  const input = "od";
 
   if (input.includes("-")) {
     //handle search
@@ -80,7 +80,7 @@ export function parseInput() {
     if (
       input.includes(
         ".com" ||
-          ".org." ||
+          ".org" ||
           ".net" ||
           ".io" ||
           ".co" ||
@@ -91,6 +91,7 @@ export function parseInput() {
     ) {
       console.log(input);
     } else if (keys.includes(input)) {
+      console.log(commands.find(x => x.key === input));
       // go to website
       console.log(commands.find(x => x.key === input).url);
     } else {

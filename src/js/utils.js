@@ -1,3 +1,6 @@
+const byId = id => document.getElementById(id);
+
+//TODO: refactor this to a switch?
 export function keyHandler(event) {
   //Listen for esc
   if (event.key === "Escape") {
@@ -18,6 +21,11 @@ export function keyHandler(event) {
   } else {
     changeFocus("search-input");
   }
+}
+
+export function mouseHandler(element) {
+  // Add event listener to only change focus if mouse is moving. Helps maintain integrity of input when suggestion has been returned and typing has continued from there
+  byId(element).addEventListener("mousemove", event => changeFocus(element));
 }
 
 export function changeFocus(element) {

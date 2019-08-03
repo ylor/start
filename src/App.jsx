@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
 
-import { changeFocus, keyHandler, parseInput, replaceInput } from "./js/utils";
+import {
+  changeFocus,
+  keyHandler,
+  mouseHandler,
+  parseInput,
+  replaceInput
+} from "./js/utils";
 
 import Clock from "./components/Clock";
 //import Suggestions from "./components/Suggestions";
@@ -90,7 +96,17 @@ export default function App() {
                 id={"search-suggestion-" + i}
                 className="search-suggestion move"
                 onKeyDown={e => keyHandler(e)}
-                onMouseOver={() => changeFocus("search-suggestion-" + i)}
+                // onMouseOver={() => {
+                //   var moved = false;
+                //   window.onmousemove = function(e) {
+                //     if (!moved) {
+                //       moved = true;
+                //       // do what you want after mousemove, here
+                //       changeFocus("search-suggestion-" + i);
+                //     }
+                //   };
+                // }}
+                onMouseOver={() => mouseHandler("search-suggestion-" + i)}
                 onFocus={() => replaceInput("search-suggestion-" + i)}
                 onClick={() =>
                   parseInput("https://google.com/search?q=" + suggestion)

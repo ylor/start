@@ -1,3 +1,5 @@
+import { config } from "./config";
+
 const byId = id => document.getElementById(id);
 
 //TODO: refactor this to a switch?
@@ -5,7 +7,7 @@ export function keyHandler(event) {
   //Listen for esc
   if (event.key === "Escape") {
     //if search-input is focused then clear the input
-    if (document.activeElement === document.getElementById("search-input")) {
+    if (document.activeElement === byId("search-input")) {
       clearInput();
     } else {
       //Else restore the focus to the search-input
@@ -29,23 +31,42 @@ export function mouseHandler(element) {
 }
 
 export function changeFocus(element) {
-  document.getElementById(element).focus();
-}
-
-export function parseInput(destination) {
-  window.location.href = destination;
+  byId(element).focus();
 }
 
 export function replaceInput(suggestion) {
-  document.getElementById("search-input").value = document.getElementById(
-    suggestion
-  ).textContent;
+  byId("search-input").value = byId(suggestion).textContent;
 }
 
 export function restoreInput(text) {
-  document.getElementById("search-input").value = text;
+  byId("search-input").value = text;
 }
 
 export function clearInput() {
-  document.getElementById("search-input").value = "";
+  byId("search-input").value = "";
+}
+
+export function parseInput(input) {
+  const { commands } = config;
+  console.log("config commands", commands);
+
+  const keys = commands.map(command => command.key);
+  console.log("keys", keys);
+
+  if (keys.includes("gb")) {
+    console.log(true);
+    console.log(commands.find(x => x.key === "gb").url);
+  } else {
+    console.log(false);
+    console.log(
+      commands.find(command => command.key === "*").url +
+        commands
+          .find(command => command.key === "*")
+          .search.replace("{}", "searchinput")
+    );
+  }
+}
+
+export function submitInput(destination) {
+  window.location.href = destination;
 }

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
 
 import {
-  changeFocus,
   keyHandler,
   mouseHandler,
-  parseInput,
-  replaceInput
+  submitInput,
+  replaceInput,
+  parseInput
 } from "./js/utils";
 
 import Clock from "./components/Clock";
@@ -16,11 +16,9 @@ import Clock from "./components/Clock";
 import logo from "./logo.svg";
 import "./App.scss";
 
-import { config } from "./js/config";
+//import { config } from "./js/config";
 
-console.log(config);
-const commands = config.commands;
-console.log(commands);
+parseInput()
 
 export default function App() {
   const [search, setSearch] = useState("");
@@ -71,7 +69,7 @@ export default function App() {
         onChange={event => setSearch(event.target.value)}
         onSubmit={e => {
           e.preventDefault();
-          parseInput(
+          submitInput(
             "https://google.com/search?q=" +
               document.getElementById("search-input").value
           );
@@ -109,7 +107,7 @@ export default function App() {
                 onMouseOver={() => mouseHandler("search-suggestion-" + i)}
                 onFocus={() => replaceInput("search-suggestion-" + i)}
                 onClick={() =>
-                  parseInput("https://google.com/search?q=" + suggestion)
+                  submitInput("https://google.com/search?q=" + suggestion)
                 }
               >
                 <li key={suggestion + "-li-" + i}>{suggestion}</li>

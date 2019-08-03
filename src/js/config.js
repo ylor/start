@@ -1,9 +1,10 @@
+/*
+ * The category, name, key, url, search path and color for your commands.
+ * If none of the specified keys are matched, the '*' key is used.
+ * Commands without a category don't show up in the help menu.
+ */
+
 export const config = {
-  /*
-   * The category, name, key, url, search path and color for your commands.
-   * If none of the specified keys are matched, the '*' key is used.
-   * Commands without a category don't show up in the help menu.
-   */
   commands: [
     {
       category: "",
@@ -126,7 +127,7 @@ export const config = {
     {
       name: "Giant Bomb",
       key: "gb",
-      url: "https://giantbomb.com/",
+      url: "https://giantbomb.com",
       search: "/search/?i=&q={}"
     },
     {
@@ -181,12 +182,12 @@ export const config = {
     {
       name: "OneDrive",
       key: "od",
-      url: "https://onedrive.live.com/"
+      url: "https://onedrive.live.com"
     },
     {
       name: "Plex.tv",
       key: "plex.tv",
-      url: "https://app.plex.tv/"
+      url: "https://app.plex.tv"
     },
     {
       name: "RARBG",
@@ -203,7 +204,7 @@ export const config = {
     {
       name: "Simplenote",
       key: "sn",
-      url: "https://app.simplenote.com/"
+      url: "https://app.simplenote.com"
     },
     {
       name: "ResetERA",
@@ -229,7 +230,7 @@ export const config = {
     {
       name: "Twitter",
       key: "twitter",
-      url: "https://twitter.com/home",
+      url: "https://twitter.com",
       search: "/search?q={}"
     },
     {
@@ -241,7 +242,7 @@ export const config = {
     {
       name: "YouTube",
       key: "yt",
-      url: "https://www.youtube.com/feed/subscriptions",
+      url: "https://www.youtube.com",
       search: "/results?search_query={}"
     },
     // Destiny
@@ -294,57 +295,5 @@ export const config = {
       key: "g",
       url: "https://boards.4chan.org/wg/catalog"
     }
-  ],
-  /**
-   * Get suggestions as you type.
-   */
-  suggestions: true,
-  suggestionsLimit: 4,
-  /**
-   * The order and limit for each suggestion influencer. An "influencer" is
-   * just a suggestion source. The following influencers are available:
-   *
-   * - "Default" suggestions come from CONFIG.defaultSuggestions
-   * - "DuckDuckGo" suggestions come from the duck duck go search api
-   * - "History" suggestions come from your previously entered queries
-   */
-  influencers: [
-    { name: "Default", limit: 4 },
-    { name: "History", limit: 1 },
-    { name: "DuckDuckGo", limit: 4 }
-  ],
-  /**
-   * Default search suggestions for the specified queries.
-   */
-  defaultSuggestions: {
-    //g: ['g/issues', 'g/pulls', 'gist.github.com'],
-    //l: ['l/#electronic+chill', 'l/#focus+instrumental', 'l/#piano+sleep'],
-    //: ['r/r/unixporn', 'r/r/startpages', 'r/r/webdev', 'r/r/technology'],
-    //s: ['s/you/likes', 's/discover/the-upload'],
-  },
-  /**
-   * The delimiter between a command key and your search query. For example,
-   * to search GitHub for potatoes, you'd type "g:potatoes".
-   */
-  searchDelimiter: ":",
-  /**
-   * The delimiter between a command key and a path. For example, you'd type
-   * "r/r/unixporn" to go to "https://reddit.com/r/unixporn".
-   */
-  pathDelimiter: "/",
-  /**
-   * The delimiter between the hours and minutes on the clock.
-   */
-  clockDelimiter: " ",
-  /**
-   * Show a twenty-four-hour clock instead of a twelve-hour clock with AM/PM.
-   */
-  twentyFourHourClock: false,
-  /**
-   * Action to take when the clock is clicked. Options include:
-   *
-   * - "Menu" to show the help menu
-   * - "Search" to show the search input
-   */
-  clockAction: "Search"
+  ]
 };

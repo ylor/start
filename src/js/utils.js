@@ -14,6 +14,7 @@ export function keyHandler(event) {
       changeFocus("search-input");
     }
   } else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+    // TODO
     // Change focus as if ArrowUp === Shitf+Tab
     // Change focus as if ArrowDown === Tab
   }
@@ -26,7 +27,7 @@ export function keyHandler(event) {
 }
 
 export function mouseHandler(element) {
-  // Add event listener to only change focus if mouse is moving. Helps maintain integrity of input when suggestion has been returned and typing has continued from there
+  // Add event listener to only change focus if mouse is moving. Helps maintain integrity of input when suggestions are being returned and typing has continued from there
   byId(element).addEventListener("mousemove", event => changeFocus(element));
 }
 
@@ -46,25 +47,67 @@ export function clearInput() {
   byId("search-input").value = "";
 }
 
-export function parseInput(input) {
+export function parseInput() {
   const { commands } = config;
-  console.log("config commands", commands);
-
+  //console.log("config commands", commands);
   const keys = commands.map(command => command.key);
-  console.log("keys", keys);
+  //console.log("keys", keys);
 
-  if (keys.includes("gb")) {
-    console.log(true);
-    console.log(commands.find(x => x.key === "gb").url);
-  } else {
-    console.log(false);
+  const input = "plex";
+
+  if (input.includes("-")) {
+    //handle search
+    const key = input.split("-")[0];
+    //console.log(key);
+    const search = input.split("-")[1];
+    //console.log(search);
+
     console.log(
-      commands.find(command => command.key === "*").url +
+      commands.find(command => command.key === key).url +
         commands
-          .find(command => command.key === "*")
-          .search.replace("{}", "searchinput")
+          .find(command => command.key === key)
+          .search.replace("{}", search)
     );
+  } else if (input.includes("/")) {
+    //handle path
+    const key = input.split("/")[0];
+    //console.log(key);
+    const path = input.split("/")[1];
+    //console.log(path);
+
+    console.log(commands.find(command => command.key === key).url + "/" + path);
+  } else {
+    if (
+      input.includes(
+        ".com" ||
+          ".org." ||
+          ".net" ||
+          ".io" ||
+          ".co" ||
+          ".co.uk" ||
+          ".edu" ||
+          ".gov"
+      )
+    ) {
+      console.log(input);
+    } else if (keys.includes(input)) {
+      // go to website
+      console.log(commands.find(x => x.key === input).url);
+    } else {
+      // search google
+      console.log(
+        commands.find(command => command.key === "*").url +
+          commands
+            .find(command => command.key === "*")
+            .search.replace("{}", input)
+      );
+    }
   }
+  //window.location.href = destination;
+}
+
+function toUrl(url) {
+  return new URL(url);
 }
 
 export function submitInput(destination) {

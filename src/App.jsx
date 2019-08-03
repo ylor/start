@@ -4,9 +4,9 @@ import fetchJsonp from "fetch-jsonp";
 import {
   keyHandler,
   mouseHandler,
-  submitInput,
+  parseInput,
   replaceInput,
-  parseInput
+  submitInput
 } from "./js/utils";
 
 import Clock from "./components/Clock";
@@ -18,9 +18,9 @@ import "./App.scss";
 
 //import { config } from "./js/config";
 
-parseInput()
-
 export default function App() {
+  parseInput();
+
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -53,6 +53,13 @@ export default function App() {
     } else {
       fetchSuggestions();
     }
+
+    window.addEventListener("keydown", keyHandler);
+    //console.log("Created");
+    return () => {
+      //console.log("Cleaned up");
+      window.removeEventListener("keydown", keyHandler);
+    };
   }, [search]);
 
   return (
@@ -82,7 +89,7 @@ export default function App() {
           title="Search"
           type="text"
           onKeyDown={e => keyHandler(e)}
-          autoFocus
+          //autoFocus
         />
       </form>
       <ul className="search-suggestions">
@@ -93,17 +100,7 @@ export default function App() {
                 type="button"
                 id={"search-suggestion-" + i}
                 className="search-suggestion move"
-                onKeyDown={e => keyHandler(e)}
-                // onMouseOver={() => {
-                //   var moved = false;
-                //   window.onmousemove = function(e) {
-                //     if (!moved) {
-                //       moved = true;
-                //       // do what you want after mousemove, here
-                //       changeFocus("search-suggestion-" + i);
-                //     }
-                //   };
-                // }}
+                // onKeyDown={e => keyHandler(e)}
                 onMouseOver={() => mouseHandler("search-suggestion-" + i)}
                 onFocus={() => replaceInput("search-suggestion-" + i)}
                 onClick={() =>

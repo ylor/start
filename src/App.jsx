@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
 
-import config from "./js/config";
-import { clock } from "./js/utils";
+import { changeFocus, keyHandler, parseInput, replaceInput } from "./js/utils";
 
 import Clock from "./components/Clock";
 //import Suggestions from "./components/Suggestions";
@@ -10,6 +9,12 @@ import Clock from "./components/Clock";
 
 import logo from "./logo.svg";
 import "./App.scss";
+
+import { config } from "./js/config";
+
+console.log(config);
+const commands = config.commands;
+console.log(commands);
 
 export default function App() {
   const [search, setSearch] = useState("");
@@ -26,27 +31,25 @@ export default function App() {
         );
 
         const json = await response.json();
-        const data = json.map(data => data.phrase);
+        const data = json
+          .map(val => val.phrase) // make a simple array
+          .filter(val => val !== search) // exclude items that equal what we have already typed in
+          .slice(0, 6); // take only the first six results
 
         console.log(data);
         setSuggestions(data);
-      } catch (e) {
+      } catch {
+        // This fails out a lot if you type quickly, but it doesn't seem to affect the application -- still get referenceErrors because it's trying to execute a script that no longer exists
         return null;
-        //console.log(e);
       }
     }
+
     if (search.length < 1) {
       setSuggestions([]);
     } else {
       fetchSuggestions();
     }
   }, [search]);
-
-  function parseInput(event) {
-    event.preventDefault();
-    console.log(event.target);
-    window.location.href = "https://www.google.com/search?q=" + search;
-  }
 
   return (
     <div className="App">
@@ -60,7 +63,13 @@ export default function App() {
         autoCorrect="off"
         spellCheck="false"
         onChange={event => setSearch(event.target.value)}
-        onSubmit={event => parseInput(event)}
+        onSubmit={e => {
+          e.preventDefault();
+          parseInput(
+            "https://google.com/search?q=" +
+              document.getElementById("search-input").value
+          );
+        }}
       >
         <input
           className="search-input"
@@ -68,48 +77,26 @@ export default function App() {
           placeholder="Search"
           title="Search"
           type="text"
-          onFocus={() =>
-            (document.getElementById("search-input").value = search)
-          }
+          onKeyDown={e => keyHandler(e)}
+          autoFocus
         />
       </form>
       <ul className="search-suggestions">
         {suggestions
           ? suggestions.map((suggestion, i) => (
               <button
-                key={suggestion + "-button"}
+                key={suggestion + "-button-" + i}
                 type="button"
                 id={"search-suggestion-" + i}
-                className="search-suggestion"
-                //data-suggestion={suggestion}
-                onKeyDown={function(e) {
-                  if (e.keyCode === 27) {
-                    document.getElementById("search-input").value = search;
-                  }
-                }}
-                onMouseOver={() =>
-                  (document.getElementById(
-                    "search-input"
-                  ).value = document.getElementById(
-                    "search-suggestion-" + i
-                  ).textContent)
-                }
-                onMouseOut={() =>
-                  (document.getElementById("search-input").value = search)
-                }
-                onFocus={() =>
-                  (document.getElementById(
-                    "search-input"
-                  ).value = document.getElementById(
-                    "search-suggestion-" + i
-                  ).textContent)
-                }
+                className="search-suggestion move"
+                onKeyDown={e => keyHandler(e)}
+                onMouseOver={() => changeFocus("search-suggestion-" + i)}
+                onFocus={() => replaceInput("search-suggestion-" + i)}
                 onClick={() =>
-                  (window.location.href =
-                    "https://google.com/search?q=" + suggestion)
+                  parseInput("https://google.com/search?q=" + suggestion)
                 }
               >
-                <li key={suggestion + "-li"}>{suggestion}</li>
+                <li key={suggestion + "-li-" + i}>{suggestion}</li>
               </button>
             ))
           : null}

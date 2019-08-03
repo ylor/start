@@ -12,7 +12,8 @@ export default function Clock() {
   }, []);
 
   return (
-    <time dateTime={time}>
+    // <time dateTime={time}>
+    <time>
       {time.toLocaleTimeString(navigator.language, {
         hour: "2-digit",
         minute: "2-digit"

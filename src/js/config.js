@@ -1,4 +1,4 @@
-const CONFIG = {
+export const config = {
   /*
    * The category, name, key, url, search path and color for your commands.
    * If none of the specified keys are matched, the '*' key is used.
@@ -9,7 +9,7 @@ const CONFIG = {
       category: "",
       name: "Google",
       key: "*",
-      url: "https://encrypted.google.com",
+      url: "https://google.com",
       search: "/search?q={}"
     },
     // Local

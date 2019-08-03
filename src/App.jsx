@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
 
 import {
+  byId,
   keyHandler,
   mouseHandler,
   parseInput,
@@ -19,8 +20,6 @@ import "./App.scss";
 //import { config } from "./js/config";
 
 export default function App() {
-  parseInput();
-
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -74,12 +73,9 @@ export default function App() {
         autoCorrect="off"
         spellCheck="false"
         onChange={event => setSearch(event.target.value)}
-        onSubmit={e => {
-          e.preventDefault();
-          submitInput(
-            "https://google.com/search?q=" +
-              document.getElementById("search-input").value
-          );
+        onSubmit={event => {
+          event.preventDefault();
+          submitInput(parseInput(byId("search-input").value));
         }}
       >
         <input
@@ -88,8 +84,6 @@ export default function App() {
           placeholder="Search"
           title="Search"
           type="text"
-          onKeyDown={e => keyHandler(e)}
-          //autoFocus
         />
       </form>
       <ul className="search-suggestions">
@@ -100,12 +94,9 @@ export default function App() {
                 type="button"
                 id={"search-suggestion-" + i}
                 className="search-suggestion move"
-                // onKeyDown={e => keyHandler(e)}
                 onMouseOver={() => mouseHandler("search-suggestion-" + i)}
                 onFocus={() => replaceInput("search-suggestion-" + i)}
-                onClick={() =>
-                  submitInput("https://google.com/search?q=" + suggestion)
-                }
+                onClick={() => (window.location.href = parseInput(suggestion))}
               >
                 <li key={suggestion + "-li-" + i}>{suggestion}</li>
               </button>

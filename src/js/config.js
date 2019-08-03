@@ -242,7 +242,7 @@ export const config = {
     {
       name: "YouTube",
       key: "yt",
-      url: "https://www.youtube.com",
+      url: "https://youtube.com",
       search: "/results?search_query={}"
     },
     // Destiny

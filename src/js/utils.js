@@ -1,6 +1,6 @@
 import { config } from "./config";
 
-const byId = id => document.getElementById(id);
+export const byId = id => document.getElementById(id);
 
 //TODO: refactor this to a switch?
 export function keyHandler(event) {
@@ -47,64 +47,85 @@ export function clearInput() {
   byId("search-input").value = "";
 }
 
-export function parseInput() {
+export function parseInput(rawInput) {
+  //const input = "server.local:32400/web".toLowerCase();
+  const input = rawInput.toLowerCase();
+
   const { commands } = config;
   //console.log("config commands", commands);
   const keys = commands.map(command => command.key);
-  console.log("keys", keys);
+  //console.log("keys", keys);
 
-  const input = "od";
+  const localTopLevelDomains = ["localhost", ".local"];
+  const topLevelDomains = [
+    ".co.uk",
+    ".co",
+    ".com",
+    ".edu",
+    ".gov",
+    ".io",
+    ".net",
+    ".org",
+    ".to"
+  ];
 
-  if (input.includes("-")) {
-    //handle search
-    const key = input.split("-")[0];
+  // if input contains a space go straight to search
+  if (input.includes(" ")) {
+    return (
+      commands.find(command => command.key === "*").url +
+      commands.find(command => command.key === "*").search.replace("{}", input)
+    );
+  }
+  // handle local tlds in case they include a port number that conflicts with the search delimiter (e.g. 'localhost:3000')
+  if (localTopLevelDomains.some(tld => input.includes(tld))) {
+    return "https://" + input;
+  }
+  //handle search
+  else if (input.includes(":")) {
+    const key = input.split(":")[0];
     //console.log(key);
-    const search = input.split("-")[1];
+    const query = input.split(":")[1];
     //console.log(search);
-
-    console.log(
-      commands.find(command => command.key === key).url +
+    if (commands.find(command => command.key === key).search) {
+      return (
+        commands.find(command => command.key === key).url +
         commands
           .find(command => command.key === key)
-          .search.replace("{}", search)
-    );
-  } else if (input.includes("/")) {
-    //handle path
+          .search.replace("{}", query)
+      );
+    } else {
+      return (
+        commands.find(command => command.key === "*").url +
+        commands
+          .find(command => command.key === "*")
+          .search.replace("{}", query)
+      );
+    }
+  }
+  //handle paths
+  else if (input.includes("/")) {
     const key = input.split("/")[0];
     //console.log(key);
     const path = input.split("/")[1];
     //console.log(path);
-
-    console.log(commands.find(command => command.key === key).url + "/" + path);
+    return commands.find(command => command.key === key).url + "/" + path;
+  }
+  //handle internet tlds
+  else if (topLevelDomains.some(tld => input.includes(tld))) {
+    return "https://" + input;
   } else {
-    if (
-      input.includes(
-        ".com" ||
-          ".org" ||
-          ".net" ||
-          ".io" ||
-          ".co" ||
-          ".co.uk" ||
-          ".edu" ||
-          ".gov"
-      )
-    ) {
-      console.log(input);
-    } else if (keys.includes(input)) {
-      console.log(commands.find(x => x.key === input));
-      // go to website
-      console.log(commands.find(x => x.key === input).url);
+    if (keys.includes(input)) {
+      return commands.find(x => x.key === input).url;
     } else {
       // search google
-      console.log(
+      return (
         commands.find(command => command.key === "*").url +
-          commands
-            .find(command => command.key === "*")
-            .search.replace("{}", input)
+        commands
+          .find(command => command.key === "*")
+          .search.replace("{}", input)
       );
     }
   }
-  //window.location.href = destination;
 }
 
 function toUrl(url) {

@@ -26,7 +26,8 @@ export function keyHandler(event) {
         // eslint-disable-next-line
         const answer = eval(byId("search-input").value);
 
-        byId("search-input").value = expression + "=" + answer.toString();
+        return (byId("search-input").value =
+          expression + "=" + answer.toString());
       } catch {
         // Cases where this fails includes incomplete expressions like `2+=`
         return false;
@@ -37,12 +38,15 @@ export function keyHandler(event) {
   if (event.key === "ArrowUp") {
     // TODO
     // Change focus as if ArrowUp === Shitf+Tab
+    event.preventDefault();
+    return;
   }
 
   if (event.key === "ArrowDown") {
     // TODO
     // Change focus as if ArrowDown === Tab
-    changeFocus("search-suggestion-0");
+    event.preventDefault();
+    return;
   }
 
   //else give focus to search-input
@@ -57,7 +61,7 @@ export function keyHandler(event) {
 }
 
 export function mouseHandler(element) {
-  // Add event listener to only change focus if mouse is moving. Helps maintain integrity of input when suggestions are being returned and typing has continued from there
+  // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned and typing has continued from there
   byId(element).addEventListener("mousemove", event => changeFocus(element));
 }
 

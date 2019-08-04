@@ -48,6 +48,7 @@ code {
   button {
     background: transparent;
     color: white;
+    cursor: pointer;
     border: none;
     &:focus {
       background: white;

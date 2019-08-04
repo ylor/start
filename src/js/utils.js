@@ -42,7 +42,7 @@ export function keyHandler(event) {
 
   //else give focus to search-input
   if (event.key === "Tab" || event.key === "Shift") {
-    // Do nothing so that 
+    // Do nothing so that
   } else {
     changeFocus("search-input");
   }

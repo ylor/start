@@ -1,6 +1,7 @@
 import { config } from "./config";
 
 export const byId = id => document.getElementById(id);
+export const mathPattern = new RegExp(/^[\d\s.+\-*/()]*$/g);
 
 //TODO: refactor this to a switch?
 export function keyHandler(event) {
@@ -13,13 +14,32 @@ export function keyHandler(event) {
       //Else restore the focus to the search-input
       changeFocus("search-input");
     }
-  } else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+  }
+
+  // listen for equals key to do some math inline
+  if (event.key === "=") {
+    if (byId("search-input").value.match(mathPattern)) {
+      try {
+        event.preventDefault();
+        const expression = byId("search-input").value;
+        // disabling eslint for line containing because I'm prevalidating the input with the regexp pattern
+        // eslint-disable-next-line
+        const answer = eval(byId("search-input").value);
+        byId("search-input").value = expression + "=" + answer.toString();
+      } catch (e) {
+        alert(e);
+      }
+    }
+  }
+
+  if (event.key === "ArrowUp" || event.key === "ArrowDown") {
     // TODO
     // Change focus as if ArrowUp === Shitf+Tab
     // Change focus as if ArrowDown === Tab
   }
+
   //else give focus to search-input
-  else if (event.key === "Tab" || event.key === "Shift") {
+  if (event.key === "Tab" || event.key === "Shift") {
     // do nothing
   } else {
     changeFocus("search-input");
@@ -69,6 +89,7 @@ export function parseInput(rawInput) {
     ".to"
   ];
 
+  // begin conditionals for the parser
   // if input contains a space go straight to search
   if (input.includes(" ")) {
     return (
@@ -76,16 +97,24 @@ export function parseInput(rawInput) {
       commands.find(command => command.key === "*").search.replace("{}", input)
     );
   }
+
   // handle local tlds in case they include a port number that conflicts with the search delimiter (e.g. 'localhost:3000')
   if (localTopLevelDomains.some(tld => input.includes(tld))) {
-    return "https://" + input;
+    return input.startsWith("http") ? input : "https://" + input;
   }
+
+  // handle input that begins with http
+  if (input.startsWith("http")) {
+    return input;
+  }
+
   //handle search
-  else if (input.includes(":")) {
+  if (input.includes(":")) {
     const key = input.split(":")[0];
     //console.log(key);
     const query = input.split(":")[1];
     //console.log(search);
+
     if (commands.find(command => command.key === key).search) {
       return (
         commands.find(command => command.key === key).url +
@@ -102,29 +131,30 @@ export function parseInput(rawInput) {
       );
     }
   }
+
   //handle paths
-  else if (input.includes("/")) {
+  if (input.includes("/")) {
     const key = input.split("/")[0];
     //console.log(key);
     const path = input.split("/")[1];
     //console.log(path);
     return commands.find(command => command.key === key).url + "/" + path;
   }
+
   //handle internet tlds
-  else if (topLevelDomains.some(tld => input.includes(tld))) {
-    return "https://" + input;
+  if (topLevelDomains.some(tld => input.includes(tld))) {
+    return input.startsWith("http") ? input : "https://" + input;
+  }
+
+  //handle match to key in config
+  if (keys.includes(input)) {
+    return commands.find(x => x.key === input).url;
   } else {
-    if (keys.includes(input)) {
-      return commands.find(x => x.key === input).url;
-    } else {
-      // search google
-      return (
-        commands.find(command => command.key === "*").url +
-        commands
-          .find(command => command.key === "*")
-          .search.replace("{}", input)
-      );
-    }
+    // search google
+    return (
+      commands.find(command => command.key === "*").url +
+      commands.find(command => command.key === "*").search.replace("{}", input)
+    );
   }
 }
 

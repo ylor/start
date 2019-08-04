@@ -3,6 +3,7 @@ import fetchJsonp from "fetch-jsonp";
 
 import {
   byId,
+  mathPattern,
   keyHandler,
   mouseHandler,
   parseInput,
@@ -47,7 +48,9 @@ export default function App() {
       }
     }
 
-    if (search.length < 1) {
+    //console.log(mathPattern);
+    //const mathPattern = new RegExp(/^[\d\s.+\-*/()]*$/g);
+    if (search.length < 1 || mathPattern.test(search)) {
       setSuggestions([]);
     } else {
       fetchSuggestions();

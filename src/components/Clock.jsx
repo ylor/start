@@ -14,10 +14,23 @@ export default function Clock() {
   return (
     // <time dateTime={time}>
     <time>
-      {time.toLocaleTimeString(navigator.language, {
-        hour: "2-digit",
-        minute: "2-digit"
-      })}
+      {time
+        .toLocaleTimeString(navigator.language, {
+          hour: "2-digit",
+          minute: "2-digit"
+        })
+        .split(" ")[0]
+        .replace(":", " ") + " "}
+      <span>
+        {
+          time
+            .toLocaleTimeString(navigator.language, {
+              hour: "2-digit",
+              minute: "2-digit"
+            })
+            .split(" ")[1]
+        }
+      </span>
     </time>
   );
 }

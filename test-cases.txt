@@ -1,0 +1,8 @@
+calculator "2+2="
+key "plex"
+space in string "npm.js vs yarn"
+localhost, .local "localhost:8000"
+search "yt:final fantasy vii"
+path "gb/api"
+tld "news.ycombinator.com"
+google "asdf"

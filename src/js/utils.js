@@ -34,16 +34,24 @@ export function keyHandler(event) {
     }
   }
 
-  if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+  if (event.key === "ArrowUp") {
     // TODO
     // Change focus as if ArrowUp === Shitf+Tab
+  }
+
+  if (event.key === "ArrowDown") {
+    // TODO
     // Change focus as if ArrowDown === Tab
+    changeFocus("search-suggestion-0");
   }
 
   //else give focus to search-input
   if (event.key === "Tab" || event.key === "Shift") {
-    // Do nothing so that
-  } else {
+    // Do nothing so that tabbing navigation is not broken
+    return;
+  }
+
+  if (document.activeElement != byId("search-input")) {
     changeFocus("search-input");
   }
 }
@@ -77,7 +85,13 @@ export function parseInput(rawInput) {
   const keys = commands.map(command => command.key);
   //console.log("keys", keys);
 
-  const localTopLevelDomains = ["localhost", ".local"];
+  const localTopLevelDomains = [
+    "0",
+    "0.0.0.0",
+    "127.0.0.1",
+    "localhost",
+    ".local"
+  ];
   const topLevelDomains = [
     ".co.uk",
     ".co",
@@ -91,17 +105,14 @@ export function parseInput(rawInput) {
   ];
 
   // begin conditionals for the parser
-  // if input contains a space go straight to search
-  if (input.includes(" ")) {
-    return (
-      commands.find(command => command.key === "*").url +
-      commands.find(command => command.key === "*").search.replace("{}", input)
-    );
-  }
 
+  //handle match to key in config
+  if (keys.includes(input)) {
+    return commands.find(x => x.key === input).url;
+  }
   // handle local tlds in case they include a port number that conflicts with the search delimiter (e.g. 'localhost:3000')
   if (localTopLevelDomains.some(tld => input.includes(tld))) {
-    return input.startsWith("http") ? input : "https://" + input;
+    return input.startsWith("http") ? input : "http://" + input;
   }
 
   // handle input that begins with http
@@ -113,7 +124,7 @@ export function parseInput(rawInput) {
   if (input.includes(":")) {
     const key = input.split(":")[0];
     //console.log(key);
-    const query = input.split(":")[1];
+    const query = input.split(":")[1].trimStart();
     //console.log(search);
 
     if (commands.find(command => command.key === key).search) {
@@ -133,6 +144,14 @@ export function parseInput(rawInput) {
     }
   }
 
+  // if input contains a space go straight to search
+  if (input.includes(" ")) {
+    return (
+      commands.find(command => command.key === "*").url +
+      commands.find(command => command.key === "*").search.replace("{}", input)
+    );
+  }
+
   //handle paths
   if (input.includes("/")) {
     const key = input.split("/")[0];
@@ -147,16 +166,11 @@ export function parseInput(rawInput) {
     return input.startsWith("http") ? input : "https://" + input;
   }
 
-  //handle match to key in config
-  if (keys.includes(input)) {
-    return commands.find(x => x.key === input).url;
-  } else {
-    // search google
-    return (
-      commands.find(command => command.key === "*").url +
-      commands.find(command => command.key === "*").search.replace("{}", input)
-    );
-  }
+  // search google
+  return (
+    commands.find(command => command.key === "*").url +
+    commands.find(command => command.key === "*").search.replace("{}", input)
+  );
 }
 
 function toUrl(url) {

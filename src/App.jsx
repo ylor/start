@@ -94,7 +94,7 @@ export default function App() {
                 key={suggestion + "-button-" + i}
                 type="button"
                 id={"search-suggestion-" + i}
-                className="search-suggestion move"
+                className="search-suggestion"
                 onMouseOver={() => mouseHandler("search-suggestion-" + i)}
                 onFocus={() => replaceInput("search-suggestion-" + i)}
                 onClick={() => (window.location.href = parseInput(suggestion))}

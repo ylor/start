@@ -22,12 +22,14 @@ export function keyHandler(event) {
       try {
         event.preventDefault();
         const expression = byId("search-input").value;
-        // disabling eslint for line containing because I'm prevalidating the input with the regexp pattern
+        // disabling eslint for line containing `eval` because I'm prevalidating the input with mathPattern
         // eslint-disable-next-line
         const answer = eval(byId("search-input").value);
+
         byId("search-input").value = expression + "=" + answer.toString();
-      } catch (e) {
-        alert(e);
+      } catch {
+        // Cases where this fails includes incomplete expressions like `2+=`
+        return false;
       }
     }
   }
@@ -40,7 +42,7 @@ export function keyHandler(event) {
 
   //else give focus to search-input
   if (event.key === "Tab" || event.key === "Shift") {
-    // do nothing
+    // Do nothing so that 
   } else {
     changeFocus("search-input");
   }
@@ -68,7 +70,6 @@ export function clearInput() {
 }
 
 export function parseInput(rawInput) {
-  //const input = "server.local:32400/web".toLowerCase();
   const input = rawInput.toLowerCase();
 
   const { commands } = config;

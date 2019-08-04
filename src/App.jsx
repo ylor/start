@@ -48,8 +48,6 @@ export default function App() {
       }
     }
 
-    //console.log(mathPattern);
-    //const mathPattern = new RegExp(/^[\d\s.+\-*/()]*$/g);
     if (search.length < 1 || mathPattern.test(search)) {
       setSuggestions([]);
     } else {

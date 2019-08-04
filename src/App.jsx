@@ -11,14 +11,15 @@ import {
   submitInput
 } from "./js/utils";
 
+import { config } from "./js/config";
+
 import Clock from "./components/Clock";
+import TBD from "./components/TBD";
 //import Suggestions from "./components/Suggestions";
 //import Weather from "./components/Weather";
 
 import logo from "./logo.svg";
 import "./App.scss";
-
-//import { config } from "./js/config";
 
 export default function App() {
   const [search, setSearch] = useState("");
@@ -40,7 +41,8 @@ export default function App() {
           .filter(val => val !== search) // exclude items that equal what we have already typed in
           .slice(0, 6); // take only the first six results
 
-        console.log(data);
+        //console.log(data);  console.log(commands);
+
         setSuggestions(data);
       } catch {
         // This fails out a lot if you type quickly, but it doesn't seem to affect the application -- still get referenceErrors because it's trying to execute a script that no longer exists
@@ -64,7 +66,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <img src={logo} className="App-logo" alt="logo" />
+      {/* <img src={logo} className="App-logo" alt="logo" /> */}
       <Clock />
       <form
         className="center overlay search-form"
@@ -105,6 +107,7 @@ export default function App() {
           : null}
       </ul>
       <aside className="center help overlay" id="help" />
+      <TBD config={config} />
     </div>
   );
 }

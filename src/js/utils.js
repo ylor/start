@@ -55,7 +55,7 @@ export function keyHandler(event) {
     return;
   }
 
-  if (document.activeElement != byId("search-input")) {
+  if (document.activeElement !== byId("search-input")) {
     changeFocus("search-input");
   }
 }

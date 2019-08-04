@@ -7,91 +7,104 @@
 export const config = {
   commands: [
     {
-      category: "",
       name: "Google",
       key: "*",
       url: "https://google.com",
       search: "/search?q={}"
     },
-    // Local
+    // Server
     {
-      category: "local",
+      category: "Server",
       name: "Pi-hole",
       key: "pi",
       url: "http://pi.hole/admin",
       search: "/search?q={}"
     },
     {
+      category: "Server",
       name: "Plex",
       key: "plex",
       url: "http://server.local:32400/web"
     },
     {
+      category: "Server",
       name: "Portainer",
       key: "port",
       url: "http://docker.local:9000"
     },
     {
+      category: "Server",
       name: "Sonarr",
       key: "sonarr",
       url: "http://docker.local:8989"
     },
     {
+      category: "Server",
       name: "Transmission",
       key: "bt",
       url: "http://docker.local:9091"
     },
     {
+      category: "Server",
       name: "Unifi Controller",
       key: "unifi",
       url: "http://docker.local:8080"
     },
     // Me
     {
+      category: "Me",
       name: "About",
       key: "about",
       url: "https://about.rolyreyes.com"
     },
     {
+      category: "Me",
       name: "Blog",
       key: "blog",
       url: "https://rolyreyes.com"
     },
     {
+      category: "Me",
       name: "Dotfiles",
       key: "dot",
       url: "https://github.com/ylor/dotfiles"
     },
     {
+      category: "Me",
       name: "Github",
       key: "git",
       url: "https://github.com/ylor?tab=repositories",
       search: "/search?q={}"
     },
     {
+      category: "Me",
       name: "Start",
       key: "start",
       url: "https://start.rolyreyes.com"
     },
     //Work
     {
+      category: "MDC",
       name: "MDC",
       key: "mdc",
       url: "http://www.mdc.edu/"
     },
     {
+      category: "MDC",
       name: "MDC - Employee",
       key: "emp",
       url: "https://wapi.mdc.edu/NTAuth/",
       search: "/NTAuth/user_data.asp?UserID={}"
     },
     {
+      category: "MDC",
       name: "MDC - Student",
       key: "stu",
       url: "https://mdcwapi.mdc.edu:8001/ntauthstudent/",
       search: "/ntauthstudent/StudentData.aspx?AcctNm={}"
     },
     {
+      category: "MDC",
       name: "JAMF",
       key: "jamf",
       url: "https://kmacdep.kendall.mdcc.edu:8443/"

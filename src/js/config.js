@@ -14,38 +14,32 @@ export const config = {
     },
     // Server
     {
-      category: "Server",
       name: "Pi-hole",
       key: "pi",
       url: "http://pi.hole/admin",
       search: "/search?q={}"
     },
     {
-      category: "Server",
       name: "Plex",
       key: "plex",
       url: "http://server.local:32400/web"
     },
     {
-      category: "Server",
       name: "Portainer",
       key: "port",
       url: "http://docker.local:9000"
     },
     {
-      category: "Server",
       name: "Sonarr",
       key: "sonarr",
       url: "http://docker.local:8989"
     },
     {
-      category: "Server",
       name: "Transmission",
       key: "bt",
       url: "http://docker.local:9091"
     },
     {
-      category: "Server",
       name: "Unifi Controller",
       key: "unifi",
       url: "http://docker.local:8080"
@@ -280,14 +274,14 @@ export const config = {
     // Reddit
     {
       category: "Reddit",
-      name: "r/DestinyTheGame",
+      name: "/r/DestinyTheGame",
       key: "dtg",
       url: "https://www.reddit.com/r/destinythegame",
       search: "/search?q={}&restrict_sr=1"
     },
     {
       category: "Reddit",
-      name: "r/HipHopHeads",
+      name: "/r/HipHopHeads",
       key: "hhh",
       url: "https://www.reddit.com/r/hiphopheads",
       search: "/search?q={}&restrict_sr=1"

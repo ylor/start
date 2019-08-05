@@ -8,6 +8,9 @@ const StyledTime = styled.time`
   span {
     font-size: 2rem;
   }
+  @media screen and (min-width: 768px){
+    font-size: 8rem;
+  }
 `;
 
 export default function Clock() {

@@ -23,7 +23,7 @@ const StyledSection = styled.section`
     margin: 0 12px;
     li {
       list-style: none;
-      margin: 12px 0;
+      margin: 4px 0;
     }
   }
 `;

@@ -37,13 +37,15 @@ export default function App() {
 
         const json = await response.json();
         const data = json
-          .map(val => val.phrase) // make a simple array
-          .filter(val => val !== search) // exclude items that equal what we have already typed in
+          .map(x => x.phrase) // make a simple array
+          .filter(x => x !== search) // exclude items that equal what we have already typed in
           .slice(0, 6); // take only the first six results
 
         //console.log(data);  console.log(commands);
-
-        setSuggestions(data);
+        if (search.includes("%")){
+          setSuggestions([data[0]])
+        } else {
+        setSuggestions(data);}
       } catch {
         // This fails out a lot if you type quickly, but it doesn't seem to affect the application -- still get referenceErrors because it's trying to execute a script that no longer exists
         return null;

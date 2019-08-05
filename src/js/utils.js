@@ -50,7 +50,7 @@ export function keyHandler(event) {
   }
 
   //else give focus to search-input
-  if (event.key === "Tab" || event.key === "Shift") {
+  if ( event.key === "Shift" || event.key === "Tab") {
     // Do nothing so that tabbing navigation is not broken
     return;
   }
@@ -123,7 +123,7 @@ export function parseInput(rawInput) {
   if (input.startsWith("http")) {
     return input;
   }
-
+  
   //handle search
   if (input.includes(":")) {
     const key = input.split(":")[0];

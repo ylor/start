@@ -6,10 +6,12 @@
     "Helvetica Neue", sans-serif;
   --font-mono: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+  --font-base-px: 20px;
 }
 
 html {
   box-sizing: border-box;
+  font-size: var(--font-base-px);
   :focus {
     outline: none;
   }

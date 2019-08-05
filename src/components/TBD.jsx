@@ -31,13 +31,13 @@ const StyledSection = styled.section`
 export default function TBD(props) {
   const { config } = props;
   const { commands } = config;
-  console.log(commands);
+  //console.log(commands);
   const categories = [
     ...new Set([...commands.map(command => command.category)])
   ]
     .slice(1)
     .sort();
-  console.log(categories);
+  //console.log(categories);
 
   return (
     <StyledAside>

@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+
+const StyledTime = styled.time`
+  font-size: 2rem;
+`;
 
 export default function Clock() {
   const [time, setTime] = useState(new Date());
@@ -13,7 +18,7 @@ export default function Clock() {
 
   return (
     // <time dateTime={time}>
-    <time>
+    <StyledTime>
       {time
         .toLocaleTimeString(navigator.language, {
           hour: "2-digit",
@@ -31,6 +36,6 @@ export default function Clock() {
             .split(" ")[1]
         }
       </span>
-    </time>
+    </StyledTime>
   );
 }

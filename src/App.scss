@@ -1,14 +1,28 @@
+:root {
+  --color-bg: #111;
+  --color-fg: #ccc;
+}
+
 html {
+  box-sizing: border-box;
   :focus {
     outline: none;
   }
   ::-moz-focus-inner {
     border: 0;
   }
+  ::placeholder {
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 body {
-  background: #222;
+  background: #111;
   color: #ccc;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -18,14 +32,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .App {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -37,14 +47,37 @@ code {
   pointer-events: none;
 }
 
-.search-suggestions {
+a {
+  color: #ccc;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  input {
+    //background: var(--color-bg);
+    border: 0;
+  }
+}
+
+.search-suggestions {
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  align-content: center;
   justify-content: center;
   @media screen and (min-width: 640px) {
     flex-direction: row;
     flex-wrap: wrap;
   }
+
   button {
     background: transparent;
     color: white;

@@ -1,7 +1,7 @@
 import { config } from "./config";
 
 export const byId = id => document.getElementById(id);
-export const mathPattern = new RegExp(/^[\d\s.+\-*/()]*$/g);
+export const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
 
 //TODO: refactor this to a switch?
 export function keyHandler(event) {

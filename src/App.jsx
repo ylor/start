@@ -18,7 +18,7 @@ import TBD from "./components/TBD";
 //import Suggestions from "./components/Suggestions";
 //import Weather from "./components/Weather";
 
-import logo from "./logo.svg";
+//import logo from "./logo.svg";
 import "./App.scss";
 
 export default function App() {
@@ -50,7 +50,7 @@ export default function App() {
       }
     }
 
-    if (search.length < 1 || mathPattern.test(search)) {
+    if (search.length < 1 || search.match(mathPattern)) {
       setSuggestions([]);
     } else {
       fetchSuggestions();
@@ -67,7 +67,6 @@ export default function App() {
   return (
     <div className="App">
       {/* <img src={logo} className="App-logo" alt="logo" /> */}
-      <Clock />
       <form
         className="center overlay search-form"
         id="search-form"
@@ -81,6 +80,7 @@ export default function App() {
           submitInput(parseInput(byId("search-input").value));
         }}
       >
+        <Clock />
         <input
           className="search-input"
           id="search-input"
@@ -88,24 +88,26 @@ export default function App() {
           title="Search"
           type="text"
         />
+        <ul className="search-suggestions">
+          {suggestions
+            ? suggestions.map((suggestion, i) => (
+                <button
+                  key={suggestion + "-button-" + i}
+                  type="button"
+                  id={"search-suggestion-" + i}
+                  className="search-suggestion focusable"
+                  onMouseOver={() => mouseHandler("search-suggestion-" + i)}
+                  onFocus={() => replaceInput("search-suggestion-" + i)}
+                  onClick={() =>
+                    (window.location.href = parseInput(suggestion))
+                  }
+                >
+                  <li key={suggestion + "-li-" + i}>{suggestion}</li>
+                </button>
+              ))
+            : null}
+        </ul>
       </form>
-      <ul className="search-suggestions">
-        {suggestions
-          ? suggestions.map((suggestion, i) => (
-              <button
-                key={suggestion + "-button-" + i}
-                type="button"
-                id={"search-suggestion-" + i}
-                className="search-suggestion focusable"
-                onMouseOver={() => mouseHandler("search-suggestion-" + i)}
-                onFocus={() => replaceInput("search-suggestion-" + i)}
-                onClick={() => (window.location.href = parseInput(suggestion))}
-              >
-                <li key={suggestion + "-li-" + i}>{suggestion}</li>
-              </button>
-            ))
-          : null}
-      </ul>
       <aside className="center help overlay" id="help" />
       <TBD config={config} />
     </div>

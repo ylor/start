@@ -5,6 +5,11 @@ import App from "./App";
 
 import * as serviceWorker from "./serviceWorker";
 
+//Load Inter typeface
+require("typeface-inter");
+// Load IBM Plex Mono typeface
+require("typeface-ibm-plex-mono");
+
 ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const StyledTime = styled.time`
-  font-size: 2rem;
+  font-size: 3rem;
+  font-weight: 200;
+  letter-spacing: -0.01em;
+  span {
+    font-size: 2rem;
+  }
 `;
 
 export default function Clock() {

@@ -1,6 +1,11 @@
 :root {
   --color-bg: #111;
   --color-fg: #ccc;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Roboto",
+    "Helvetica Neue", sans-serif;
+  --font-mono: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 html {
@@ -25,9 +30,7 @@ body {
   background: #111;
   color: #ccc;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -52,8 +55,7 @@ a {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: var(--font-mono);
 }
 
 form {
@@ -63,6 +65,7 @@ form {
   justify-content: center;
   input {
     //background: var(--color-bg);
+    font-family: var(--font-mono);
     font-size: 2rem;
     border: 0;
   }
@@ -84,6 +87,7 @@ form {
     color: white;
     cursor: pointer;
     border: none;
+    font-family: var(--font-mono);
     &:focus {
       background: white;
       outline: none;

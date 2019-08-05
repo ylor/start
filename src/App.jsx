@@ -84,7 +84,7 @@ export default function App() {
         <input
           className="search-input"
           id="search-input"
-          placeholder="Search"
+          //placeholder="Search"
           title="Search"
           type="text"
         />

@@ -2,14 +2,23 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const StyledTime = styled.time`
+  cursor: pointer;
+  display: fixed;
+  position: absolute;
   font-size: 3rem;
-  font-weight: 200;
+  font-weight: 100;
   letter-spacing: -0.01em;
+  visibility: visible;
+
   span {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
-  @media screen and (min-width: 768px){
-    font-size: 8rem;
+
+  @media screen and (min-width: 768px) {
+    font-size: 10rem;
+    span {
+      font-size: 5rem;
+    }
   }
 `;
 
@@ -26,7 +35,13 @@ export default function Clock() {
 
   return (
     // <time dateTime={time}>
-    <StyledTime>
+    <StyledTime
+      id="clock"
+      onClick={() => {
+        document.getElementById("clock").style.visibility = "hidden";
+        document.getElementById("search-input").style.visibility = "visible";
+      }}
+    >
       {time
         .toLocaleTimeString(navigator.language, {
           hour: "2-digit",
@@ -34,7 +49,7 @@ export default function Clock() {
         })
         .split(" ")[0]
         .replace(":", " ") + " "}
-      <span>
+      <span id="am-pm">
         {
           time
             .toLocaleTimeString(navigator.language, {

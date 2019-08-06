@@ -5,10 +5,11 @@ import App from "./App";
 
 import * as serviceWorker from "./serviceWorker";
 
+import "./assets/fonts/Inter/inter.css";
+import "./assets/fonts/iosevka/webfont.css";
+
 //Load Inter typeface
-require("typeface-inter");
-// Load IBM Plex Mono typeface
-require("typeface-ibm-plex-mono");
+//require("typeface-inter");
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

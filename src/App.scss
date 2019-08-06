@@ -1,11 +1,12 @@
 :root {
   --color-bg: #111;
   --color-fg: #ccc;
+  --color-fg-bright: #fff;
 
-  --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Roboto",
+  --font-sans: -apple-system, BlinkMacSystemFont, "Inter var", "Roboto",
     "Helvetica Neue", sans-serif;
-  --font-mono: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  --font-mono: "Iosevka", "SFMono-Regular", Menlo, Monaco, Consolas,
+    "Courier New", monospace;
   --font-base-px: 20px;
 }
 
@@ -29,7 +30,7 @@ html {
 }
 
 body {
-  background: #111;
+  background: #0f0f0f;
   color: #ccc;
   margin: 0;
   font-family: var(--font-sans);
@@ -65,48 +66,32 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  //visibility: hidden;
   input {
-    //background: var(--color-bg);
-    font-family: var(--font-mono);
-    font-size: 2rem;
-    border: 0;
-  }
-}
-
-.search-suggestions {
-  display: flex;
-  padding: 0;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  @media screen and (min-width: 640px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  button {
     background: transparent;
-    color: white;
-    cursor: pointer;
-    border: none;
+    border: 0;
+    color: var(--color-fg);
     font-family: var(--font-mono);
-    &:focus {
-      background: white;
-      outline: none;
-      color: black;
-    }
-  }
-  li {
-    list-style: none;
-    margin: 0.5rem;
+    font-size: 6rem;
+    font-weight: 200;
+    max-width: 95vw;
+    position: fixed;
+    text-align: center;
+    visibility: hidden;
   }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+// .center {
+//   position: fixed;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
+
+.visible {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
 }

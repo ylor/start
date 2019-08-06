@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledAside = styled.aside`
+  position: fixed;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  visibility: hidden;
 `;
 const StyledSection = styled.section`
   display: flex;
@@ -28,7 +30,7 @@ const StyledSection = styled.section`
   }
 `;
 
-export default function TBD(props) {
+export default function Links(props) {
   const { config } = props;
   const { commands } = config;
   //console.log(commands);
@@ -40,7 +42,7 @@ export default function TBD(props) {
   //console.log(categories);
 
   return (
-    <StyledAside>
+    <StyledAside id="links">
       {categories.map(category => (
         <StyledSection>
           <ul>

@@ -1,38 +1,31 @@
 import { config } from "./config";
 
-export const byId = id => document.getElementById(id);
+export const id = element => document.getElementById(element);
 export const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
 
-//TODO: refactor this to a switch?
-export function keyHandler(event) {
-  //Listen for esc
-  if (event.key === "Escape") {
-    //if search-input is focused then clear the input
-    if (document.activeElement === byId("search-input")) {
-      clearInput();
-    } else {
-      //Else restore the focus to the search-input
-      changeFocus("search-input");
-    }
+function showElement(element) {
+  id(element).style.visibility = "visible";
+}
+
+function hideElement(element) {
+  id(element).style.visibility = "hidden";
+}
+
+function toggleVisibility(element) {
+  const x = id(element);
+  if (x.style.visibility === "hidden") {
+    x.style.visibility = "visible";
+  } else {
+    x.style.visibility = "hidden";
   }
+}
 
-  // listen for equals key to do some math inline
-  if (event.key === "=") {
-    if (byId("search-input").value.match(mathPattern)) {
-      try {
-        event.preventDefault();
-        const expression = byId("search-input").value;
-        // disabling eslint for line containing `eval` because I'm prevalidating the input with mathPattern
-        // eslint-disable-next-line
-        const answer = eval(byId("search-input").value);
-
-        return (byId("search-input").value =
-          expression + "=" + answer.toString());
-      } catch {
-        // Cases where this fails includes incomplete expressions like `2+=`
-        return false;
-      }
-    }
+// TODO: refactor this to a switch?
+export function keyHandler(event) {
+  if (event.key === "?") {
+    event.preventDefault();
+    if (id("clock").visibility === "visible" || id("search-input"))
+      showElement("links");
   }
 
   if (event.key === "ArrowUp") {
@@ -49,36 +42,72 @@ export function keyHandler(event) {
     return;
   }
 
+  // listen for equals key to do some math inline
+  if (event.key === "=") {
+    if (id("search-input").value.match(mathPattern)) {
+      try {
+        event.preventDefault();
+        const expression = id("search-input").value;
+        // disabling eslint for line containing `eval` because I'm prevalidating the input with mathPattern
+        // eslint-disable-next-line
+        const answer = eval(id("search-input").value);
+
+        return (id("search-input").value =
+          expression + "=" + answer.toString());
+      } catch {
+        // Cases where this fails includes incomplete expressions like `2+=`
+        return false;
+      }
+    }
+  }
+
   //else give focus to search-input
-  if ( event.key === "Shift" || event.key === "Tab") {
+  if (event.key === "Shift" || event.key === "Tab") {
     // Do nothing so that tabbing navigation is not broken
     return;
   }
 
-  if (document.activeElement !== byId("search-input")) {
+  // Listen for esc
+  if (event.key === "Escape") {
+    // If search-input is focused then clear the input
+    if (document.activeElement !== id("search-input")) {
+      return changeFocus("search-input");
+    }
+    // Else restore the focus to the search-input
+    // changeFocus("search-input");
+    showElement("clock");
+    hideElement("search-input");
+    hideElement("search-suggestions");
+  }
+
+  if (document.activeElement !== id("search-input")) {
+    if ((id("clock").style.visibility = "visible")) {
+      id("clock").style.visibility = "hidden";
+      id("search-input").style.visibility = "visible";
+    }
     changeFocus("search-input");
   }
 }
 
 export function mouseHandler(element) {
   // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned and typing has continued from there
-  byId(element).addEventListener("mousemove", event => changeFocus(element));
+  id(element).addEventListener("mousemove", event => changeFocus(element));
 }
 
 export function changeFocus(element) {
-  byId(element).focus();
+  id(element).focus();
 }
 
 export function replaceInput(suggestion) {
-  byId("search-input").value = byId(suggestion).textContent;
+  id("search-input").value = id(suggestion).textContent;
 }
 
 export function restoreInput(text) {
-  byId("search-input").value = text;
+  id("search-input").value = text;
 }
 
 export function clearInput() {
-  byId("search-input").value = "";
+  id("search-input").value = null;
 }
 
 export function parseInput(rawInput) {
@@ -123,7 +152,7 @@ export function parseInput(rawInput) {
   if (input.startsWith("http")) {
     return input;
   }
-  
+
   //handle search
   if (input.includes(":")) {
     const key = input.split(":")[0];

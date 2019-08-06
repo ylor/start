@@ -12,7 +12,6 @@ const StyledSuggestions = styled.ul`
   justify-content: center;
   position: relative;
   width: 75vw;
-  visibility: visible;
   position: fixed;
   top: 55%;
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import { id } from "../js/utils";
+
 const StyledTime = styled.time`
   cursor: pointer;
   display: fixed;
@@ -38,8 +40,8 @@ export default function Clock() {
     <StyledTime
       id="clock"
       onClick={() => {
-        document.getElementById("clock").style.visibility = "hidden";
-        document.getElementById("search-input").style.visibility = "visible";
+        id("clock").style.visibility = "hidden";
+        id("search-form").style.visibility = "visible";
       }}
     >
       {time

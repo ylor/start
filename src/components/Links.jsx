@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledAside = styled.aside`
+const StyledAside = styled.section`
   position: fixed;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  visibility: hidden;
 `;
+
 const StyledSection = styled.section`
   display: flex;
   flex-wrap: wrap;
@@ -42,16 +42,18 @@ export default function Links(props) {
   //console.log(categories);
 
   return (
-    <StyledAside id="links">
+    <StyledAside id="links" className="hidden">
       {categories.map(category => (
-        <StyledSection>
+        <StyledSection key={category}>
           <ul>
             <h1>{category}</h1>
             {commands.map(command =>
               command.category === category ? (
-                <li title={command.key}>
+                <li key={command.name} title={command.key}>
                   {/* <span>{command.key}</span> */}
-                  <a href={command.url}>{command.name}</a>
+                  <a key={command.url} href={command.url}>
+                    {command.name}
+                  </a>
                 </li>
               ) : null
             )}

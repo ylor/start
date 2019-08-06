@@ -11,21 +11,19 @@ function hideElement(element) {
   id(element).style.visibility = "hidden";
 }
 
-function toggleVisibility(element) {
-  const x = id(element);
-  if (x.style.visibility === "hidden") {
-    x.style.visibility = "visible";
-  } else {
-    x.style.visibility = "hidden";
-  }
+function toggleHidden(element) {
+  id(element).classList.toggle("hidden");
+}
+
+function toggleVisible(element) {
+  id(element).classList.toggle("visible");
 }
 
 // TODO: refactor this to a switch?
 export function keyHandler(event) {
   if (event.key === "?") {
     event.preventDefault();
-    if (id("clock").visibility === "visible" || id("search-input"))
-      showElement("links");
+    toggleHidden("links");
   }
 
   if (event.key === "ArrowUp") {
@@ -83,7 +81,7 @@ export function keyHandler(event) {
   if (document.activeElement !== id("search-input")) {
     if ((id("clock").style.visibility = "visible")) {
       id("clock").style.visibility = "hidden";
-      id("search-input").style.visibility = "visible";
+      id("search-form").style.visibility = "visible";
     }
     changeFocus("search-input");
   }
@@ -114,9 +112,9 @@ export function parseInput(rawInput) {
   const input = rawInput.toLowerCase();
 
   const { commands } = config;
-  //console.log("config commands", commands);
+  //console.log("config commands", commands)
   const keys = commands.map(command => command.key);
-  //console.log("keys", keys);
+  //console.log("keys", keys)
 
   const localTopLevelDomains = [
     "0",
@@ -156,9 +154,9 @@ export function parseInput(rawInput) {
   //handle search
   if (input.includes(":")) {
     const key = input.split(":")[0];
-    //console.log(key);
+    //console.log(key)
     const query = input.split(":")[1].trimStart();
-    //console.log(search);
+    //console.log(search)
 
     if (commands.find(command => command.key === key).search) {
       return (
@@ -188,9 +186,9 @@ export function parseInput(rawInput) {
   //handle paths
   if (input.includes("/")) {
     const key = input.split("/")[0];
-    //console.log(key);
+    //console.log(key)
     const path = input.split("/")[1];
-    //console.log(path);
+    //console.log(path)
     return commands.find(command => command.key === key).url + "/" + path;
   }
 

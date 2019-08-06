@@ -8,9 +8,6 @@ import * as serviceWorker from "./serviceWorker";
 import "./assets/fonts/Inter/inter.css";
 import "./assets/fonts/iosevka/webfont.css";
 
-//Load Inter typeface
-//require("typeface-inter");
-
 ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change

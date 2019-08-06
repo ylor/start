@@ -68,7 +68,7 @@ export default function App() {
   }, [search]);
 
   return (
-    <div className="App">
+    <div id="App" className="App">
       {/* <img src={logo} className="App-logo" alt="logo" /> */}
       <Clock />
       <form

@@ -1,30 +1,39 @@
 import React from "react";
 import styled from "styled-components";
 
+import { id } from "../js/utils";
+
 const StyledAside = styled.section`
-  position: fixed;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  background: var(--color-bg);
+  visibility: hidden;
+  position: absolute;
+  @media screen and (min-width: 768px) {
+    position: fixed;
+    display: flex;
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 const StyledSection = styled.section`
   display: flex;
   flex-wrap: wrap;
+
   h1 {
-    margin: 0;
-    padding: 0;
+    margin-bottom: 0;
+    font-weight: 300;
+    letter-spacing: 0.15rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
   }
+
   ul {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    padding: 0;
-    margin: 0 12px;
+    margin: 0 10px;
+
     li {
-      list-style: none;
       margin: 4px 0;
     }
   }

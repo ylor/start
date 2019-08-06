@@ -12,8 +12,6 @@ const StyledSuggestions = styled.ul`
   justify-content: center;
   position: relative;
   width: 75vw;
-  position: fixed;
-  top: 55%;
 
   @media screen and (min-width: 640px) {
     flex-direction: row;

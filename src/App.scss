@@ -1,5 +1,5 @@
 :root {
-  --color-bg: #111;
+  --color-bg: #0f0f0f;
   --color-fg: #ccc;
   --color-fg-bright: #fff;
 
@@ -30,8 +30,8 @@ html {
 }
 
 body {
-  background: #0f0f0f;
-  color: #ccc;
+  background: var(--color-bg);
+  color: var(--color-fg);
   margin: 0;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -44,13 +44,10 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+  min-height: 85vh;
+  @media screen and (min-width: 640px) {
+    height: 100vh;
+  }
 }
 
 a {
@@ -61,38 +58,25 @@ code {
   font-family: var(--font-mono);
 }
 
+#search {
+  visibility: hidden;
+}
+
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  //visibility: hidden;
+
   input {
     background: transparent;
-    //background: white;
     border: 0;
     color: var(--color-fg);
     font-family: var(--font-mono);
     font-size: 6rem;
     font-weight: 200;
     max-width: 95vw;
-    position: fixed;
     text-align: center;
     //visibility: hidden;
   }
-}
-
-// .center {
-//   position: fixed;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-// }
-
-.visible {
-  visibility: visible;
-}
-
-.hidden {
-  visibility: hidden;
 }

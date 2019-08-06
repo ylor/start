@@ -14,7 +14,7 @@ import {
 import { config } from "./js/config";
 
 import Clock from "./components/Clock";
-import TBD from "./components/Links";
+import Links from "./components/Links";
 import Suggestions from "./components/Suggestions";
 //import Weather from "./components/Weather";
 
@@ -68,31 +68,31 @@ export default function App() {
   }, [search]);
 
   return (
-    <div id="App" className="App">
-      {/* <img src={logo} className="App-logo" alt="logo" /> */}
+    <div className="App">
       <Clock />
-      <form
-        className="center overlay search-form"
-        id="search-form"
-        autoCapitalize="none"
-        autoComplete="off"
-        autoCorrect="off"
-        spellCheck="false"
-        onChange={event => setSearch(event.target.value)}
-        onSubmit={event => {
-          event.preventDefault();
-          submitInput(parseInput(id("search-input").value));
-        }}
-      >
-        <input
-          className="search-input"
-          id="search-input"
-          type="text"
-          autoFocus
-        />
-        <Suggestions search={search} suggestions={suggestions} />
-      </form>
-      <TBD config={config} />
+      <div id="search">
+        <form
+          id="search-form"
+          autoCapitalize="none"
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck="false"
+          onChange={event => setSearch(event.target.value)}
+          onSubmit={event => {
+            event.preventDefault();
+            submitInput(parseInput(id("search-input").value));
+          }}
+        >
+          <input
+            className="search-input"
+            id="search-input"
+            type="text"
+            autoFocus
+          />
+          <Suggestions search={search} suggestions={suggestions} />
+        </form>
+      </div>
+      <Links config={config} />
     </div>
   );
 }

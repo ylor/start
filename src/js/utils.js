@@ -11,19 +11,28 @@ function hideElement(element) {
   id(element).style.visibility = "hidden";
 }
 
-function toggleHidden(element) {
-  id(element).classList.toggle("hidden");
+function getVisibility(element) {
+  if (getComputedStyle(id(element)).visibility === "visible") {
+    return true;
+  } else {
+    return false;
+  }
 }
 
-function toggleVisible(element) {
-  id(element).classList.toggle("visible");
+function toggleVisibility(element) {
+  if (getComputedStyle(id(element)).visibility === "hidden") {
+    id(element).style.visibility = "visible";
+  } else {
+    id(element).style.visibility = "hidden";
+  }
 }
 
 // TODO: refactor this to a switch?
 export function keyHandler(event) {
   if (event.key === "?") {
     event.preventDefault();
-    toggleHidden("links");
+    toggleVisibility("links");
+    return;
   }
 
   if (event.key === "ArrowUp") {
@@ -67,24 +76,29 @@ export function keyHandler(event) {
 
   // Listen for esc
   if (event.key === "Escape") {
-    // If search-input is focused then clear the input
-    if (document.activeElement !== id("search-input")) {
-      return changeFocus("search-input");
-    }
+    // // If search-input is focused then clear the input
+    // if (document.activeElement !== id("search-input")) {
+    //   return changeFocus("search-input");
+    // }
     // Else restore the focus to the search-input
     // changeFocus("search-input");
-    showElement("clock");
-    hideElement("search-input");
-    hideElement("search-suggestions");
+    if (document.activeElement === id("search-input")) {
+      // hideElement("search-input");
+      // hideElement("search-suggestions");
+      hideElement("search");
+      hideElement("links");
+      showElement("clock");
+      clearInput();
+      return;
+    }
   }
 
-  if (document.activeElement !== id("search-input")) {
-    if ((id("clock").style.visibility = "visible")) {
-      id("clock").style.visibility = "hidden";
-      id("search-form").style.visibility = "visible";
-    }
-    changeFocus("search-input");
-  }
+  hideElement("clock");
+  hideElement("links");
+  // showElement("search-input");
+  // showElement("search-suggestions");
+  showElement("search");
+  changeFocus("search-input");
 }
 
 export function mouseHandler(element) {
@@ -202,10 +216,6 @@ export function parseInput(rawInput) {
     commands.find(command => command.key === "*").url +
     commands.find(command => command.key === "*").search.replace("{}", input)
   );
-}
-
-function toUrl(url) {
-  return new URL(url);
 }
 
 export function submitInput(destination) {

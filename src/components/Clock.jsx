@@ -5,15 +5,14 @@ import { id } from "../js/utils";
 
 const StyledTime = styled.time`
   cursor: pointer;
-  display: fixed;
   position: absolute;
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: 100;
   letter-spacing: -0.01em;
   visibility: visible;
 
   span {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
 
   @media screen and (min-width: 768px) {
@@ -41,12 +40,16 @@ export default function Clock() {
       id="clock"
       onClick={() => {
         id("clock").style.visibility = "hidden";
-        id("search-form").style.visibility = "visible";
+        if (window.innerWidth <= 640) {
+          id("links").style.visibility = "visible";
+        } else {
+          id("search-form").style.visibility = "visible";
+        }
       }}
     >
       {time
         .toLocaleTimeString(navigator.language, {
-          hour: "2-digit",
+          hour: "numeric",
           minute: "2-digit"
         })
         .split(" ")[0]
@@ -55,8 +58,7 @@ export default function Clock() {
         {
           time
             .toLocaleTimeString(navigator.language, {
-              hour: "2-digit",
-              minute: "2-digit"
+              hour: "numeric"
             })
             .split(" ")[1]
         }

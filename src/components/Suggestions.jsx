@@ -48,14 +48,14 @@ const StyledSuggestions = styled.ul`
 export default function Suggestions(props) {
   const { search, suggestions } = props;
   return (
-    <StyledSuggestions id="search-suggestions" className="search-suggestions">
+    <StyledSuggestions id="search-suggestions">
       {suggestions
         ? suggestions.map((suggestion, i) => (
             <button
               key={suggestion + "-button-" + i}
               type="button"
               id={"search-suggestion-" + i}
-              className="search-suggestion focusable"
+              className="search-suggestion move"
               onMouseOver={() => mouseHandler("search-suggestion-" + i)}
               onFocus={() => replaceInput("search-suggestion-" + i)}
               onClick={() => (window.location.href = parseInput(suggestion))}

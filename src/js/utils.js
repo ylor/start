@@ -11,13 +11,13 @@ function hideElement(element) {
   id(element).style.visibility = "hidden";
 }
 
-function getVisibility(element) {
-  if (getComputedStyle(id(element)).visibility === "visible") {
-    return true;
-  } else {
-    return false;
-  }
-}
+// function getVisibility(element) {
+//   if (getComputedStyle(id(element)).visibility === "visible") {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 
 function toggleVisibility(element) {
   if (getComputedStyle(id(element)).visibility === "hidden") {
@@ -97,7 +97,6 @@ export function keyHandler(event) {
   hideElement("links");
   // showElement("search-input");
   // showElement("search-suggestions");
-  showElement("search");
   changeFocus("search-input");
 }
 

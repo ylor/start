@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { id } from "../js/utils";
+// import { id } from "../js/utils";
 
 const StyledAside = styled.section`
   background: var(--color-bg);

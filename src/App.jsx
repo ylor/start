@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
+import styled from "styled-components";
 
 import {
   id,
   mathPattern,
   keyHandler,
-  mouseHandler,
   parseInput,
-  replaceInput,
   submitInput
 } from "./js/utils";
 
@@ -20,6 +19,28 @@ import Suggestions from "./components/Suggestions";
 
 //import logo from "./logo.svg";
 import "./App.scss";
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledInput = styled.input`
+  background: transparent;
+  border: 0;
+  color: var(--color-fg);
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 200;
+  max-width: 95vw;
+  text-align: center;
+  //visibility: hidden;
+  @media screen and (min-width: 768px) {
+    font-size: 5rem;
+  }
+`;
 
 export default function App() {
   const [search, setSearch] = useState("");
@@ -60,9 +81,7 @@ export default function App() {
     }
 
     window.addEventListener("keydown", keyHandler);
-    //console.log("Created");
     return () => {
-      //console.log("Cleaned up");
       window.removeEventListener("keydown", keyHandler);
     };
   }, [search]);
@@ -70,28 +89,21 @@ export default function App() {
   return (
     <div className="App">
       <Clock />
-      <div id="search">
-        <form
-          id="search-form"
-          autoCapitalize="none"
-          autoComplete="off"
-          autoCorrect="off"
-          spellCheck="false"
-          onChange={event => setSearch(event.target.value)}
-          onSubmit={event => {
-            event.preventDefault();
-            submitInput(parseInput(id("search-input").value));
-          }}
-        >
-          <input
-            className="search-input"
-            id="search-input"
-            type="text"
-            autoFocus
-          />
-          <Suggestions search={search} suggestions={suggestions} />
-        </form>
-      </div>
+      <StyledForm
+        id="search-form"
+        autoCapitalize="none"
+        autoComplete="off"
+        autoCorrect="off"
+        spellCheck="false"
+        onChange={event => setSearch(event.target.value)}
+        onSubmit={event => {
+          event.preventDefault();
+          submitInput(parseInput(id("search-input").value));
+        }}
+      >
+        <StyledInput id="search-input" className="move" type="text" autoFocus />
+        <Suggestions search={search} suggestions={suggestions} />
+      </StyledForm>
       <Links config={config} />
     </div>
   );

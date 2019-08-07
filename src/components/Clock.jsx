@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { id } from "../js/utils";
+import { id, changeFocus } from "../js/utils";
 
 const StyledTime = styled.time`
   cursor: pointer;
@@ -40,11 +40,12 @@ export default function Clock() {
       id="clock"
       onClick={() => {
         id("clock").style.visibility = "hidden";
-        if (window.innerWidth <= 640) {
-          id("links").style.visibility = "visible";
-        } else {
-          id("search-form").style.visibility = "visible";
-        }
+        // if (window.innerWidth <= 640) {
+        //   id("links").style.visibility = "visible";
+        // } else {
+        id("search-form").style.visibility = "visible";
+        // }
+        changeFocus("search-input");
       }}
     >
       {time

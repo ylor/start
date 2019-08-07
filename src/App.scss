@@ -57,26 +57,3 @@ a {
 code {
   font-family: var(--font-mono);
 }
-
-#search {
-  visibility: hidden;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  input {
-    background: transparent;
-    border: 0;
-    color: var(--color-fg);
-    font-family: var(--font-mono);
-    font-size: 6rem;
-    font-weight: 200;
-    max-width: 95vw;
-    text-align: center;
-    //visibility: hidden;
-  }
-}

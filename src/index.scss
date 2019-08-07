@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:100&display=swap');
 @import url("https://use.typekit.net/cwr6yuv.css");
 
 :root {
@@ -6,11 +5,16 @@
   --color-fg: #ccc;
   --color-fg-bright: #fff;
 
+  --font-display: "brandon-grotesque", -apple-system, BlinkMacSystemFont,
+    "Roboto", "Helvetica Neue", sans-serif;
   --font-sans: -apple-system, BlinkMacSystemFont, "aktiv-grotesk", "Roboto",
     "Helvetica Neue", sans-serif;
   --font-mono: "iA Writer Duo", "SFMono-Regular", Menlo, Monaco, Consolas,
     "Courier New", monospace;
-  --font-base-px: 20px;
+  --font-base-px: 16px;
+  @media screen and (min-width: 768px) {
+    --font-base-px: 24px;
+  }
 }
 
 html {

@@ -21,14 +21,21 @@ const StyledAside = styled.section`
 const StyledSection = styled.section`
   h1 {
     margin-bottom: 0;
-    font-weight: 300;
+    font-weight: 700;
+    font-size: 1.15rem;
     letter-spacing: 0.15rem;
     text-transform: uppercase;
+    font-family: var(--font-display);
   }
 
   ul {
     li {
       margin: 2rem 0;
+      a {
+        text-decoration: none;
+        font-weight: 300;
+        border-bottom: 2px solid white;
+      }
     }
   }
 `;

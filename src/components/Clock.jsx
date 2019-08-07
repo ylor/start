@@ -4,24 +4,16 @@ import styled from "styled-components";
 import { id, changeFocus } from "../js/utils";
 
 const StyledTime = styled.time`
+  font-family: var(--font-display);
+  display: block;
   position: absolute;
   cursor: pointer;
-  font-size: 5rem;
+  font-size: 8rem;
   font-weight: 100;
   letter-spacing: -0.01em;
 
-  @media screen and (min-width: 768px) {
-    font-size: 12rem;
-    span {
-      font-size: 6rem;
-    }
-  }
-
   span {
-    font-size: 2.5rem;
-    @media screen and (min-width: 768px) {
-      font-size: 6rem;
-    }
+    font-size: 4rem;
   }
 `;
 

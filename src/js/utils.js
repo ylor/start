@@ -46,7 +46,12 @@ export function keyHandler(event) {
     // TODO
     // Change focus as if ArrowDown === Tab
     event.preventDefault();
-    return;
+    console.log(document.getElementsByClassName("move"));
+    var elements = document.getElementsByClassName("move");
+    for (var x = 0; x < elements.length; x++) {
+      console.log(elements[x]);
+      elements[x].focus();
+    }
   }
 
   // listen for equals key to do some math inline
@@ -68,12 +73,6 @@ export function keyHandler(event) {
     }
   }
 
-  //else give focus to search-input
-  if (event.key === "Shift" || event.key === "Tab") {
-    // Do nothing so that tabbing navigation is not broken
-    return;
-  }
-
   // Listen for esc
   if (event.key === "Escape") {
     // // If search-input is focused then clear the input
@@ -92,14 +91,32 @@ export function keyHandler(event) {
     }
   }
 
-  if (event.key === "Backspace"){
+  // Make these keys not trigger anything
+  const gatedKeys = [
+    "Alt",
+    "ArrowUp",
+    "ArrowRight",
+    "ArrowDown",
+    "ArrowLeft",
+    "CapsLock",
+    "Control",
+    "Enter",
+    "OS",
+    "Shift",
+    "Tab"
+  ];
+  if (gatedKeys.includes(event.key) || event.code === "Space") {
+    return;
+  }
+
+  if (event.key === "Backspace") {
     if (id("search-input").value === "") {
       hideElement("search-input");
       hideElement("search-suggestions");
       hideElement("links");
       showElement("clock");
     }
-    return
+    return;
   }
 
   hideElement("clock");

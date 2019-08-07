@@ -36,7 +36,6 @@ const StyledSuggestions = styled.ul`
     margin: 0.5rem;
     font-weight: 300;
     @media screen and (min-width: 768px) {
-      font-size: 1.5rem;
       margin: 1rem;
     }
 

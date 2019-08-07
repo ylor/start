@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "iA Writer Duospace";
+  font-weight: normal;
+  font-style: normal;
+  src: url("iAWriterDuospace-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "iA Writer Duospace";
+  font-weight: normal;
+  font-style: italic;
+  src: url("iAWriterDuospace-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "iA Writer Duospace";
+  font-weight: bold;
+  font-style: normal;
+  src: url("iAWriterDuospace-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "iA Writer Duospace";
+  font-weight: bold;
+  font-style: italic;
+  src: url("iAWriterDuospace-BoldItalic.woff2") format("woff2");
+}

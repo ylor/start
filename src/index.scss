@@ -5,9 +5,9 @@
   --color-fg: #ccc;
   --color-fg-bright: #fff;
 
-  --font-sans: "acumin-pro", -apple-system, BlinkMacSystemFont, "Roboto",
+  --font-sans: -apple-system, BlinkMacSystemFont, "acumin-pro", "Roboto",
     "Helvetica Neue", sans-serif;
-  --font-mono: "interstate-mono", "SFMono-Regular", Menlo, Monaco, Consolas,
+  --font-mono: "iA Writer Duo", "SFMono-Regular", Menlo, Monaco, Consolas,
     "Courier New", monospace;
   --font-base-px: 20px;
 }
@@ -43,13 +43,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
-}
-
 a {
   color: #ccc;
 }
 
 code {
   font-family: var(--font-mono);
+}
+
+.highlight {
+  background: var(--color-fg);
+  color: var(--color-bg);
 }

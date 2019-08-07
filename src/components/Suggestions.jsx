@@ -41,8 +41,7 @@ const StyledSuggestions = styled.ul`
     }
 
     .match {
-      color: var(--color-fg-bright);
-      font-weight: 700;
+      font-weight: 600;
       border-bottom: 1px solid var(--color-fg);
     }
   }

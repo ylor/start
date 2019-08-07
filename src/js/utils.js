@@ -92,6 +92,16 @@ export function keyHandler(event) {
     }
   }
 
+  if (event.key === "Backspace"){
+    if (id("search-input").value === "") {
+      hideElement("search-input");
+      hideElement("search-suggestions");
+      hideElement("links");
+      showElement("clock");
+    }
+    return
+  }
+
   hideElement("clock");
   hideElement("links");
   showElement("search-input");

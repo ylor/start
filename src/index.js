@@ -6,8 +6,6 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 import "./index.scss";
-import "./assets/fonts/ibm-plex-mono.css";
-import "./assets/fonts/inter.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

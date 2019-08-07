@@ -23,7 +23,7 @@ const StyledApp = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
+  min-height: 75vh;
 
   @media screen and (min-width: 640px) {
     min-height: 100vh;

@@ -83,9 +83,8 @@ export function keyHandler(event) {
     // Else restore the focus to the search-input
     // changeFocus("search-input");
     if (document.activeElement === id("search-input")) {
-      // hideElement("search-input");
-      // hideElement("search-suggestions");
-      hideElement("search");
+      hideElement("search-input");
+      hideElement("search-suggestions");
       hideElement("links");
       showElement("clock");
       clearInput();

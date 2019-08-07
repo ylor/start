@@ -7,11 +7,10 @@ import { mouseHandler, replaceInput, parseInput } from "../js/utils";
 const StyledSuggestions = styled.ul`
   display: flex;
   padding: 0;
+  max-width: 85vw;
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  position: relative;
-  width: 75vw;
 
   @media screen and (min-width: 640px) {
     flex-direction: row;
@@ -25,17 +24,21 @@ const StyledSuggestions = styled.ul`
     border: none;
     font-family: var(--font-mono);
     &:focus {
-      background: white;
+      background: var(--color-fg);
       outline: none;
-      color: black;
+      color: var(--color-bg);
     }
   }
 
   li {
     list-style: none;
-    font-size: 1.5rem;
-    margin: 1rem;
+    font-size: 1rem;
+    margin: 0.5rem;
     font-weight: 300;
+    @media screen and (min-width: 768px) {
+      font-size: 1.5rem;
+      margin: 1rem;
+    }
 
     .match {
       //color: var(--color-fg-bright);

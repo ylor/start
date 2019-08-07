@@ -5,8 +5,9 @@ import App from "./App";
 
 import * as serviceWorker from "./serviceWorker";
 
-import "./assets/fonts/Inter/inter.css";
-import "./assets/fonts/iosevka/webfont.css";
+import "./index.scss";
+import "./assets/fonts/ibm-plex-mono.css";
+import "./assets/fonts/inter.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

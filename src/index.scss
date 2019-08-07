@@ -5,7 +5,7 @@
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Inter var", "Roboto",
     "Helvetica Neue", sans-serif;
-  --font-mono: "Iosevka", "SFMono-Regular", Menlo, Monaco, Consolas,
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Monaco, Consolas,
     "Courier New", monospace;
   --font-base-px: 20px;
 }
@@ -19,7 +19,10 @@ html {
   ::-moz-focus-inner {
     border: 0;
   }
-  ::placeholder {
+
+  ::selection {
+    background: var(--color-fg);
+    color: var(--color-bg);
   }
 }
 
@@ -39,15 +42,6 @@ body {
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  min-height: 85vh;
-  @media screen and (min-width: 640px) {
-    height: 100vh;
-  }
 }
 
 a {

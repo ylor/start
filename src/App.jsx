@@ -13,12 +13,22 @@ import {
 import { config } from "./js/config";
 
 import Clock from "./components/Clock";
-import Links from "./components/Links";
 import Suggestions from "./components/Suggestions";
+import Links from "./components/Links";
 //import Weather from "./components/Weather";
 
-//import logo from "./logo.svg";
-import "./App.scss";
+const StyledApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+
+  @media screen and (min-width: 640px) {
+    min-height: 100vh;
+  }
+`;
 
 const StyledForm = styled.form`
   display: flex;
@@ -33,10 +43,10 @@ const StyledInput = styled.input`
   color: var(--color-fg);
   font-family: var(--font-mono);
   font-size: 2.5rem;
-  font-weight: 200;
-  max-width: 95vw;
+  font-weight: 300;
+  max-width: 99vw;
   text-align: center;
-  //visibility: hidden;
+
   @media screen and (min-width: 768px) {
     font-size: 5rem;
   }
@@ -60,7 +70,7 @@ export default function App() {
         const data = json
           .map(x => x.phrase) // make a simple array
           .filter(x => x !== search) // exclude items that equal what we have already typed in
-          .slice(0, 4); // take only the first four results
+          .slice(0, 6); // take only the first four results
 
         //console.log(data);  console.log(commands);
         if (search.includes("%")) {
@@ -87,7 +97,7 @@ export default function App() {
   }, [search]);
 
   return (
-    <div className="App">
+    <StyledApp id="App">
       <Clock />
       <StyledForm
         id="search-form"
@@ -101,10 +111,10 @@ export default function App() {
           submitInput(parseInput(id("search-input").value));
         }}
       >
-        <StyledInput id="search-input" className="move" type="text" autoFocus />
+        <StyledInput id="search-input" className="move" type="text" />
         <Suggestions search={search} suggestions={suggestions} />
       </StyledForm>
       <Links config={config} />
-    </div>
+    </StyledApp>
   );
 }

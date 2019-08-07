@@ -5,21 +5,20 @@ import styled from "styled-components";
 
 const StyledAside = styled.section`
   background: var(--color-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
   visibility: hidden;
-  position: absolute;
-  @media screen and (min-width: 768px) {
-    position: fixed;
+  section {
     display: flex;
-    flex-basis: 100%;
     flex-wrap: wrap;
-    justify-content: center;
   }
 `;
 
 const StyledSection = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-
   h1 {
     margin-bottom: 0;
     font-weight: 300;
@@ -28,13 +27,8 @@ const StyledSection = styled.section`
   }
 
   ul {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin: 0 10px;
-
     li {
-      margin: 4px 0;
+      margin: 2rem 0;
     }
   }
 `;

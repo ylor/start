@@ -94,8 +94,8 @@ export function keyHandler(event) {
 
   hideElement("clock");
   hideElement("links");
-  // showElement("search-input");
-  // showElement("search-suggestions");
+  showElement("search-input");
+  showElement("search-suggestions");
   changeFocus("search-input");
 }
 

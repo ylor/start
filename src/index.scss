@@ -1,11 +1,13 @@
+@import url("https://use.typekit.net/cwr6yuv.css");
+
 :root {
   --color-bg: #0f0f0f;
   --color-fg: #ccc;
   --color-fg-bright: #fff;
 
-  --font-sans: -apple-system, BlinkMacSystemFont, "Inter var", "Roboto",
+  --font-sans: "acumin-pro", -apple-system, BlinkMacSystemFont, "Roboto",
     "Helvetica Neue", sans-serif;
-  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Monaco, Consolas,
+  --font-mono: "interstate-mono", "IBM Plex Mono", "SFMono-Regular", Menlo, Monaco, Consolas,
     "Courier New", monospace;
   --font-base-px: 20px;
 }

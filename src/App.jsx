@@ -70,7 +70,7 @@ export default function App() {
         const data = json
           .map(x => x.phrase) // make a simple array
           .filter(x => x !== search) // exclude items that equal what we have already typed in
-          .slice(0, 6); // take only the first four results
+          .slice(0, 4); // take only the first four results
 
         //console.log(data);  console.log(commands);
         if (search.includes("%")) {

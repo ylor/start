@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { navigate } from "@reach/router";
 import styled from "styled-components";
 
-import { id, changeFocus } from "../js/utils";
-
 const StyledTime = styled.time`
   cursor: pointer;
   font-size: 8rem;
@@ -41,41 +39,12 @@ export default function Clock() {
 
     if (event.key === "?") {
       event.preventDefault();
-      navigate("/links");
-      return;
+      return navigate("/links");
     }
 
-    const keyWhitelist = [
-      "a",
-      "b",
-      "c",
-      "d",
-      "e",
-      "f",
-      "g",
-      "h",
-      "i",
-      "j",
-      "k",
-      "l",
-      "m",
-      "n",
-      "o",
-      "p",
-      "q",
-      "r",
-      "s",
-      "t",
-      "u",
-      "v",
-      "w",
-      "x",
-      "y",
-      "z"
-    ];
     if (window.location.pathname !== "/search") {
       return navigate("/search", {
-        state: { letter: keyWhitelist.includes(event.key) ? event.key : "" }
+        state: { letter: event.key.length === 1 ? event.key : "" }
       });
     }
   }

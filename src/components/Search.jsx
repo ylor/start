@@ -6,7 +6,6 @@ import fetchJsonp from "fetch-jsonp";
 import {
   id,
   mathPattern,
-  //keyHandler,
   clearInput,
   parseInput,
   submitInput,
@@ -15,10 +14,7 @@ import {
 
 import { config } from "../js/config";
 
-// import Clock from "./components/Clock";
 import Suggestions from "./Suggestions";
-// import Links from "./components/Links";
-//import Weather from "./components/Weather";
 
 const StyledForm = styled.form`
   display: flex;

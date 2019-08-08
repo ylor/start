@@ -70,7 +70,7 @@ export default function TabBar() {
         </Label>
       </NavLink>
 
-      <NavLink to="/NavLinks">
+      <NavLink to="/links">
         <Label>
           <span role="img" aria-label="NavLinks-icon">
             🔗

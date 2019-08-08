@@ -7,9 +7,6 @@ import { config } from "../js/config";
 
 const StyledAside = styled.aside`
   background: var(--color-bg);
-
-  @media screen and (min-width: 768px) {
-  }
 `;
 
 const StyledSection = styled.section`

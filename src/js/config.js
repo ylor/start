@@ -78,27 +78,27 @@ export const config = {
     },
     //Work
     {
-      category: "Miami-Dade College",
+      category: "MDC",
       name: "MDC",
       key: "mdc",
       url: "http://www.mdc.edu/"
     },
     {
-      category: "Miami-Dade College",
+      category: "MDC",
       name: "MDC - Employee",
       key: "emp",
       url: "https://wapi.mdc.edu/NTAuth/",
       search: "/NTAuth/user_data.asp?UserID={}"
     },
     {
-      category: "Miami-Dade College",
+      category: "MDC",
       name: "MDC - Student",
       key: "stu",
       url: "https://mdcwapi.mdc.edu:8001/ntauthstudent/",
       search: "/ntauthstudent/StudentData.aspx?AcctNm={}"
     },
     {
-      category: "Miami-Dade College",
+      category: "MDC",
       name: "JAMF",
       key: "jamf",
       url: "https://kmacdep.kendall.mdcc.edu:8443/"

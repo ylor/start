@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { navigate } from "@reach/router";
 import styled from "styled-components";
 import fetchJsonp from "fetch-jsonp";
 
@@ -21,7 +20,7 @@ const StyledInput = styled.input`
   font-family: var(--font-mono);
   font-size: 3rem;
   font-weight: 300;
-  max-width: 99vw;
+  width: 100vw;
   text-align: center;
 `;
 
@@ -31,83 +30,86 @@ function clearInput() {
   id("search-input").value = "";
 }
 
-function keyHandler(event) {
-  if (event.key === "ArrowUp") {
-    // TODO
-    // Change focus as if ArrowUp === Shitf+Tab
-    return event.preventDefault();
-  }
+export default function Search(props) {
+  const [search, setSearch] = useState(
+    props.location.state.letter ? props.location.state.letter : ""
+  );
+  //props.location.state.letter
+  const [suggestions, setSuggestions] = useState([]);
 
-  if (event.key === "ArrowDown") {
-    // TODO
-    // Change focus as if ArrowDown === Tab
-    event.preventDefault();
-    console.log(document.getElementsByClassName("move"));
-    var elements = document.getElementsByClassName("move");
-    for (var x = 0; x < elements.length; x++) {
-      console.log(elements[x]);
-      elements[x].focus();
+  function keyHandler(event) {
+    if (event.key === "ArrowUp") {
+      // TODO
+      // Change focus as if ArrowUp === Shitf+Tab
+      return event.preventDefault();
     }
-  }
 
-  // listen for equals key to do some math inline
-  if (event.key === "=") {
-    if (id("search-input").value.match(mathPattern)) {
-      try {
-        event.preventDefault();
-        const expression = id("search-input").value;
-        // disabling eslint for line containing `eval` because I'm prevalidating the input with mathPattern
-        // eslint-disable-next-line
-        const answer = eval(id("search-input").value);
-
-        return (id("search-input").value =
-          expression + "=" + answer.toString());
-      } catch {
-        // Cases where this fails includes incomplete expressions like `2+=`
-        return false;
+    if (event.key === "ArrowDown") {
+      // TODO
+      // Change focus as if ArrowDown === Tab
+      event.preventDefault();
+      console.log(document.getElementsByClassName("move"));
+      var elements = document.getElementsByClassName("move");
+      for (var x = 0; x < elements.length; x++) {
+        console.log(elements[x]);
+        elements[x].focus();
       }
     }
-  }
 
-  if (event.key === "?") {
-    event.preventDefault();
-    return navigate("/links");
-  }
+    // listen for equals key to do some math inline
+    if (event.key === "=") {
+      if (id("search-input").value.match(mathPattern)) {
+        try {
+          event.preventDefault();
+          const expression = id("search-input").value;
+          // disabling eslint for line containing `eval` because I'm prevalidating the input with mathPattern
+          // eslint-disable-next-line
+          const answer = eval(id("search-input").value);
 
-  if ((event.ctrlKey || event.metaKey) && event.key === "r") {
-    event.preventDefault();
-    return navigate("/");
-  }
-
-  if (event.key === "Backspace") {
-    if (document.activeElement !== id("search-input")) {
-      return changeFocus("search-input");
-    }
-    if (id("search-input").value === "") {
-      return navigate("/");
-    }
-  }
-
-  // Listen for esc
-  if (event.key === "Escape") {
-    // // If search-input is focused then clear the input
-    if (document.activeElement !== id("search-input")) {
-      return changeFocus("search-input");
+          return (id("search-input").value =
+            expression + "=" + answer.toString());
+        } catch {
+          // Cases where this fails includes incomplete expressions like `2+=`
+          return false;
+        }
+      }
     }
 
-    if (id("search-input").value.length > 0) {
-      return clearInput();
+    if (event.key === "?") {
+      event.preventDefault();
+      return props.history.push("/");
+      //return <Redirect to="/links" />;
+      //return props.history.push("/links");
     }
 
-    return navigate("/");
-  }
-}
+    if ((event.ctrlKey || event.metaKey) && event.key === "r") {
+      event.preventDefault();
+      return props.history.push("/");
+    }
 
-export default function Search(navigate) {
-  const [search, setSearch] = useState(
-    navigate.location.state.letter ? navigate.location.state.letter : ""
-  );
-  const [suggestions, setSuggestions] = useState([]);
+    if (event.key === "Backspace") {
+      if (document.activeElement !== id("search-input")) {
+        return changeFocus("search-input");
+      }
+      if (id("search-input").value === "") {
+        return props.history.push("/");
+      }
+    }
+
+    // Listen for esc
+    if (event.key === "Escape") {
+      // // If search-input is focused then clear the input
+      if (document.activeElement !== id("search-input")) {
+        return changeFocus("search-input");
+      }
+
+      if (id("search-input").value.length > 0) {
+        return clearInput();
+      }
+
+      return props.history.push("/");
+    }
+  }
 
   useEffect(() => {
     async function fetchSuggestions() {
@@ -142,6 +144,10 @@ export default function Search(navigate) {
       fetchSuggestions();
     }
 
+    window.innerWidth <= 640
+      ? id("search-input").blur()
+      : id("search-input").focus();
+
     window.addEventListener("keydown", keyHandler);
     return () => window.removeEventListener("keydown", keyHandler);
   }, [search]);
@@ -163,7 +169,6 @@ export default function Search(navigate) {
         id="search-input"
         className="move"
         type="text"
-        autoFocus
         placeholder="Tap Here"
         onFocus={event => (event.target.placeholder = "")}
         onBlur={event => (event.target.placeholder = "Tap Here")}

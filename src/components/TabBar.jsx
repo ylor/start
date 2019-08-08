@@ -1,27 +1,27 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+import HomeIcon from "../assets/svg/home.svg";
+import SearchIcon from "../assets/svg/search.svg";
+import LinksIcon from "../assets/svg/list.svg";
+
 const StyledNav = styled.nav`
-  position: fixed;
+  background: #222;
+  border-top: 2px solid #000;
   bottom: 0;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
   width: 100vw;
   z-index: 999;
 
-  background: #222;
-  border-top: 2px solid blue;
-  color: white;
-
-  display: flex;
-  justify-content: space-around;
-
   a {
-    width: 100%;
-    height: 100%;
-    padding: 24px;
-
-    text-decoration: none;
     -webkit-tap-highlight-color: transparent;
+    padding: 12px;
+    text-decoration: none;
+    width: 20%;
   }
 `;
 
@@ -29,52 +29,39 @@ const Label = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1.5rem;
+  img {
+    height: 36px;
+  }
 `;
-
-const NavLink = props => (
-  <Link
-    {...props}
-    getProps={({ isCurrent }) => {
-      // the object returned here is passed to the
-      // anchor element's props
-      return {
-        style: {
-          //background: isCurrent ? "white" : "black",
-          color: isCurrent ? "white" : "black"
-        }
-      };
-    }}
-  />
-);
 
 export default function TabBar() {
   return (
     <StyledNav>
       <NavLink to="/">
         <Label>
-          <span role="img" aria-label="home-icon">
-            🏠
-          </span>
-          <span>Home</span>
+          <img src={HomeIcon} alt="Home" />
+          {/* <span role="img" aria-label="home-icon" />
+          <span>Home</span> */}
         </Label>
       </NavLink>
 
       <NavLink to="/search">
         <Label>
-          <span role="img" aria-label="search-icon">
+          <img src={SearchIcon} alt="Search" />
+          {/* <span role="img" aria-label="search-icon">
             🔍
           </span>
-          <span>Search</span>
+          <span>Search</span> */}
         </Label>
       </NavLink>
 
       <NavLink to="/links">
         <Label>
-          <span role="img" aria-label="NavLinks-icon">
+          <img src={LinksIcon} alt="Links" />
+          {/* <span role="img" aria-label="NavLinks-icon">
             🔗
           </span>
-          <span>Links</span>
+          <span>Links</span> */}
         </Label>
       </NavLink>
     </StyledNav>

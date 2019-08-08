@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
-import { navigate } from "@reach/router";
 import styled from "styled-components";
 
 import { config } from "../js/config";
 
-const StyledAside = styled.aside``;
+const StyledAside = styled.aside`
+  flex: auto;
+  align-self: flex-start;
+  justify-self: flex-start;
+  margin-right: auto;
+`;
 
 const StyledSection = styled.section`
   h1 {
@@ -27,20 +31,7 @@ const StyledSection = styled.section`
   }
 `;
 
-function keyHandler(event) {
-  // Make these keys not trigger anything
-  if (event.key === "Shift") {
-    return;
-  }
-
-  if (event.key === "?" || event.key === "Escape") {
-    event.preventDefault();
-    navigate("/");
-    return;
-  }
-}
-
-export default function Links() {
+export default function Links(props) {
   const { commands } = config;
   //console.log(commands);
 
@@ -50,6 +41,19 @@ export default function Links() {
     .slice(1)
     .sort();
   //console.log(categories);
+
+  function keyHandler(event) {
+    // Make these keys not trigger anything
+    if (event.key === "Shift") {
+      return;
+    }
+
+    if (event.key === "?" || event.key === "Escape") {
+      event.preventDefault();
+      props.history.push("/");
+      return;
+    }
+  }
 
   useEffect(() => {
     window.addEventListener("keydown", keyHandler);

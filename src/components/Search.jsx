@@ -12,7 +12,7 @@ import {
   changeFocus
 } from "../js/utils";
 
-import { config } from "../js/config";
+//import { config } from "../js/config";
 
 import Suggestions from "./Suggestions";
 

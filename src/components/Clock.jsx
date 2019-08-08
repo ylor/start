@@ -28,6 +28,7 @@ export default function Clock() {
       "CapsLock",
       "Control",
       "Escape",
+      "Meta",
       "OS",
       "Shift",
       "Tab"
@@ -38,8 +39,9 @@ export default function Clock() {
       return;
     }
 
-    if (event.ctrlKey && event.key === "r") {
+    if ((event.metaKey || event.ctrlKey) && event.key === "r") {
       event.preventDefault();
+      window.location.reload();
       return;
     }
 

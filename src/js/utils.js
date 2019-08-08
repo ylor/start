@@ -1,5 +1,4 @@
 import { config } from "./config";
-import { navigate } from "@reach/router";
 
 export const id = element => document.getElementById(element);
 export const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);

@@ -79,11 +79,11 @@ function keyHandler(event) {
     }
   }
 
-  if (event.ctrlKey && event.key === "r") {
+  if ((event.ctrlKey || event.metaKey) && event.key === "r") {
     event.preventDefault();
     return navigate("/");
   }
-
+  
   if (event.key === "Backspace") {
     if (document.activeElement !== id("search-input")) {
       return changeFocus("search-input");

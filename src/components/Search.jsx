@@ -144,8 +144,6 @@ export default function Search(navigate) {
       fetchSuggestions();
     }
 
-    id("search-input").focus();
-
     window.addEventListener("keydown", keyHandler);
     return () => window.removeEventListener("keydown", keyHandler);
   }, [search]);
@@ -167,9 +165,10 @@ export default function Search(navigate) {
         id="search-input"
         className="move"
         type="text"
-        placeholder={window.innerWidth <= 640 ? "Tap" : null}
+        placeholder="Tap Here"
+        onFocus={e => (e.target.placeholder = "")}
+        onBlur={e => (e.target.placeholder = "Tap Here")}
         defaultValue={search}
-        autoFocus
       />
       <Suggestions search={search} suggestions={suggestions} />
     </StyledForm>

@@ -1,15 +1,22 @@
 import { config } from "./config";
+import { navigate } from "@reach/router";
 
 export const id = element => document.getElementById(element);
 export const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
 
-function showElement(element) {
-  id(element).style.visibility = "visible";
-}
+// function showElement(element) {
+//   if (id(element).style.visibility === "hidden") {
+//     id(element).style.visibility = "visible";
+//   }
 
-function hideElement(element) {
-  id(element).style.visibility = "hidden";
-}
+//   if (id(element).style.display === "none") {
+//     id(element).style.display = "block";
+//   }
+// }
+
+// function hideElement(element) {
+//   id(element).style.visibility = "hidden";
+// }
 
 // function getVisibility(element) {
 //   if (getComputedStyle(id(element)).visibility === "visible") {
@@ -25,13 +32,19 @@ function toggleVisibility(element) {
   } else {
     id(element).style.visibility = "hidden";
   }
+
+  if (getComputedStyle(id(element)).display === "none") {
+    id(element).style.display = "block";
+  } else {
+    id(element).style.display = "none";
+  }
 }
 
 // TODO: refactor this to a switch?
 export function keyHandler(event) {
   if (event.key === "?") {
     event.preventDefault();
-    toggleVisibility("links");
+    //toggleVisibility("links");
     return;
   }
 
@@ -76,19 +89,32 @@ export function keyHandler(event) {
   // Listen for esc
   if (event.key === "Escape") {
     // // If search-input is focused then clear the input
-    // if (document.activeElement !== id("search-input")) {
-    //   return changeFocus("search-input");
-    // }
+    if (document.activeElement !== id("search-input")) {
+      return changeFocus("search-input");
+    }
     // Else restore the focus to the search-input
     // changeFocus("search-input");
-    if (document.activeElement === id("search-input")) {
-      hideElement("search-input");
-      hideElement("search-suggestions");
-      hideElement("links");
-      showElement("clock");
-      clearInput();
-      return;
-    }
+    //(document.activeElement === id("search-input")) {
+    //   hideElement("search-input");
+    //   hideElement("search-suggestions");
+    //   hideElement("links");
+    //   showElement("clock");
+    //   clearInput();
+  } else {
+    changeFocus("search-input");
+  }
+
+  //   return;
+  // }
+
+  if (event.key === "Backspace") {
+    // if (id("search-input").value === "") {
+    //   hideElement("search-input");
+    //   hideElement("search-suggestions");
+    //   hideElement("links");
+    //   showElement("clock");
+    // }
+    return;
   }
 
   // Make these keys not trigger anything
@@ -100,6 +126,7 @@ export function keyHandler(event) {
     "ArrowLeft",
     "CapsLock",
     "Control",
+    "Escape",
     "Enter",
     "OS",
     "Shift",
@@ -109,20 +136,13 @@ export function keyHandler(event) {
     return;
   }
 
-  if (event.key === "Backspace") {
-    if (id("search-input").value === "") {
-      hideElement("search-input");
-      hideElement("search-suggestions");
-      hideElement("links");
-      showElement("clock");
-    }
-    return;
+  // hideElement("clock");
+  // hideElement("links");
+  // showElement("search-input");
+  // showElement("search-suggestions");
+  if (window.location.pathname !== "/search") {
+    return navigate("/search");
   }
-
-  hideElement("clock");
-  hideElement("links");
-  showElement("search-input");
-  showElement("search-suggestions");
   changeFocus("search-input");
 }
 
@@ -162,6 +182,7 @@ export function parseInput(rawInput) {
     "localhost",
     ".local"
   ];
+
   const topLevelDomains = [
     ".co.uk",
     ".co",

@@ -1,20 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { navigate } from "@reach/router";
 import styled from "styled-components";
 
+import { config } from "../js/config";
 // import { id } from "../js/utils";
 
-const StyledAside = styled.section`
+const StyledAside = styled.aside`
   background: var(--color-bg);
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow: auto;
-  width: 100%;
-  height: 100%;
-  visibility: hidden;
-  section {
-    display: flex;
-    flex-wrap: wrap;
+
+  @media screen and (min-width: 768px) {
   }
 `;
 
@@ -25,31 +19,50 @@ const StyledSection = styled.section`
     font-size: 1.15rem;
     letter-spacing: 0.15rem;
     text-transform: uppercase;
-    font-family: var(--font-display);
   }
 
   ul {
     li {
-      margin: 2rem 0;
+      margin: 0.5rem 0;
       a {
         text-decoration: none;
         font-weight: 300;
-        border-bottom: 2px solid white;
+        border-bottom: 2px solid var(--color-fg-bright);
       }
     }
   }
 `;
 
+function keyHandler(event) {
+  // Make these keys not trigger anything
+  if (event.key === "Shift") {
+    return;
+  }
+
+  if (event.key === "?" || event.key === "Escape") {
+    event.preventDefault();
+    navigate("/");
+    return;
+  }
+}
+
 export default function Links(props) {
-  const { config } = props;
   const { commands } = config;
   //console.log(commands);
+
   const categories = [
     ...new Set([...commands.map(command => command.category)])
   ]
     .slice(1)
     .sort();
   //console.log(categories);
+
+  useEffect(() => {
+    window.addEventListener("keydown", keyHandler);
+    return () => {
+      window.removeEventListener("keydown", keyHandler);
+    };
+  }, []);
 
   return (
     <StyledAside id="links" className="hidden">

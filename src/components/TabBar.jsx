@@ -20,8 +20,6 @@ const StyledNav = styled.nav`
     height: 100%;
     padding: 24px;
 
-    border-left: 2px solid blue;
-    border-right: 2px solid blue;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
   }
@@ -42,7 +40,8 @@ const NavLink = props => (
       // anchor element's props
       return {
         style: {
-          background: isCurrent ? "white" : "black"
+          //background: isCurrent ? "white" : "black",
+          color: isCurrent ? "white" : "black"
         }
       };
     }}
@@ -57,7 +56,7 @@ export default function TabBar() {
           <span role="img" aria-label="home-icon">
             🏠
           </span>
-          {/* <span>Home</span> */}
+          <span>Home</span>
         </Label>
       </NavLink>
 
@@ -66,7 +65,7 @@ export default function TabBar() {
           <span role="img" aria-label="search-icon">
             🔍
           </span>
-          {/* <span>Search</span> */}
+          <span>Search</span>
         </Label>
       </NavLink>
 
@@ -75,7 +74,7 @@ export default function TabBar() {
           <span role="img" aria-label="NavLinks-icon">
             🔗
           </span>
-          {/* <span>NavLinks</span> */}
+          <span>Links</span>
         </Label>
       </NavLink>
     </StyledNav>

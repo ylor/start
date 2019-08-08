@@ -35,8 +35,7 @@ function keyHandler(event) {
   if (event.key === "ArrowUp") {
     // TODO
     // Change focus as if ArrowUp === Shitf+Tab
-    event.preventDefault();
-    return;
+    return event.preventDefault();
   }
 
   if (event.key === "ArrowDown") {
@@ -72,8 +71,7 @@ function keyHandler(event) {
 
   if (event.key === "?") {
     event.preventDefault();
-    navigate("/links");
-    return;
+    return navigate("/links");
   }
 
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -138,7 +136,7 @@ export default function Search(navigate) {
       }
     }
 
-    if (search.length === 0 || search.match(mathPattern)) {
+    if (search.length < 1 || search.match(mathPattern)) {
       setSuggestions([]);
     } else {
       fetchSuggestions();
@@ -165,9 +163,10 @@ export default function Search(navigate) {
         id="search-input"
         className="move"
         type="text"
+        autoFocus
         placeholder="Tap Here"
-        onFocus={e => (e.target.placeholder = "")}
-        onBlur={e => (e.target.placeholder = "Tap Here")}
+        onFocus={event => (event.target.placeholder = "")}
+        onBlur={event => (event.target.placeholder = "Tap Here")}
         defaultValue={search}
       />
       <Suggestions search={search} suggestions={suggestions} />

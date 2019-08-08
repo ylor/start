@@ -4,9 +4,7 @@ import styled from "styled-components";
 
 import { config } from "../js/config";
 
-const StyledAside = styled.aside`
-  background: var(--color-bg);
-`;
+const StyledAside = styled.aside``;
 
 const StyledSection = styled.section`
   h1 {
@@ -42,7 +40,7 @@ function keyHandler(event) {
   }
 }
 
-export default function Links(props) {
+export default function Links() {
   const { commands } = config;
   //console.log(commands);
 
@@ -55,7 +53,7 @@ export default function Links(props) {
 
   useEffect(() => {
     window.addEventListener("keydown", keyHandler);
-    return () => window.removeEventListener("keydown", keyHandler)
+    return () => window.removeEventListener("keydown", keyHandler);
   }, []);
 
   return (
@@ -66,7 +64,7 @@ export default function Links(props) {
             <h1>{category}</h1>
             {commands.map(command =>
               command.category === category ? (
-                <li key={command.name} title={command.key}>
+                <li key={command.name} title={"Shortcut: " + command.key}>
                   {/* <span>{command.key}</span> */}
                   <a key={command.url} href={command.url}>
                     {command.name}

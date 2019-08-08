@@ -29,7 +29,7 @@ export default function App() {
         <Search path="/search" />
         <Links path="/links" />
       </Router>
-      <TabBar />
+      {window.innerWidth <= 640 ? <TabBar /> : null}
     </StyledApp>
   );
 }

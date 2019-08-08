@@ -71,9 +71,7 @@ export default function Clock() {
   return (
     <StyledTime
       id="clock"
-      onClick={() =>
-        window.innwerWidth <= 768 ? navigate("/search") : navigate("/links")
-      }
+      onClick={() => (window.innwerWidth <= 640 ? navigate("/search") : null)}
     >
       {time
         .toLocaleTimeString(navigator.language, {
@@ -81,7 +79,7 @@ export default function Clock() {
           minute: "2-digit"
         })
         .split(" ")[0]
-        .replace(":", " ") + " " }
+        .replace(":", " ") + " "}
       <span id="am-pm">
         {
           time

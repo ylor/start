@@ -19,7 +19,7 @@ const StyledInput = styled.input`
   border: 0;
   color: var(--color-fg);
   font-family: var(--font-mono);
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 300;
   max-width: 99vw;
   text-align: center;
@@ -28,7 +28,7 @@ const StyledInput = styled.input`
 const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
 
 function clearInput() {
-  id("search-input").value = null;
+  id("search-input").value = "";
 }
 
 function keyHandler(event) {
@@ -107,7 +107,7 @@ function keyHandler(event) {
 
 export default function Search(navigate) {
   const [search, setSearch] = useState(
-    navigate.location.state ? navigate.location.state.letter : ""
+    navigate.location.state.letter ? navigate.location.state.letter : ""
   );
   const [suggestions, setSuggestions] = useState([]);
 
@@ -138,11 +138,13 @@ export default function Search(navigate) {
       }
     }
 
-    if (search.length < 1 || search.match(mathPattern)) {
+    if (search.length === 0 || search.match(mathPattern)) {
       setSuggestions([]);
     } else {
       fetchSuggestions();
     }
+
+    id("search-input").focus();
 
     window.addEventListener("keydown", keyHandler);
     return () => window.removeEventListener("keydown", keyHandler);
@@ -165,6 +167,7 @@ export default function Search(navigate) {
         id="search-input"
         className="move"
         type="text"
+        placeholder={window.innerWidth <= 640 ? "Tap" : null}
         defaultValue={search}
         autoFocus
       />

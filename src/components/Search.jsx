@@ -28,14 +28,10 @@ const StyledInput = styled.input`
   border: 0;
   color: var(--color-fg);
   font-family: var(--font-mono);
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 300;
   max-width: 99vw;
   text-align: center;
-
-  @media screen and (min-width: 768px) {
-    font-size: 5rem;
-  }
 `;
 
 function keyHandler(event) {

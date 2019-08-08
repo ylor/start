@@ -4,11 +4,11 @@ import styled from "styled-components";
 
 const StyledTime = styled.time`
   cursor: pointer;
-  font-size: 8rem;
+  font-size: 6rem;
   font-weight: 100;
 
   span {
-    font-size: 4rem;
+    font-size: 3rem;
     letter-spacing: 0.1rem;
   }
 `;

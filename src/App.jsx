@@ -79,6 +79,7 @@ export default function App() {
   return (
     <StyledApp id="App">
       <Router>
+        <Clock default />
         <Clock path="/" />
         <Search path="/search" />
         <Links path="/links" />

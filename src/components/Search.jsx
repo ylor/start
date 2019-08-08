@@ -3,14 +3,7 @@ import { navigate } from "@reach/router";
 import styled from "styled-components";
 import fetchJsonp from "fetch-jsonp";
 
-import {
-  id,
-  mathPattern,
-  clearInput,
-  parseInput,
-  submitInput,
-  changeFocus
-} from "../js/utils";
+import { id, parseInput, changeFocus } from "../js/utils";
 
 import Suggestions from "./Suggestions";
 
@@ -31,6 +24,12 @@ const StyledInput = styled.input`
   max-width: 99vw;
   text-align: center;
 `;
+
+const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
+
+function clearInput() {
+  id("search-input").value = null;
+}
 
 function keyHandler(event) {
   if (event.key === "ArrowUp") {
@@ -81,7 +80,7 @@ function keyHandler(event) {
     event.preventDefault();
     return navigate("/");
   }
-  
+
   if (event.key === "Backspace") {
     if (document.activeElement !== id("search-input")) {
       return changeFocus("search-input");
@@ -121,7 +120,6 @@ export default function Search(navigate) {
             jsonpCallbackFunction: "autocompleteCallback"
           }
         );
-
         const json = await response.json();
         const data = json
           .map(x => x.phrase) // make a simple array
@@ -147,7 +145,7 @@ export default function Search(navigate) {
     }
 
     window.addEventListener("keydown", keyHandler);
-    return () => window.removeEventListener("keydown", keyHandler)
+    return () => window.removeEventListener("keydown", keyHandler);
   }, [search]);
 
   return (
@@ -156,12 +154,12 @@ export default function Search(navigate) {
       autoCapitalize="none"
       autoComplete="off"
       autoCorrect="off"
-      spellCheck="false"
       onChange={event => setSearch(event.target.value)}
       onSubmit={event => {
         event.preventDefault();
-        submitInput(parseInput(id("search-input").value));
+        window.location.href = parseInput(id("search-input").value);
       }}
+      spellCheck="false"
     >
       <StyledInput
         id="search-input"

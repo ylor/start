@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Search from "./components/Search";
 import Clock from "./components/Clock";
 import Links from "./components/Links";
+import TabBar from "./components/TabBar";
 
 const StyledApp = styled.main`
   display: flex;
@@ -28,6 +29,7 @@ export default function App() {
         <Search path="/search" />
         <Links path="/links" />
       </Router>
+      <TabBar />
     </StyledApp>
   );
 }

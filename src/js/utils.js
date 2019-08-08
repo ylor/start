@@ -1,7 +1,6 @@
 import { config } from "./config";
 
 export const id = element => document.getElementById(element);
-export const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
 
 export function mouseHandler(element) {
   // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned and typing has continued from there
@@ -12,17 +11,11 @@ export function changeFocus(element) {
   id(element).focus();
 }
 
-export function replaceInput(suggestion) {
-  id("search-input").value = id(suggestion).textContent;
-}
 
 export function restoreInput(text) {
   id("search-input").value = text;
 }
 
-export function clearInput() {
-  id("search-input").value = null;
-}
 
 export function parseInput(rawInput) {
   const input = rawInput.toLowerCase();
@@ -119,8 +112,4 @@ export function parseInput(rawInput) {
     commands.find(command => command.key === "*").url +
     commands.find(command => command.key === "*").search.replace("{}", input)
   );
-}
-
-export function submitInput(destination) {
-  window.location.href = destination;
 }

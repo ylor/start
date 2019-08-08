@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import reactStringReplace from "react-string-replace";
 
-import { id, changeFocus, replaceInput, parseInput } from "../js/utils";
-
+import { id, changeFocus, parseInput } from "../js/utils";
 
 const StyledSuggestions = styled.ul`
   display: flex;
@@ -48,8 +47,12 @@ const StyledSuggestions = styled.ul`
 `;
 
 function mouseHandler(element) {
-  // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned and typing has continued from there
+  // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned as typing continues
   id(element).addEventListener("mousemove", event => changeFocus(element));
+}
+
+function replaceInput(suggestion) {
+  id("search-input").value = id(suggestion).textContent;
 }
 
 export default function Suggestions(props) {
@@ -59,13 +62,13 @@ export default function Suggestions(props) {
       {suggestions
         ? suggestions.map((suggestion, i) => (
             <button
-              key={suggestion + "-button-" + i}
-              type="button"
+              key={"search-suggestion-" + i}
               id={"search-suggestion-" + i}
               className="search-suggestion move"
               onMouseOver={() => mouseHandler("search-suggestion-" + i)}
               onFocus={() => replaceInput("search-suggestion-" + i)}
               onClick={() => (window.location.href = parseInput(suggestion))}
+              type="button"
             >
               <li key={suggestion + "-li-" + i}>
                 {reactStringReplace(suggestion, search, (match, i) => (

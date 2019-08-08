@@ -26,6 +26,7 @@ export default function Clock() {
       "ArrowRight",
       "ArrowDown",
       "ArrowLeft",
+      "Backspace",
       "CapsLock",
       "Control",
       "Escape",

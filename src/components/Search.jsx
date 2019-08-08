@@ -155,7 +155,7 @@ function keyHandler(event) {
 export default function Search(navigate) {
   //console.log(navigate.location.state.letter);
   const [search, setSearch] = useState(
-    navigate.location.state.letter ? navigate.location.state.letter : ""
+    navigate.location.state ? navigate.location.state.letter : ""
   );
   const [suggestions, setSuggestions] = useState([]);
 

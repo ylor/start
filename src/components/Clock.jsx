@@ -69,10 +69,7 @@ export default function Clock() {
   }, []);
 
   return (
-    <StyledTime
-      id="clock"
-      onClick={() => (window.innwerWidth <= 640 ? navigate("/search") : null)}
-    >
+    <StyledTime id="clock" onClick={() => navigate("/search")}>
       {time
         .toLocaleTimeString(navigator.language, {
           hour: "numeric",

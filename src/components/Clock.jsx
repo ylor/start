@@ -13,49 +13,48 @@ const StyledTime = styled.time`
   }
 `;
 
+function keyHandler(event) {
+  const keyBlacklist = [
+    "Alt",
+    "ArrowUp",
+    "ArrowRight",
+    "ArrowDown",
+    "ArrowLeft",
+    "Backspace",
+    "CapsLock",
+    "Control",
+    "Escape",
+    "Meta",
+    "OS",
+    "Shift",
+    "Tab"
+  ];
+  // Make these keys not trigger anything
+  if (keyBlacklist.includes(event.key) || event.code === "Space") {
+    event.preventDefault();
+    return;
+  }
+
+  if ((event.metaKey || event.ctrlKey) && event.key === "r") {
+    event.preventDefault();
+    window.location.reload();
+    return;
+  }
+
+  if (event.key === "?") {
+    event.preventDefault();
+    return navigate("/links");
+  }
+
+  if (window.location.pathname !== "/search") {
+    return navigate("/search", {
+      state: { letter: event.key.length === 1 ? event.key : "" }
+    });
+  }
+}
+
 export default function Clock() {
   const [time, setTime] = useState(new Date());
-
-  function keyHandler(event) {
-    // Make these keys not trigger anything
-    const keyBlacklist = [
-      "Alt",
-      "ArrowUp",
-      "ArrowRight",
-      "ArrowDown",
-      "ArrowLeft",
-      "Backspace",
-      "CapsLock",
-      "Control",
-      "Escape",
-      "Meta",
-      "OS",
-      "Shift",
-      "Tab"
-    ];
-
-    if (keyBlacklist.includes(event.key) || event.code === "Space") {
-      event.preventDefault();
-      return;
-    }
-
-    if ((event.metaKey || event.ctrlKey) && event.key === "r") {
-      event.preventDefault();
-      window.location.reload();
-      return;
-    }
-
-    if (event.key === "?") {
-      event.preventDefault();
-      return navigate("/links");
-    }
-
-    if (window.location.pathname !== "/search") {
-      return navigate("/search", {
-        state: { letter: event.key.length === 1 ? event.key : "" }
-      });
-    }
-  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -82,7 +81,7 @@ export default function Clock() {
           minute: "2-digit"
         })
         .split(" ")[0]
-        .replace(":", " ") + " "}
+        .replace(":", " ") + " " }
       <span id="am-pm">
         {
           time

@@ -3,7 +3,6 @@ import { navigate } from "@reach/router";
 import styled from "styled-components";
 
 import { config } from "../js/config";
-// import { id } from "../js/utils";
 
 const StyledAside = styled.aside`
   background: var(--color-bg);
@@ -56,9 +55,7 @@ export default function Links(props) {
 
   useEffect(() => {
     window.addEventListener("keydown", keyHandler);
-    return () => {
-      window.removeEventListener("keydown", keyHandler);
-    };
+    return () => window.removeEventListener("keydown", keyHandler)
   }, []);
 
   return (

@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import reactStringReplace from "react-string-replace";
 
-import { mouseHandler, replaceInput, parseInput } from "../js/utils";
+import { id, changeFocus, replaceInput, parseInput } from "../js/utils";
+
 
 const StyledSuggestions = styled.ul`
   display: flex;
@@ -45,6 +46,11 @@ const StyledSuggestions = styled.ul`
     }
   }
 `;
+
+function mouseHandler(element) {
+  // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned and typing has continued from there
+  id(element).addEventListener("mousemove", event => changeFocus(element));
+}
 
 export default function Suggestions(props) {
   const { search, suggestions } = props;

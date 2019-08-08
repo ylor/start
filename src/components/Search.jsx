@@ -12,8 +12,6 @@ import {
   changeFocus
 } from "../js/utils";
 
-//import { config } from "../js/config";
-
 import Suggestions from "./Suggestions";
 
 const StyledForm = styled.form`
@@ -35,12 +33,6 @@ const StyledInput = styled.input`
 `;
 
 function keyHandler(event) {
-  if (event.key === "?") {
-    event.preventDefault();
-    navigate("/links");
-    return;
-  }
-
   if (event.key === "ArrowUp") {
     // TODO
     // Change focus as if ArrowUp === Shitf+Tab
@@ -79,6 +71,12 @@ function keyHandler(event) {
     }
   }
 
+  if (event.key === "?") {
+    event.preventDefault();
+    navigate("/links");
+    return;
+  }
+
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
     event.preventDefault();
     return navigate("/");
@@ -103,12 +101,12 @@ function keyHandler(event) {
     if (id("search-input").value.length > 0) {
       return clearInput();
     }
+
     return navigate("/");
   }
 }
 
 export default function Search(navigate) {
-  //console.log(navigate.location.state.letter);
   const [search, setSearch] = useState(
     navigate.location.state ? navigate.location.state.letter : ""
   );
@@ -130,7 +128,7 @@ export default function Search(navigate) {
           .filter(x => x !== search) // exclude items that equal what we have already typed in
           .slice(0, 4); // take only the first four results
 
-        //console.log(data);  console.log(commands);
+        //console.log(data);
         if (search.includes("%")) {
           setSuggestions([data[0]]);
         } else {
@@ -149,9 +147,7 @@ export default function Search(navigate) {
     }
 
     window.addEventListener("keydown", keyHandler);
-    return () => {
-      window.removeEventListener("keydown", keyHandler);
-    };
+    return () => window.removeEventListener("keydown", keyHandler)
   }, [search]);
 
   return (

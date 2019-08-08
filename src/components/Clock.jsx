@@ -4,11 +4,11 @@ import styled from "styled-components";
 
 const StyledTime = styled.time`
   cursor: pointer;
-  font-size: 6rem;
+  font-size: 8rem;
   font-weight: 100;
 
   span {
-    font-size: 3rem;
+    font-size: 4rem;
     letter-spacing: 0.1rem;
   }
 `;
@@ -34,6 +34,12 @@ export default function Clock() {
     ];
 
     if (keyBlacklist.includes(event.key) || event.code === "Space") {
+      event.preventDefault();
+      return;
+    }
+
+    if (event.ctrlKey && event.key === "r") {
+      event.preventDefault();
       return;
     }
 

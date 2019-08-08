@@ -32,7 +32,7 @@ const StyledSuggestions = styled.ul`
 
   li {
     list-style: none;
-    font-size: 0.75rem;
+    font-size: 1rem;
     margin: 0.5rem;
     font-weight: 300;
     /* @media screen and (min-width: 768px) {

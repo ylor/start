@@ -28,7 +28,7 @@ const StyledInput = styled.input`
   border: 0;
   color: var(--color-fg);
   font-family: var(--font-mono);
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 300;
   max-width: 99vw;
   text-align: center;
@@ -37,7 +37,7 @@ const StyledInput = styled.input`
 function keyHandler(event) {
   if (event.key === "?") {
     event.preventDefault();
-    //toggleVisibility("links");
+    navigate("/links");
     return;
   }
 
@@ -79,6 +79,20 @@ function keyHandler(event) {
     }
   }
 
+  if (event.ctrlKey && event.key === "r") {
+    event.preventDefault();
+    return navigate("/");
+  }
+
+  if (event.key === "Backspace") {
+    if (document.activeElement !== id("search-input")) {
+      return changeFocus("search-input");
+    }
+    if (id("search-input").value === "") {
+      return navigate("/");
+    }
+  }
+
   // Listen for esc
   if (event.key === "Escape") {
     // // If search-input is focused then clear the input
@@ -87,61 +101,10 @@ function keyHandler(event) {
     }
 
     if (id("search-input").value.length > 0) {
-      // Else restore the focus to the search-input
-      // changeFocus("search-input");
-      //(document.activeElement === id("search-input")) {
-      //   hideElement("search-input");
-      //   hideElement("search-suggestions");
-      //   hideElement("links");
-      //   showElement("clock");
       return clearInput();
     }
-    //changeFocus("search-input");
     return navigate("/");
   }
-
-  //   return;
-  // }
-
-  if (event.key === "Backspace") {
-    if (document.activeElement !== id("search-input")) {
-      return changeFocus("search-input");
-    }
-    if (id("search-input").value === "") {
-      //   hideElement("search-input");
-      //   hideElement("search-suggestions");
-      //   hideElement("links");
-      //   showElement("clock");
-      return navigate("/");
-    }
-  }
-
-  // // Make these keys not trigger anything
-  // const gatedKeys = [
-  //   "Alt",
-  //   "ArrowUp",
-  //   "ArrowRight",
-  //   "ArrowDown",
-  //   "ArrowLeft",
-  //   "CapsLock",
-  //   "Control",
-  //   "Escape",
-  //   "Enter",
-  //   "OS",
-  // ];
-  // if (gatedKeys.includes(event.key) || event.code === "Space") {
-  //   return;
-  // }
-
-  // hideElement("clock");
-  // hideElement("links");
-  // showElement("search-input");
-  // showElement("search-suggestions");
-
-  // if (window.location.pathname !== "/search") {
-  //   return navigate("/search");
-  // }
-  // changeFocus("search-input");
 }
 
 export default function Search(navigate) {

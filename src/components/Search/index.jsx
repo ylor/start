@@ -4,7 +4,7 @@ import fetchJsonp from "fetch-jsonp";
 
 import { id, parseInput, changeFocus } from "../../js/utils";
 
-import Suggestions from "../Suggestions";
+import Suggestions from "./Suggestions";
 
 const StyledForm = styled.form`
   display: flex;

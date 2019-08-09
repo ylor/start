@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import reactStringReplace from "react-string-replace";
 
-import { id, changeFocus, parseInput } from "../js/utils";
+import { id, changeFocus, parseInput } from "../../js/utils";
 
 const StyledSuggestions = styled.ul`
   display: flex;
@@ -71,11 +71,15 @@ export default function Suggestions(props) {
               type="button"
             >
               <li key={suggestion + "-li-" + i}>
-                {reactStringReplace(suggestion, search, (match, i) => (
-                  <span className="match" key={i}>
-                    {match}
-                  </span>
-                ))}
+                {reactStringReplace(
+                  suggestion,
+                  search.match(new RegExp(/\b(.)+(.)\b/g)),
+                  (match, i) => (
+                    <span className="match" key={i}>
+                      {match}
+                    </span>
+                  )
+                )}
               </li>
             </button>
           ))

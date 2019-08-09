@@ -7,7 +7,8 @@ import SearchIcon from "../assets/svg/search.svg";
 import LinksIcon from "../assets/svg/list.svg";
 
 const StyledNav = styled.nav`
-  background: #111;
+  background-color: hsla(0, 0%, 15%, 0.70);
+  backdrop-filter: blur(25px);
   border-top: 1px solid #000;
   bottom: 0;
   color: white;

@@ -34,6 +34,7 @@ export function parseInput(rawInput) {
     ".io",
     ".net",
     ".org",
+    ".sh",
     ".to"
   ];
 

@@ -3,17 +3,14 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 
-import Search from "./components/Search";
-import Clock from "./components/Clock";
-import Links from "./components/Links";
+import Search from "./components/Search/Search";
+import Clock from "./components/Clock/Clock";
+import Links from "./components/Links/Links";
 import TabBar from "./components/TabBar";
 
 const StyledApp = styled.main`
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
-
-  min-height: 80vh;
+  min-height: 75vh;
 
   @media screen and (min-width: 640px) {
     min-height: 100vh;

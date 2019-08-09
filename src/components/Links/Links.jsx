@@ -1,20 +1,16 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-import { config } from "../js/config";
+import { config } from "../../js/config";
 
 const StyledAside = styled.aside`
-  flex: auto;
-  align-self: flex-start;
-  justify-self: flex-start;
-  margin-right: auto;
+  margin-bottom: 500px;
 `;
 
 const StyledSection = styled.section`
   h1 {
     margin-bottom: 0;
     font-weight: 700;
-    font-size: 1.15rem;
     letter-spacing: 0.15rem;
     text-transform: uppercase;
   }
@@ -42,23 +38,23 @@ export default function Links(props) {
     .sort();
   //console.log(categories);
 
-  function keyHandler(event) {
-    // Make these keys not trigger anything
-    if (event.key === "Shift") {
-      return;
-    }
-
-    if (event.key === "?" || event.key === "Escape") {
-      event.preventDefault();
-      props.history.push("/");
-      return;
-    }
-  }
-
   useEffect(() => {
+    function keyHandler(event) {
+      // Make these keys not trigger anything
+      if (event.key === "Shift") {
+        return;
+      }
+
+      if (event.key === "?" || event.key === "Escape") {
+        event.preventDefault();
+        props.history.push("/");
+        return;
+      }
+    }
+
     window.addEventListener("keydown", keyHandler);
     return () => window.removeEventListener("keydown", keyHandler);
-  }, []);
+  }, [props.history]);
 
   return (
     <StyledAside id="links" className="hidden">

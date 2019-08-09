@@ -9,7 +9,7 @@
     "Helvetica Neue", sans-serif;
   --font-mono: "iA Writer Duo", "SFMono-Regular", Menlo, Monaco, Consolas,
     "Courier New", monospace;
-  --font-base-px: 20px;
+  --font-base-px: 24px;
   @media screen and (min-width: 768px) {
     --font-base-px: 32px;
   }
@@ -18,9 +18,11 @@
 html {
   box-sizing: border-box;
   font-size: var(--font-base-px);
+
   :focus {
     outline: none;
   }
+
   ::-moz-focus-inner {
     border: 0;
   }

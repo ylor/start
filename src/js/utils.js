@@ -11,11 +11,9 @@ export function changeFocus(element) {
   id(element).focus();
 }
 
-
 export function restoreInput(text) {
   id("search-input").value = text;
 }
-
 
 export function parseInput(rawInput) {
   const input = rawInput.toLowerCase();
@@ -25,13 +23,7 @@ export function parseInput(rawInput) {
   const keys = commands.map(command => command.key);
   //console.log("keys", keys)
 
-  const localTopLevelDomains = [
-    "0",
-    "0.0.0.0",
-    "127.0.0.1",
-    "localhost",
-    ".local"
-  ];
+  const localTopLevelDomains = ["0.0.0.0", "127.0.0.1", "localhost", ".local"];
 
   const topLevelDomains = [
     ".co.uk",

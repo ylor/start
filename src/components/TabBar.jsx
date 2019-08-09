@@ -7,8 +7,8 @@ import SearchIcon from "../assets/svg/search.svg";
 import LinksIcon from "../assets/svg/list.svg";
 
 const StyledNav = styled.nav`
-  background: #222;
-  border-top: 2px solid #000;
+  background: #111;
+  border-top: 1px solid #000;
   bottom: 0;
   color: white;
   display: flex;
@@ -16,10 +16,10 @@ const StyledNav = styled.nav`
   position: fixed;
   width: 100vw;
   z-index: 999;
+  padding: 12px 12px 24px 12px;
 
   a {
     -webkit-tap-highlight-color: transparent;
-    padding: 12px;
     text-decoration: none;
     width: 20%;
   }

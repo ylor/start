@@ -3,9 +3,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 
-import Search from "./components/Search/Search";
-import Clock from "./components/Clock/Clock";
-import Links from "./components/Links/Links";
+import Search from "./components/Search";
+import Clock from "./components/Clock";
+import Links from "./components/Links";
 import TabBar from "./components/TabBar";
 
 const StyledApp = styled.main`

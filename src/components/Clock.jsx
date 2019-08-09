@@ -53,10 +53,7 @@ export default function Clock(props) {
       }
 
       if (window.location.pathname !== "/search") {
-        props.history.push({
-          pathname: "/search",
-          state: { letter: event.key.length === 1 ? event.key : "" }
-        });
+        props.history.push("/search");
       }
     }
 

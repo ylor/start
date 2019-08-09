@@ -102,6 +102,8 @@ export function parseInput(rawInput) {
   // search google
   return (
     commands.find(command => command.key === "*").url +
-    commands.find(command => command.key === "*").search.replace("{}", input)
+    commands
+      .find(command => command.key === "*")
+      .search.replace("{}", encodeURIComponent(input))
   );
 }

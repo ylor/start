@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import fetchJsonp from "fetch-jsonp";
 
-import { id, parseInput, changeFocus } from "../../js/utils";
+import { id, parseInput, changeFocus } from "../js/utils";
 
 import Suggestions from "./Suggestions";
 
@@ -36,7 +36,6 @@ function clearInput() {
 
 export default function Search(props) {
   const [search, setSearch] = useState("");
-  console.log(props.location.state.letter);
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {

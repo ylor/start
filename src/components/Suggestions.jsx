@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import reactStringReplace from "react-string-replace";
 
-import { id, changeFocus, parseInput } from "../../js/utils";
+import { id, changeFocus, parseInput } from "../js/utils";
 
 const StyledSuggestions = styled.ul`
   display: flex;

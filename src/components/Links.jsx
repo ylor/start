@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-import { config } from "../../js/config";
+import { config } from "../js/config";
 
 const StyledAside = styled.aside`
   margin-bottom: 500px;

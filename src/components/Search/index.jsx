@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import fetchJsonp from "fetch-jsonp";
 
-import { id, parseInput, changeFocus } from "../js/utils";
+import { id, parseInput, changeFocus } from "../../js/utils";
 
-import Suggestions from "./Suggestions";
+import Suggestions from "../Suggestions";
 
 const StyledForm = styled.form`
   display: flex;

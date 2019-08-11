@@ -1,71 +1,71 @@
 @font-face {
   font-family: "Acumin";
-  src: url("acumin-100.woff2") format("woff2");
-  font-display: auto;
+  font-display: block;
   font-style: normal;
   font-weight: 100;
+  src: url("acumin-100.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Acumin";
-  src: url("acumin-200.woff2") format("woff2");
-  font-display: auto;
+  font-display: block;
   font-style: normal;
   font-weight: 200;
+  src: url("acumin-200.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Acumin";
-  src: url("acumin-300.woff2") format("woff2");
-  font-display: auto;
+  font-display: block;
   font-style: normal;
   font-weight: 300;
+  src: url("acumin-300.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Acumin";
-  src: url("acumin-400.woff2") format("woff2");
-  font-display: auto;
+  font-display: block;
   font-style: normal;
   font-weight: 400;
+  src: url("acumin-400.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Acumin";
-  src: url("acumin-500.woff2") format("woff2");
-  font-display: auto;
+  font-display: block;
   font-style: normal;
   font-weight: 500;
+  src: url("acumin-500.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Acumin";
-  src: url("acumin-600.woff2") format("woff2");
-  font-display: auto;
+  font-display: block;
   font-style: normal;
   font-weight: 600;
+  src: url("acumin-600.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Acumin";
-  src: url("acumin-700.woff2") format("woff2");
-  font-display: auto;
+  font-display: block;
   font-style: normal;
   font-weight: 700;
+  src: url("acumin-700.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Acumin";
-  src: url("Acumin-800.woff2") format("woff2");
-  font-display: auto;
+  font-display: block;
   font-style: normal;
   font-weight: 800;
+  src: url("Acumin-800.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Acumin";
-  src: url("acumin-900.woff2") format("woff2");
-  font-display: auto;
+  font-display: block;
   font-style: normal;
   font-weight: 900;
+  src: url("acumin-900.woff2") format("woff2");
 }

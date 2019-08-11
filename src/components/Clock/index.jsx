@@ -37,9 +37,7 @@ export default function Clock(props) {
       if (event.key === "?") {
         event.preventDefault();
         return props.history.push("/links");
-      }
-
-      if (window.location.pathname !== "/search") {
+      } else if (window.location.pathname !== "/search") {
         props.history.push("/search");
       }
     }

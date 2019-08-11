@@ -5,12 +5,12 @@
   src: url("iAWriterDuoS-Regular.woff2") format("woff2");
 }
 
-@font-face {
+/* @font-face {
   font-family: "Duo";
   font-weight: normal;
   font-style: italic;
   src: url("iAWriterDuoS-Italic.woff2") format("woff2");
-}
+} */
 
 @font-face {
   font-family: "Duo";
@@ -19,9 +19,9 @@
   src: url("iAWriterDuoS-Bold.woff2") format("woff2");
 }
 
-@font-face {
+/* @font-face {
   font-family: "Duo";
   font-weight: bold;
   font-style: italic;
   src: url("iAWriterDuoS-BoldItalic.woff2") format("woff2");
-}
+} */

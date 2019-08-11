@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+//import styled from "styled-components";
+import "./index.scss";
 
-const StyledTime = styled.time`
-  cursor: pointer;
-  font-size: 5rem;
-  font-weight: 100;
-  align-self: center;
-  justify-self: center;
-  margin: 0 auto;
+// const StyledTime = styled.time`
+//   cursor: pointer;
+//   font-size: 5rem;
+//   font-weight: 100;
+//   align-self: center;
+//   justify-self: center;
+//   margin: 0 auto;
 
-  span {
-    font-size: 2.5rem;
-    letter-spacing: 0.1rem;
-  }
-`;
+//   span {
+//     font-size: 2.5rem;
+//     letter-spacing: 0.1rem;
+//   }
+// `;
 
 export default function Clock(props) {
   const [time, setTime] = useState(new Date());
@@ -70,7 +71,7 @@ export default function Clock(props) {
   }, [props.history]);
 
   return (
-    <StyledTime id="clock" onClick={() => props.history.push("/search")}>
+    <time id="clock" onClick={() => props.history.push("/search")}>
       {time
         .toLocaleTimeString(navigator.language, {
           hour: "numeric",
@@ -87,6 +88,6 @@ export default function Clock(props) {
             .split(" ")[1]
         }
       </span>
-    </StyledTime>
+    </time>
   );
 }

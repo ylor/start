@@ -19,13 +19,8 @@ export function parseInput(rawInput) {
   const { commands } = config;
   const input = rawInput.toLowerCase();
   const keys = commands.map(command => command.key);
-  const localTopLevelDomains = ["localhost", ".local"];
-
-  const ipPattern = new RegExp(
-    /\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b/g
-  );
   const urlPattern = new RegExp(
-    /([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?/gi
+    /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/gi
   );
 
   // begin conditionals for the parser
@@ -34,7 +29,7 @@ export function parseInput(rawInput) {
     return commands.find(x => x.key === input).url;
   }
 
-  //handle search
+  //handle search with a matched key
   else if (input.includes(":") && keys.includes(input.split(":")[0])) {
     const key = input.split(":")[0];
     const query = rawInput.split(":")[1].trimStart();
@@ -49,21 +44,16 @@ export function parseInput(rawInput) {
     }
   }
 
-  //handle paths that match shortcut keys
+  //handle paths with a matched key
   else if (input.includes("/") && keys.includes(input.split("/")[0])) {
     const key = input.split("/")[0];
     const path = input.split("/")[1];
     return commands.find(command => command.key === key).url + "/" + path;
   }
 
-  // handle local tlds in case they include a port number that conflicts with the search delimiter (e.g. 'localhost:3000')
-  else if (localTopLevelDomains.some(tld => input.includes(tld)) || input.match(ipPattern)) {
-    return input.startsWith("http") ? input : "http://" + input;
-  }
-
   //handle urls
-  else if (input.match(urlPattern)) {
-    return input.startsWith("http") ? input : "https://" + input;
+  else if (input.match(urlPattern) || input.includes("localhost")) {
+    return input.startsWith("http") ? input : "http://" + input;
   }
 
   // search google

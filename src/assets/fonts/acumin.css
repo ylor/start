@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "Acumin";
+  src: url("acumin-100.woff2") format("woff2");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Acumin";
+  src: url("acumin-200.woff2") format("woff2");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Acumin";
+  src: url("acumin-300.woff2") format("woff2");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Acumin";
+  src: url("acumin-400.woff2") format("woff2");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Acumin";
+  src: url("acumin-500.woff2") format("woff2");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Acumin";
+  src: url("acumin-600.woff2") format("woff2");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Acumin";
+  src: url("acumin-700.woff2") format("woff2");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Acumin";
+  src: url("Acumin-800.woff2") format("woff2");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Acumin";
+  src: url("acumin-900.woff2") format("woff2");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 900;
+}

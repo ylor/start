@@ -3,11 +3,10 @@ import ReactDOM from "react-dom";
 
 import App from "./App";
 
-import * as serviceWorker from "./serviceWorker";
-
+import * as serviceWorker from "./js/serviceWorker";
 import "./index.scss";
-import "./assets/Duo/duo.css";
-import "./assets/Duospace/duospace.css";
+import "./assets/fonts/acumin.css";
+import "./assets/fonts/duo.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

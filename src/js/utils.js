@@ -16,10 +16,14 @@ export function changeFocus(element) {
 // }
 
 export function parseInput(rawInput) {
-  const input = rawInput.toLowerCase();
   const { commands } = config;
+  const input = rawInput.toLowerCase();
   const keys = commands.map(command => command.key);
-  const localTopLevelDomains = ["0.0.0.0", "127.0.0.1", "localhost", ".local"];
+  const localTopLevelDomains = ["localhost", ".local"];
+
+  const ipPattern = new RegExp(
+    /\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b/g
+  );
   const urlPattern = new RegExp(
     /([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?/gi
   );
@@ -45,20 +49,21 @@ export function parseInput(rawInput) {
     }
   }
 
-  //handle paths that match keys
+  //handle paths that match shortcut keys
   else if (input.includes("/") && keys.includes(input.split("/")[0])) {
     const key = input.split("/")[0];
     const path = input.split("/")[1];
     return commands.find(command => command.key === key).url + "/" + path;
   }
+
+  // handle local tlds in case they include a port number that conflicts with the search delimiter (e.g. 'localhost:3000')
+  else if (localTopLevelDomains.some(tld => input.includes(tld)) || input.match(ipPattern)) {
+    return input.startsWith("http") ? input : "http://" + input;
+  }
+
   //handle urls
   else if (input.match(urlPattern)) {
     return input.startsWith("http") ? input : "https://" + input;
-  }
-
-  // handle local tlds in case they include a port number that conflicts with the search delimiter (e.g. 'localhost:3000')
-  else if (localTopLevelDomains.some(tld => input.includes(tld))) {
-    return input.startsWith("http") ? input : "http://" + input;
   }
 
   // search google

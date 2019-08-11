@@ -9,8 +9,7 @@
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "react-string-replace": "^0.4.4",
-    "styled-components": "^4.3.2"
+    "react-string-replace": "^0.4.4"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",

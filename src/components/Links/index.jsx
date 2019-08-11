@@ -1,31 +1,32 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 import { config } from "../../js/config";
+import "./links.scss";
 
-const StyledAside = styled.aside`
-  margin-bottom: 500px;
-`;
+// const aside = styled.aside`
+//   margin-bottom: 500px;
+// `;
 
-const StyledSection = styled.section`
-  h1 {
-    margin-bottom: 0;
-    font-weight: 700;
-    letter-spacing: 0.15rem;
-    text-transform: uppercase;
-  }
+// const section = styled.section`
+//   h1 {
+//     margin-bottom: 0;
+//     font-weight: 700;
+//     letter-spacing: 0.15rem;
+//     text-transform: uppercase;
+//   }
 
-  ul {
-    li {
-      margin: 0.5rem 0;
-      a {
-        text-decoration: none;
-        font-weight: 300;
-        border-bottom: 2px solid var(--color-fg-bright);
-      }
-    }
-  }
-`;
+//   ul {
+//     li {
+//       margin: 0.5rem 0;
+//       a {
+//         text-decoration: none;
+//         font-weight: 300;
+//         border-bottom: 2px solid var(--color-fg-bright);
+//       }
+//     }
+//   }
+// `;
 
 export default function Links(props) {
   const { commands } = config;
@@ -57,9 +58,9 @@ export default function Links(props) {
   }, [props.history]);
 
   return (
-    <StyledAside id="links" className="hidden">
+    <aside id="links" className="hidden">
       {categories.map(category => (
-        <StyledSection key={category}>
+        <section key={category}>
           <ul>
             <h1>{category}</h1>
             {commands.map(command =>
@@ -73,8 +74,8 @@ export default function Links(props) {
               ) : null
             )}
           </ul>
-        </StyledSection>
+        </section>
       ))}
-    </StyledAside>
+    </aside>
   );
 }

@@ -1,50 +1,52 @@
 import React from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import reactStringReplace from "react-string-replace";
 
 import { id, changeFocus, parseInput } from "../../js/utils";
 
-const StyledSuggestions = styled.ul`
-  display: flex;
-  padding: 0;
-  max-width: 85vw;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
+import "./suggestions.scss";
 
-  @media screen and (min-width: 640px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
+// const ul = styled.ul`
+//   display: flex;
+//   padding: 0;
+//   max-width: 85vw;
+//   flex-direction: column;
+//   align-content: center;
+//   justify-content: center;
 
-  button {
-    background: transparent;
-    color: white;
-    cursor: pointer;
-    border: none;
-    font-family: var(--font-mono);
-    &:focus {
-      background: var(--color-fg);
-      outline: none;
-      color: var(--color-bg);
-    }
-  }
+//   @media screen and (min-width: 640px) {
+//     flex-direction: row;
+//     flex-wrap: wrap;
+//   }
 
-  li {
-    list-style: none;
-    font-size: 1rem;
-    margin: 0.5rem;
-    font-weight: 300;
-    /* @media screen and (min-width: 768px) {
-      margin: 1rem;
-    } */
+//   button {
+//     background: transparent;
+//     color: white;
+//     cursor: pointer;
+//     border: none;
+//     font-family: var(--font-mono);
+//     &:focus {
+//       background: var(--color-fg);
+//       outline: none;
+//       color: var(--color-bg);
+//     }
+//   }
 
-    .match {
-      font-weight: 600;
-      border-bottom: 1px solid var(--color-fg);
-    }
-  }
-`;
+//   li {
+//     list-style: none;
+//     font-size: 1rem;
+//     margin: 0.5rem;
+//     font-weight: 300;
+//     /* @media screen and (min-width: 768px) {
+//       margin: 1rem;
+//     } */
+
+//     .match {
+//       font-weight: 600;
+//       border-bottom: 1px solid var(--color-fg);
+//     }
+//   }
+// `;
 
 function mouseHandler(element) {
   // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned as typing continues
@@ -58,7 +60,7 @@ function replaceInput(suggestion) {
 export default function Suggestions(props) {
   const { search, suggestions } = props;
   return (
-    <StyledSuggestions id="search-suggestions">
+    <ul id="search-suggestions">
       {suggestions
         ? suggestions.map((suggestion, i) => (
             <button
@@ -84,6 +86,6 @@ export default function Suggestions(props) {
             </button>
           ))
         : null}
-    </StyledSuggestions>
+    </ul>
   );
 }

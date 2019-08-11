@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import fetchJsonp from "fetch-jsonp";
 
 import { id, parseInput, changeFocus } from "../../js/utils";
 
+import "./search.scss";
+
 import Suggestions from "./Suggestions";
 
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+// const form = styled.form`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
-const StyledInput = styled.input`
-  background: transparent;
-  border: 0;
-  color: var(--color-fg);
-  font-family: var(--font-mono);
-  font-size: 3rem;
-  font-weight: 300;
-  width: 100vw;
-  text-align: center;
-  /* ::placeholder {
-    font-size: 1.5rem;
-    color: #666;
-  } */
-`;
+// const input = styled.input`
+//   background: transparent;
+//   border: 0;
+//   color: var(--color-fg);
+//   font-family: var(--font-mono);
+//   font-size: 3rem;
+//   font-weight: 300;
+//   width: 100vw;
+//   text-align: center;
+//   /* ::placeholder {
+//     font-size: 1.5rem;
+//     color: #666;
+//   } */
+// `;
 
 const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
 
@@ -149,7 +151,7 @@ export default function Search(props) {
   }, [search, props.history]);
 
   return (
-    <StyledForm
+    <form
       id="search-form"
       autoCapitalize="none"
       autoComplete="off"
@@ -161,7 +163,7 @@ export default function Search(props) {
       }}
       spellCheck="false"
     >
-      <StyledInput
+      <input
         id="search-input"
         className="move"
         type="text"
@@ -169,6 +171,6 @@ export default function Search(props) {
         autoFocus
       />
       <Suggestions search={search} suggestions={suggestions} />
-    </StyledForm>
+    </form>
   );
 }

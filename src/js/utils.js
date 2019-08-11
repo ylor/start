@@ -11,26 +11,20 @@ export function changeFocus(element) {
   id(element).focus();
 }
 
-export function restoreInput(text) {
-  id("search-input").value = text;
-}
+// export function restoreInput(text) {
+//   id("search-input").value = text;
+// }
 
 export function parseInput(rawInput) {
   const input = rawInput.toLowerCase();
-
   const { commands } = config;
-  //console.log("config commands", commands)
   const keys = commands.map(command => command.key);
-  //console.log("keys", keys)
-
   const localTopLevelDomains = ["0.0.0.0", "127.0.0.1", "localhost", ".local"];
-
   const urlPattern = new RegExp(
-    /^(?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9./]+$/gim
+    /([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?/gi
   );
 
   // begin conditionals for the parser
-
   //handle match to key in config
   if (keys.includes(input)) {
     return commands.find(x => x.key === input).url;
@@ -39,7 +33,7 @@ export function parseInput(rawInput) {
   //handle search
   else if (input.includes(":") && keys.includes(input.split(":")[0])) {
     const key = input.split(":")[0];
-    const query = input.split(":")[1].trimStart();
+    const query = rawInput.split(":")[1].trimStart();
 
     if (commands.find(command => command.key === key).search) {
       return (
@@ -57,22 +51,22 @@ export function parseInput(rawInput) {
     const path = input.split("/")[1];
     return commands.find(command => command.key === key).url + "/" + path;
   }
+  //handle urls
+  else if (input.match(urlPattern)) {
+    return input.startsWith("http") ? input : "https://" + input;
+  }
 
   // handle local tlds in case they include a port number that conflicts with the search delimiter (e.g. 'localhost:3000')
   else if (localTopLevelDomains.some(tld => input.includes(tld))) {
     return input.startsWith("http") ? input : "http://" + input;
   }
 
-  //handle urls
-  else if (input.match(urlPattern)) {
-    return input.startsWith("http") ? input : "https://" + input;
-  }
-
   // search google
-  else return (
-    commands.find(command => command.key === "*").url +
-    commands
-      .find(command => command.key === "*")
-      .search.replace("{}", encodeURIComponent(rawInput))
-  );
+  else
+    return (
+      commands.find(command => command.key === "*").url +
+      commands
+        .find(command => command.key === "*")
+        .search.replace("{}", encodeURIComponent(rawInput))
+    );
 }

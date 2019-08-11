@@ -165,9 +165,6 @@ export default function Search(props) {
         id="search-input"
         className="move"
         type="text"
-        // placeholder="Tap to Search"
-        // onFocus={event => (event.target.placeholder = "")}
-        // onBlur={event => (event.target.placeholder = "Tap Here")}
         defaultValue={search}
         autoFocus
       />

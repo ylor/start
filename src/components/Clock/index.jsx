@@ -33,10 +33,11 @@ export default function Clock(props) {
         "Meta",
         "OS",
         "Shift",
+        "Spacebar",
         "Tab"
       ];
       // Make these keys not trigger anything
-      if (keyBlacklist.includes(event.key) || event.code === "Space") {
+      if (keyBlacklist.includes(event.key)) {
         event.preventDefault();
         return;
       }

@@ -7,9 +7,8 @@ import SearchIcon from "../assets/svg/search.svg";
 import LinksIcon from "../assets/svg/list.svg";
 
 const StyledNav = styled.nav`
-  background-color: hsla(0, 0%, 15%, 0.70);
-  backdrop-filter: blur(25px);
-  border-top: 1px solid #000;
+  background-color: hsl(0, 0%, 15%);
+  border-top: 1px solid #333;
   bottom: 0;
   color: white;
   display: flex;
@@ -19,10 +18,20 @@ const StyledNav = styled.nav`
   z-index: 999;
   padding: 12px 12px 24px 12px;
 
+  @supports (
+    (-webkit-backdrop-filter: blur(30px)) or (backdrop-filter: blur(30px))
+  ) {
+    background-color: hsla(0, 0%, 15%, 0.69);
+    backdrop-filter: blur(30px);
+  }
+
   a {
     -webkit-tap-highlight-color: transparent;
     text-decoration: none;
     width: 20%;
+    &.active {
+      color: red;
+    }
   }
 `;
 
@@ -38,31 +47,25 @@ const Label = styled.div`
 export default function TabBar() {
   return (
     <StyledNav>
-      <NavLink to="/">
+      <NavLink exact to="/">
         <Label>
           <img src={HomeIcon} alt="Home" />
-          {/* <span role="img" aria-label="home-icon" />
-          <span>Home</span> */}
+          <span role="img" aria-label="home-icon" />
+          <span>Home</span>
         </Label>
       </NavLink>
 
-      <NavLink to="/search">
+      <NavLink exact to="/search">
         <Label>
           <img src={SearchIcon} alt="Search" />
-          {/* <span role="img" aria-label="search-icon">
-            🔍
-          </span>
-          <span>Search</span> */}
+          <span>Search</span>
         </Label>
       </NavLink>
 
-      <NavLink to="/links">
+      <NavLink exact to="/links">
         <Label>
           <img src={LinksIcon} alt="Links" />
-          {/* <span role="img" aria-label="NavLinks-icon">
-            🔗
-          </span>
-          <span>Links</span> */}
+          <span>Links</span>
         </Label>
       </NavLink>
     </StyledNav>

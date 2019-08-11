@@ -127,8 +127,7 @@ export default function Search(props) {
       if (event.key === "Backspace") {
         if (document.activeElement !== id("search-input")) {
           return changeFocus("search-input");
-        }
-        if (id("search-input").value === "") {
+        } else if (id("search-input").value === "") {
           return props.history.push("/");
         }
       }

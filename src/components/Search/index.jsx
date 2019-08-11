@@ -22,10 +22,10 @@ const StyledInput = styled.input`
   font-weight: 300;
   width: 100vw;
   text-align: center;
-  ::placeholder {
+  /* ::placeholder {
     font-size: 1.5rem;
     color: #666;
-  }
+  } */
 `;
 
 const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
@@ -83,11 +83,12 @@ export default function Search(props) {
         // Change focus as if ArrowDown === Tab
         event.preventDefault();
         console.log(document.getElementsByClassName("move"));
+        var currentElement = document.activeElement;
         var elements = document.getElementsByClassName("move");
-        for (var x = 0; x < elements.length; x++) {
-          console.log(elements[x]);
-          elements[x].focus();
-        }
+        // for (var x = 0; x < elements.length; x++) {
+        //   console.log(elements[x]);
+        //   elements[x].focus();
+        // }
       }
 
       // listen for equals key to do some math inline
@@ -109,11 +110,9 @@ export default function Search(props) {
         }
       }
 
-      if (event.key === "?") {
+      if (event.key === "?" && id("search-input").value < 1) {
         event.preventDefault();
-        return props.history.push("/");
-        //return <Redirect to="/links" />;
-        //return props.history.push("/links");
+        return props.history.push("/links");
       }
 
       if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -135,19 +134,15 @@ export default function Search(props) {
         // // If search-input is focused then clear the input
         if (document.activeElement !== id("search-input")) {
           return changeFocus("search-input");
-        }
-
-        if (id("search-input").value.length > 0) {
+        } else if (id("search-input").value.length > 0) {
           return clearInput();
+        } else {
+          return props.history.push("/");
         }
-
-        return props.history.push("/");
       }
-    }
 
-    // window.innerWidth <= 640
-    //   ? id("search-input").blur()
-    //   : id("search-input").focus();
+      changeFocus("search-input");
+    }
 
     window.addEventListener("keydown", keyHandler);
     return () => window.removeEventListener("keydown", keyHandler);

@@ -25,18 +25,9 @@ export function parseInput(rawInput) {
 
   const localTopLevelDomains = ["0.0.0.0", "127.0.0.1", "localhost", ".local"];
 
-  const topLevelDomains = [
-    ".co.uk",
-    ".co",
-    ".com",
-    ".edu",
-    ".gov",
-    ".io",
-    ".net",
-    ".org",
-    ".sh",
-    ".to"
-  ];
+  const urlPattern = new RegExp(
+    /^(?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9./]+$/gim
+  );
 
   // begin conditionals for the parser
 
@@ -44,22 +35,11 @@ export function parseInput(rawInput) {
   if (keys.includes(input)) {
     return commands.find(x => x.key === input).url;
   }
-  // handle local tlds in case they include a port number that conflicts with the search delimiter (e.g. 'localhost:3000')
-  if (localTopLevelDomains.some(tld => input.includes(tld))) {
-    return input.startsWith("http") ? input : "http://" + input;
-  }
-
-  // handle input that begins with http
-  if (input.startsWith("http")) {
-    return input;
-  }
 
   //handle search
-  if (input.includes(":")) {
+  else if (input.includes(":") && keys.includes(input.split(":")[0])) {
     const key = input.split(":")[0];
-    //console.log(key)
     const query = input.split(":")[1].trimStart();
-    //console.log(search)
 
     if (commands.find(command => command.key === key).search) {
       return (
@@ -68,43 +48,31 @@ export function parseInput(rawInput) {
           .find(command => command.key === key)
           .search.replace("{}", query)
       );
-    } else {
-      return (
-        commands.find(command => command.key === "*").url +
-        commands
-          .find(command => command.key === "*")
-          .search.replace("{}", query)
-      );
     }
   }
 
-  // if input contains a space go straight to search
-  if (input.includes(" ")) {
-    return (
-      commands.find(command => command.key === "*").url +
-      commands.find(command => command.key === "*").search.replace("{}", input)
-    );
-  }
-
-  //handle paths
-  if (input.includes("/")) {
+  //handle paths that match keys
+  else if (input.includes("/") && keys.includes(input.split("/")[0])) {
     const key = input.split("/")[0];
-    //console.log(key)
     const path = input.split("/")[1];
-    //console.log(path)
     return commands.find(command => command.key === key).url + "/" + path;
   }
 
-  //handle internet tlds
-  if (topLevelDomains.some(tld => input.includes(tld))) {
+  // handle local tlds in case they include a port number that conflicts with the search delimiter (e.g. 'localhost:3000')
+  else if (localTopLevelDomains.some(tld => input.includes(tld))) {
+    return input.startsWith("http") ? input : "http://" + input;
+  }
+
+  //handle urls
+  else if (input.match(urlPattern)) {
     return input.startsWith("http") ? input : "https://" + input;
   }
 
   // search google
-  return (
+  else return (
     commands.find(command => command.key === "*").url +
     commands
       .find(command => command.key === "*")
-      .search.replace("{}", encodeURIComponent(input))
+      .search.replace("{}", encodeURIComponent(rawInput))
   );
 }

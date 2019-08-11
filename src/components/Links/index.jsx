@@ -1,43 +1,16 @@
 import React, { useEffect } from "react";
 // import styled from "styled-components";
 
-import { config } from "../../js/config";
-import "./links.scss";
-
-// const aside = styled.aside`
-//   margin-bottom: 500px;
-// `;
-
-// const section = styled.section`
-//   h1 {
-//     margin-bottom: 0;
-//     font-weight: 700;
-//     letter-spacing: 0.15rem;
-//     text-transform: uppercase;
-//   }
-
-//   ul {
-//     li {
-//       margin: 0.5rem 0;
-//       a {
-//         text-decoration: none;
-//         font-weight: 300;
-//         border-bottom: 2px solid var(--color-fg-bright);
-//       }
-//     }
-//   }
-// `;
+import { config } from "../../config";
+import "./style.scss";
 
 export default function Links(props) {
   const { commands } = config;
-  //console.log(commands);
-
   const categories = [
     ...new Set([...commands.map(command => command.category)])
   ]
     .slice(1)
     .sort();
-  //console.log(categories);
 
   useEffect(() => {
     function keyHandler(event) {
@@ -58,9 +31,9 @@ export default function Links(props) {
   }, [props.history]);
 
   return (
-    <aside id="links" className="hidden">
+    <aside className="categories">
       {categories.map(category => (
-        <section key={category}>
+        <section key={category} className="links">
           <ul>
             <h1>{category}</h1>
             {commands.map(command =>

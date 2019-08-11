@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from "react";
-//import styled from "styled-components";
-import "./clock.scss";
-
-// const StyledTime = styled.time`
-//   cursor: pointer;
-//   font-size: 5rem;
-//   font-weight: 100;
-//   align-self: center;
-//   justify-self: center;
-//   margin: 0 auto;
-
-//   span {
-//     font-size: 2.5rem;
-//     letter-spacing: 0.1rem;
-//   }
-// `;
+import "./style.scss";
 
 export default function Clock(props) {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     function keyHandler(event) {
+      // Make these keys not trigger anything
       const keyBlacklist = [
         "Alt",
         "ArrowUp",
@@ -37,7 +23,6 @@ export default function Clock(props) {
         "Spacebar",
         "Tab"
       ];
-      // Make these keys not trigger anything
       if (keyBlacklist.includes(event.key)) {
         event.preventDefault();
         return;

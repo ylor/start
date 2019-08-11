@@ -1,21 +1,5 @@
-import { config } from "../config";
-
-export const id = element => document.getElementById(element);
-
-export function mouseHandler(element) {
-  // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned and typing has continued from there
-  id(element).addEventListener("mousemove", event => changeFocus(element));
-}
-
-export function changeFocus(element) {
-  id(element).focus();
-}
-
-// export function restoreInput(text) {
-//   id("search-input").value = text;
-// }
-
-export function parseInput(rawInput) {
+import { config } from "../../config";
+export default function parseInput(rawInput) {
   const { commands } = config;
   const input = rawInput.toLowerCase();
   const keys = commands.map(command => command.key);

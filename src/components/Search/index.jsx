@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 // import styled from "styled-components";
 import fetchJsonp from "fetch-jsonp";
 
-import { id, parseInput, changeFocus } from "../../js/utils";
+import { id, changeFocus } from "../../js/utils";
 
-import "./search.scss";
+import parseInput from "./parseInput";
+
+import "./style.scss";
 
 import Suggestions from "./Suggestions";
 
@@ -143,7 +145,9 @@ export default function Search(props) {
         }
       }
 
-      changeFocus("search-input");
+      if (event.key !== "Shift" && event.key !== "Tab") {
+        changeFocus("search-input");
+      }
     }
 
     window.addEventListener("keydown", keyHandler);

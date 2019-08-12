@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
-// import styled from "styled-components";
 import fetchJsonp from "fetch-jsonp";
+import reactStringReplace from "react-string-replace";
 
 import { id, changeFocus } from "../../js/utils";
 import parseInput from "./parseInput";
 import "./style.scss";
 
-import Suggestions from "./Suggestions";
-
 const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
+
+function mouseHandler(element) {
+  // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned as typing continues
+  id(element).addEventListener("mousemove", event => changeFocus(element));
+}
+
+function replaceInput(suggestion) {
+  id("search-input").value = id(suggestion).textContent;
+}
 
 function clearInput() {
   id("search-input").value = "";
@@ -52,41 +59,31 @@ export default function Search(props) {
     }
 
     function keyHandler(event) {
+      const currentElement = document.activeElement;
+      const suggestionClass = document.getElementsByClassName(
+        "search-suggestion"
+      );
+
+      // Change focus as if ArrowUp === Shitf+Tab
       if (event.key === "ArrowUp") {
-        // TODO
-        // Change focus as if ArrowUp === Shitf+Tab
         event.preventDefault();
-        console.log(document.getElementsByClassName("move"));
-        var currentElement = document.activeElement;
-        //var elements = document.getElementsByClassName("move");
-        if (currentElement === id("search-input")) {
-          id("search-suggestion-3").focus();
-        } else if (currentElement === id("search-suggestion-3")) {
-          id("search-suggestion-2").focus();
-        } else if (currentElement === id("search-suggestion-2")) {
-          id("search-suggestion-1").focus();
-        } else if (currentElement === id("search-suggestion-1")) {
-          id("search-suggestion-0").focus();
+        if (currentElement.id === "search-input") {
+          suggestionClass[suggestionClass.length - 1].focus();
         } else {
-          id("search-input").focus();
+          currentElement.previousElementSibling
+            ? currentElement.previousElementSibling.focus()
+            : id("search-input").focus();
         }
-      } else if (event.key === "ArrowDown") {
-        // TODO
-        // Change focus as if ArrowDown === Tab
+      }
+      // Change focus as if ArrowDown === Tab
+      else if (event.key === "ArrowDown") {
         event.preventDefault();
-        console.log(document.getElementsByClassName("move"));
-        var currentElement = document.activeElement;
-        //var elements = document.getElementsByClassName("move");
-        if (currentElement === id("search-input")) {
-          id("search-suggestion-0").focus();
-        } else if (currentElement === id("search-suggestion-0")) {
-          id("search-suggestion-1").focus();
-        } else if (currentElement === id("search-suggestion-1")) {
-          id("search-suggestion-2").focus();
-        } else if (currentElement === id("search-suggestion-2")) {
-          id("search-suggestion-3").focus();
+        if (currentElement.id === "search-input") {
+          suggestionClass[0].focus();
         } else {
-          id("search-input").focus();
+          currentElement.nextElementSibling
+            ? currentElement.nextElementSibling.focus()
+            : id("search-input").focus();
         }
       }
 
@@ -161,10 +158,34 @@ export default function Search(props) {
         id="search-input"
         className="move"
         type="text"
-        defaultValue={search}
         autoFocus
+        onFocus={event => (event.target.value = search)}
       />
-      <Suggestions search={search} suggestions={suggestions} />
+      <div id="search-suggestions">
+        {suggestions
+          ? suggestions.map((suggestion, i) => (
+              <button
+                key={"search-suggestion-" + i}
+                id={"search-suggestion-" + i}
+                className="search-suggestion move"
+                onClick={() => (window.location.href = parseInput(suggestion))}
+                onFocus={event => replaceInput(event.target.id)}
+                onMouseOver={event => mouseHandler(event.target.id)}
+                type="button"
+              >
+                {reactStringReplace(
+                  suggestion,
+                  search.match(new RegExp(/\b(.)+(.)\b/g)),
+                  (match, i) => (
+                    <span className="match" key={i}>
+                      {match}
+                    </span>
+                  )
+                )}
+              </button>
+            ))
+          : null}
+      </div>
     </form>
   );
 }

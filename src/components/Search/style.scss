@@ -1,9 +1,9 @@
-form {
+#search-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  input {
+  #search-input {
     background: transparent;
     border: 0;
     color: var(--color-fg);
@@ -16,5 +16,43 @@ form {
       font-size: 1.5rem;
       color: #666;
     } */
+  }
+}
+
+#search-suggestions {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  max-width: 85vw;
+  padding: 0;
+
+  @media screen and (min-width: 640px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .search-suggestion {
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    border: none;
+    list-style: none;
+    font-size: 0.75rem;
+    margin: 0.25rem;
+    padding: 0.5rem;
+    font-weight: 300;
+    font-family: var(--font-mono);
+
+    &:focus {
+      background: var(--color-fg);
+      outline: none;
+      color: var(--color-bg);
+    }
+  }
+
+  .match {
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-fg);
   }
 }

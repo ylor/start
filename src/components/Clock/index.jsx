@@ -28,28 +28,37 @@ export default function Clock(props) {
         return;
       }
 
-      if ((event.metaKey || event.ctrlKey) && event.key === "r") {
+      // Prevent triggering search screen when trying to reload
+      else if ((event.metaKey || event.ctrlKey) && event.key === "r") {
         event.preventDefault();
         window.location.reload();
         return;
       }
 
-      if (event.key === "?") {
+      // Trigger links on question mark
+      else if (event.key === "?") {
         event.preventDefault();
         return props.history.push("/links");
-      } else if (window.location.pathname !== "/search") {
+      }
+
+      // Trigger search screen on any keypress other than above
+      if (window.location.pathname !== "/search") {
         props.history.push("/search");
       }
     }
 
+    // Init keyHandler
     window.addEventListener("keydown", keyHandler);
-    const interval = setInterval(() => {
+
+    // Update date every second
+    const dateUpdater = setInterval(() => {
       setTime(new Date());
     }, 1000);
 
+    // Cleanup dateUpdater interval and keyHandler event listener
     return () => {
       window.removeEventListener("keydown", keyHandler);
-      clearInterval(interval);
+      clearInterval(dateUpdater);
     };
   }, [props.history]);
 

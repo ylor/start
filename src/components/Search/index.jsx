@@ -3,34 +3,10 @@ import React, { useState, useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
 
 import { id, changeFocus } from "../../js/utils";
-
 import parseInput from "./parseInput";
-
 import "./style.scss";
 
 import Suggestions from "./Suggestions";
-
-// const form = styled.form`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-// `;
-
-// const input = styled.input`
-//   background: transparent;
-//   border: 0;
-//   color: var(--color-fg);
-//   font-family: var(--font-mono);
-//   font-size: 3rem;
-//   font-weight: 300;
-//   width: 100vw;
-//   text-align: center;
-//   /* ::placeholder {
-//     font-size: 1.5rem;
-//     color: #666;
-//   } */
-// `;
 
 const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
 
@@ -89,14 +65,15 @@ export default function Search(props) {
         console.log(document.getElementsByClassName("move"));
         var currentElement = document.activeElement;
         var elements = document.getElementsByClassName("move");
-        // for (var x = 0; x < elements.length; x++) {
-        //   console.log(elements[x]);
-        //   elements[x].focus();
-        // }
+        var currentIndex = 0;
+
+        currentIndex =
+          currentIndex + 1 === elements.length ? 0 : ++currentIndex;
+        elements[currentIndex].focus();
       }
 
       // listen for equals key to do some math inline
-      if (event.key === "=") {
+      else if (event.key === "=") {
         if (id("search-input").value.match(mathPattern)) {
           try {
             event.preventDefault();
@@ -112,19 +89,13 @@ export default function Search(props) {
             return false;
           }
         }
-      }
-
-      if (event.key === "?" && id("search-input").value < 1) {
+      } else if (event.key === "?" && id("search-input").value < 1) {
         event.preventDefault();
         return props.history.push("/links");
-      }
-
-      if ((event.ctrlKey || event.metaKey) && event.key === "r") {
+      } else if ((event.ctrlKey || event.metaKey) && event.key === "r") {
         event.preventDefault();
         return props.history.push("/");
-      }
-
-      if (event.key === "Backspace") {
+      } else if (event.key === "Backspace") {
         if (document.activeElement !== id("search-input")) {
           return changeFocus("search-input");
         } else if (id("search-input").value === "") {
@@ -134,7 +105,7 @@ export default function Search(props) {
       }
 
       // Listen for esc
-      if (event.key === "Escape") {
+      else if (event.key === "Escape") {
         // // If search-input is focused then clear the input
         if (document.activeElement !== id("search-input")) {
           return changeFocus("search-input");
@@ -145,7 +116,8 @@ export default function Search(props) {
         }
       }
 
-      if (event.key !== "Shift" && event.key !== "Tab") {
+      // Allow tabbing but anything else focuses search
+      else if (event.key !== "Shift" && event.key !== "Tab") {
         changeFocus("search-input");
       }
     }

@@ -55,21 +55,39 @@ export default function Search(props) {
       if (event.key === "ArrowUp") {
         // TODO
         // Change focus as if ArrowUp === Shitf+Tab
-        return event.preventDefault();
-      }
-
-      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        console.log(document.getElementsByClassName("move"));
+        var currentElement = document.activeElement;
+        //var elements = document.getElementsByClassName("move");
+        if (currentElement === id("search-input")) {
+          id("search-suggestion-3").focus();
+        } else if (currentElement === id("search-suggestion-3")) {
+          id("search-suggestion-2").focus();
+        } else if (currentElement === id("search-suggestion-2")) {
+          id("search-suggestion-1").focus();
+        } else if (currentElement === id("search-suggestion-1")) {
+          id("search-suggestion-0").focus();
+        } else {
+          id("search-input").focus();
+        }
+      } else if (event.key === "ArrowDown") {
         // TODO
         // Change focus as if ArrowDown === Tab
         event.preventDefault();
         console.log(document.getElementsByClassName("move"));
         var currentElement = document.activeElement;
-        var elements = document.getElementsByClassName("move");
-        var currentIndex = 0;
-
-        currentIndex =
-          currentIndex + 1 === elements.length ? 0 : ++currentIndex;
-        elements[currentIndex].focus();
+        //var elements = document.getElementsByClassName("move");
+        if (currentElement === id("search-input")) {
+          id("search-suggestion-0").focus();
+        } else if (currentElement === id("search-suggestion-0")) {
+          id("search-suggestion-1").focus();
+        } else if (currentElement === id("search-suggestion-1")) {
+          id("search-suggestion-2").focus();
+        } else if (currentElement === id("search-suggestion-2")) {
+          id("search-suggestion-3").focus();
+        } else {
+          id("search-input").focus();
+        }
       }
 
       // listen for equals key to do some math inline

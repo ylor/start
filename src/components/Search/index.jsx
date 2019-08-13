@@ -13,7 +13,8 @@ function changeFocus(element) {
 }
 
 function mouseHandler(element) {
-  // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned as typing continues
+  // Add event listener to only change focus via mouse if mouse is moving.
+  // Helps maintain integrity of input when suggestions are being returned as typing continues
   id(element).addEventListener("mousemove", event => changeFocus(element));
 }
 
@@ -109,6 +110,7 @@ export default function Search(props) {
       }
 
       // Listen for space
+      // In Safari on macOS there doesn't seem to be an equivalent for event.key === "Spacebar" so I had to use event.code
       else if (event.key === "Spacebar" || event.code === "Space") {
         if (document.activeElement.id !== "search-input") {
           setSearch(document.activeElement.textContent);
@@ -127,7 +129,7 @@ export default function Search(props) {
         }
       }
 
-      // Listen for ctrl/cmd + r
+      // Listen for ctrl/cmd + r to give a nicer experience for reloads
       else if ((event.ctrlKey || event.metaKey) && event.key === "r") {
         event.preventDefault();
         props.history.push("/");
@@ -138,9 +140,13 @@ export default function Search(props) {
         // If search-input is focused then clear the input
         if (document.activeElement !== id("search-input")) {
           changeFocus("search-input");
-        } else if (id("search-input").value.length > 0) {
+        }
+        // If search-input is focused and has a value, zero it out
+        else if (id("search-input").value.length > 0) {
           id("search-input").value = "";
-        } else {
+        }
+        // If search-input is already empty, navigate back home
+        else {
           props.history.push("/");
         }
       }
@@ -161,30 +167,30 @@ export default function Search(props) {
       autoCapitalize="none"
       autoComplete="off"
       autoCorrect="off"
+      spellCheck="false"
       onChange={event => setSearch(event.target.value)}
       onSubmit={event => {
         event.preventDefault();
         window.location.href = parseInput(id("search-input").value);
       }}
-      spellCheck="false"
     >
       <input
         id="search-input"
+        type="text"
         autoFocus
         onFocus={event => (event.target.value = search)}
-        type="text"
       />
       <div id="search-suggestions">
         {suggestions
-          ? suggestions.map((suggestion, i) => (
+          ? suggestions.map((suggestion, index) => (
               <button
-                key={"search-suggestion-" + i}
-                id={"search-suggestion-" + i}
+                key={"search-suggestion-" + index}
+                id={"search-suggestion-" + index}
                 className="search-suggestion"
+                type="button"
                 onClick={() => (window.location.href = parseInput(suggestion))}
                 onFocus={() => (id("search-input").value = suggestion)}
                 onMouseOver={event => mouseHandler(event.target.id)}
-                type="button"
               >
                 {reactStringReplace(
                   suggestion,

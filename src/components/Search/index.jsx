@@ -2,23 +2,19 @@ import React, { useState, useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
 import reactStringReplace from "react-string-replace";
 
-import { id, changeFocus } from "../../js/utils";
+import { id } from "../../js/utils";
 import parseInput from "./parseInput";
 import "./style.scss";
 
 const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
 
+function changeFocus(element) {
+  id(element).focus();
+}
+
 function mouseHandler(element) {
   // Add event listener to only change focus via mouse if mouse is moving. Helps maintain integrity of input when suggestions are being returned as typing continues
   id(element).addEventListener("mousemove", event => changeFocus(element));
-}
-
-function replaceInput(suggestion) {
-  id("search-input").value = id(suggestion).textContent;
-}
-
-function clearInput() {
-  id("search-input").value = "";
 }
 
 export default function Search(props) {
@@ -66,7 +62,6 @@ export default function Search(props) {
 
       // Change focus as if ArrowUp === Shitf+Tab
       if (event.key === "ArrowUp") {
-        event.preventDefault();
         if (currentElement.id === "search-input") {
           suggestionClass[suggestionClass.length - 1].focus();
         } else {
@@ -74,10 +69,11 @@ export default function Search(props) {
             ? currentElement.previousElementSibling.focus()
             : id("search-input").focus();
         }
+        return event.preventDefault();
       }
+
       // Change focus as if ArrowDown === Tab
       else if (event.key === "ArrowDown") {
-        event.preventDefault();
         if (currentElement.id === "search-input") {
           suggestionClass[0].focus();
         } else {
@@ -85,10 +81,11 @@ export default function Search(props) {
             ? currentElement.nextElementSibling.focus()
             : id("search-input").focus();
         }
+        return event.preventDefault();
       }
 
       // listen for equals key to do some math inline
-      else if (event.key === "=") {
+      if (event.key === "=") {
         if (id("search-input").value.match(mathPattern)) {
           try {
             event.preventDefault();
@@ -96,52 +93,59 @@ export default function Search(props) {
             // disabling eslint for line containing `eval` because I'm prevalidating the input with mathPattern
             // eslint-disable-next-line
             const answer = eval(id("search-input").value);
-
-            return (id("search-input").value =
-              expression + "=" + answer.toString());
+            id("search-input").value = expression + "=" + answer.toString();
+            return true;
           } catch {
             // Cases where this fails includes incomplete expressions like `2+=`
             return false;
           }
         }
-      } else if (event.key === "?" && id("search-input").value < 1) {
+      }
+      // Listen for ? and do something only if there's nothing in the input
+      if (event.key === "?" && id("search-input").value === "") {
         event.preventDefault();
         return props.history.push("/links");
-      } else if ((event.ctrlKey || event.metaKey) && event.key === "r") {
-        event.preventDefault();
-        return props.history.push("/");
-      } else if (event.key === "Backspace") {
+      }
+
+      // Listen for backspace
+      if (event.key === "Backspace") {
         if (document.activeElement !== id("search-input")) {
           setSearch(document.activeElement.textContent);
           changeFocus("search-input");
-          return;
-        } else if (id("search-input").value === "") {
+        } else if (id("search-input").value.length <= 1) {
+          props.history.push("/");
           event.preventDefault();
-          return props.history.push("/");
         }
+        return;
+      }
+
+      // Listen for ctrl/cmd + r
+      if ((event.ctrlKey || event.metaKey) && event.key === "r") {
+        event.preventDefault();
+        return props.history.push("/");
       }
 
       // Listen for esc
-      else if (event.key === "Escape") {
+      if (event.key === "Escape") {
         // // If search-input is focused then clear the input
         if (document.activeElement !== id("search-input")) {
           return changeFocus("search-input");
         } else if (id("search-input").value.length > 0) {
-          return clearInput();
+          return (id("search-input").value = "");
         } else {
           return props.history.push("/");
         }
       }
 
       // Allow tabbing but anything else focuses search
-      else if (event.key !== "Shift" && event.key !== "Tab") {
+      if (event.key !== "Shift" && event.key !== "Tab") {
         changeFocus("search-input");
       }
     }
 
     window.addEventListener("keydown", keyHandler);
     return () => window.removeEventListener("keydown", keyHandler);
-  }, [search, props.history]);
+  }, [props.history, search]);
 
   return (
     <form
@@ -158,10 +162,9 @@ export default function Search(props) {
     >
       <input
         id="search-input"
-        className="move"
-        type="text"
         autoFocus
         onFocus={event => (event.target.value = search)}
+        type="text"
       />
       <div id="search-suggestions">
         {suggestions
@@ -169,17 +172,17 @@ export default function Search(props) {
               <button
                 key={"search-suggestion-" + i}
                 id={"search-suggestion-" + i}
-                className="search-suggestion move"
+                className="search-suggestion"
                 onClick={() => (window.location.href = parseInput(suggestion))}
-                onFocus={event => replaceInput(event.target.id)}
+                onFocus={() => (id("search-input").value = suggestion)}
                 onMouseOver={event => mouseHandler(event.target.id)}
                 type="button"
               >
                 {reactStringReplace(
                   suggestion,
                   search.match(new RegExp(/\b(.)+(.)\b/g)),
-                  (match, i) => (
-                    <span className="match" key={i}>
+                  (match, index) => (
+                    <span className="match" key={index}>
                       {match}
                     </span>
                   )

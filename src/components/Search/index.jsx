@@ -69,7 +69,7 @@ export default function Search(props) {
             ? currentElement.previousElementSibling.focus()
             : id("search-input").focus();
         }
-        return event.preventDefault();
+        event.preventDefault();
       }
 
       // Change focus as if ArrowDown === Tab
@@ -81,11 +81,11 @@ export default function Search(props) {
             ? currentElement.nextElementSibling.focus()
             : id("search-input").focus();
         }
-        return event.preventDefault();
+        event.preventDefault();
       }
 
       // listen for equals key to do some math inline
-      if (event.key === "=") {
+      else if (event.key === "=") {
         if (id("search-input").value.match(mathPattern)) {
           try {
             event.preventDefault();
@@ -101,44 +101,52 @@ export default function Search(props) {
           }
         }
       }
+
       // Listen for ? and do something only if there's nothing in the input
-      if (event.key === "?" && id("search-input").value === "") {
+      else if (event.key === "?" && id("search-input").value === "") {
         event.preventDefault();
-        return props.history.push("/links");
+        props.history.push("/links");
+      }
+
+      // Listen for space
+      else if (event.key === "Spacebar" || event.code === "Space") {
+        if (document.activeElement.id !== "search-input") {
+          setSearch(document.activeElement.textContent);
+          changeFocus("search-input");
+        }
       }
 
       // Listen for backspace
-      if (event.key === "Backspace") {
-        if (document.activeElement !== id("search-input")) {
+      else if (event.key === "Backspace") {
+        if (document.activeElement.id !== "search-input") {
           setSearch(document.activeElement.textContent);
           changeFocus("search-input");
         } else if (id("search-input").value.length <= 1) {
           props.history.push("/");
           event.preventDefault();
         }
-        return;
       }
 
       // Listen for ctrl/cmd + r
-      if ((event.ctrlKey || event.metaKey) && event.key === "r") {
+      else if ((event.ctrlKey || event.metaKey) && event.key === "r") {
         event.preventDefault();
-        return props.history.push("/");
+        props.history.push("/");
       }
 
       // Listen for esc
-      if (event.key === "Escape") {
-        // // If search-input is focused then clear the input
+      else if (event.key === "Escape") {
+        // If search-input is focused then clear the input
         if (document.activeElement !== id("search-input")) {
-          return changeFocus("search-input");
+          changeFocus("search-input");
         } else if (id("search-input").value.length > 0) {
-          return (id("search-input").value = "");
+          id("search-input").value = "";
         } else {
-          return props.history.push("/");
+          props.history.push("/");
         }
       }
 
       // Allow tabbing but anything else focuses search
-      if (event.key !== "Shift" && event.key !== "Tab") {
+      else if (event.key !== "Shift" && event.key !== "Tab") {
         changeFocus("search-input");
       }
     }

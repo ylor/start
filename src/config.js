@@ -81,13 +81,13 @@ export const config = {
       category: "MDC",
       name: "MDC",
       key: "mdc",
-      url: "http://www.mdc.edu/"
+      url: "http://www.mdc.edu"
     },
     {
       category: "MDC",
       name: "MDC - Employee",
       key: "emp",
-      url: "https://wapi.mdc.edu/NTAuth/",
+      url: "https://wapi.mdc.edu/NTAuth",
       search: "/NTAuth/user_data.asp?UserID={}"
     },
     {
@@ -146,7 +146,7 @@ export const config = {
       name: "Giphy",
       key: "gif",
       url: "https://giphy.com",
-      search: "search/{}"
+      search: "/search/{}"
     },
     {
       name: "Hacker News",
@@ -183,7 +183,7 @@ export const config = {
     {
       name: "Node Package Manager",
       key: "npm",
-      url: "https://www.npmjs.com/",
+      url: "https://www.npmjs.com",
       search: "/search?q={}"
     },
     {

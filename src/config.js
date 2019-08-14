@@ -143,6 +143,12 @@ export const config = {
       url: "https://giantbomb.com/infinite"
     },
     {
+      name: "Giphy",
+      key: "gif",
+      url: "https://giphy.com",
+      search: "search/{}"
+    },
+    {
       name: "Hacker News",
       key: "hn",
       url: "https://news.ycombinator.com/",

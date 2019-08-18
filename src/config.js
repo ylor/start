@@ -206,7 +206,7 @@ export const config = {
       name: "RARBG",
       key: "rarbg",
       url: "https://rarbg.to/torrents",
-      search: "/torrents.php?search={}"
+      search: "?search={}"
     },
     {
       name: "Reddit",

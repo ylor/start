@@ -152,7 +152,11 @@ export default function Search(props) {
       }
 
       // Allow tabbing but anything else focuses search
-      else if (event.key !== "Shift" && event.key !== "Tab") {
+      else if (
+        event.key !== "Enter" &&
+        event.key !== "Shift" &&
+        event.key !== "Tab"
+      ) {
         changeFocus("search-input");
       }
     }

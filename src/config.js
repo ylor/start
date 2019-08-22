@@ -175,6 +175,12 @@ export const config = {
       url: "https://jsfiddle.net/"
     },
     {
+      name: "MyAnimeList",
+      key: "mal",
+      url: "https://myanimelist.net",
+      search: "/search/all?q={}"
+    },
+    {
       name: "Netflix",
       key: "netflix",
       url: "https://www.netflix.com/browse",

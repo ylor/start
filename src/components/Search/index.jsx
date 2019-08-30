@@ -2,50 +2,38 @@ import React, { useState, useEffect } from "react";
 import fetchJsonp from "fetch-jsonp";
 import reactStringReplace from "react-string-replace";
 
-import { id } from "../../js/utils";
 import parseInput from "./parseInput";
 import "./style.scss";
 
 const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
 
-function changeFocus(element) {
-  id(element).focus();
-}
-
-function mouseHandler(element) {
-  // Add event listener to only change focus via mouse if mouse is moving.
-  // Helps maintain integrity of input when suggestions are being returned as typing continues
-  id(element).addEventListener("mousemove", event => changeFocus(element));
-}
+const changeFocus = element => document.getElementById(element).focus();
 
 export default function Search(props) {
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
+  const searchInput = document.getElementById("search-input");
+
   useEffect(() => {
     async function fetchSuggestions() {
-      try {
-        const response = await fetchJsonp(
-          "https://duckduckgo.com/ac/?q=" + search,
-          {
-            jsonpCallbackFunction: "autocompleteCallback"
-          }
-        );
-        const json = await response.json();
-        const data = json
-          .map(x => x.phrase) // make a simple array
-          .filter(x => x !== search) // exclude items that equal what we have already typed in
-          .slice(0, 4); // take only the first four results
+      const response = await fetchJsonp(
+        "https://duckduckgo.com/ac/?q=" + search,
+        { jsonpCallbackFunction: "autocompleteCallback" }
+      );
+      const json = await response.json();
+      const data = json
+        // make a simple array
+        .map(x => x.phrase)
+        // exclude items that equal what we have already typed in
+        .filter(x => x !== search)
+        // take only the first four results
+        .slice(0, 4);
 
-        //console.log(data);
-        if (search.includes("%")) {
-          setSuggestions([data[0]]);
-        } else {
-          setSuggestions(data);
-        }
-      } catch {
-        // This fails out a lot if you type quickly, but it doesn't seem to affect the application -- still get referenceErrors because it's trying to execute a script that no longer exists
-        return null;
+      if (search.includes("%")) {
+        setSuggestions([data[0]]);
+      } else {
+        setSuggestions(data);
       }
     }
 
@@ -56,45 +44,42 @@ export default function Search(props) {
     }
 
     function keyHandler(event) {
-      const currentElement = document.activeElement;
       const suggestionClass = document.getElementsByClassName(
         "search-suggestion"
       );
 
       // Change focus as if ArrowUp === Shitf+Tab
       if (event.key === "ArrowUp") {
-        if (currentElement.id === "search-input") {
+        if (document.activeElement === searchInput) {
           suggestionClass[suggestionClass.length - 1].focus();
         } else {
-          currentElement.previousElementSibling
-            ? currentElement.previousElementSibling.focus()
-            : id("search-input").focus();
+          document.activeElement.previousElementSibling
+            ? document.activeElement.previousElementSibling.focus()
+            : searchInput.focus();
         }
-        event.preventDefault();
       }
 
       // Change focus as if ArrowDown === Tab
       else if (event.key === "ArrowDown") {
-        if (currentElement.id === "search-input") {
+        if (document.activeElement === searchInput) {
           suggestionClass[0].focus();
         } else {
-          currentElement.nextElementSibling
-            ? currentElement.nextElementSibling.focus()
-            : id("search-input").focus();
+          document.activeElement.nextElementSibling
+            ? document.activeElement.nextElementSibling.focus()
+            : searchInput.focus();
         }
-        event.preventDefault();
       }
 
       // listen for equals key to do some math inline
       else if (event.key === "=") {
-        if (id("search-input").value.match(mathPattern)) {
+        if (searchInput.value.match(mathPattern)) {
           try {
             event.preventDefault();
-            const expression = id("search-input").value;
+            const expression = searchInput.value;
             // disabling eslint for line containing `eval` because I'm prevalidating the input with mathPattern
             // eslint-disable-next-line
-            const answer = eval(id("search-input").value);
-            id("search-input").value = expression + "=" + answer.toString();
+            const answer = eval(searchInput.value);
+            searchInput.value = expression + "=" + answer.toString();
             return true;
           } catch {
             // Cases where this fails includes incomplete expressions like `2+=`
@@ -104,7 +89,7 @@ export default function Search(props) {
       }
 
       // Listen for ? and do something only if there's nothing in the input
-      else if (event.key === "?" && id("search-input").value === "") {
+      else if (event.key === "?" && searchInput.value.length === 0) {
         event.preventDefault();
         props.history.push("/links");
       }
@@ -123,7 +108,7 @@ export default function Search(props) {
         if (document.activeElement.id !== "search-input") {
           setSearch(document.activeElement.textContent);
           changeFocus("search-input");
-        } else if (id("search-input").value.length <= 1) {
+        } else if (searchInput.value.length <= 1) {
           props.history.push("/");
           event.preventDefault();
         }
@@ -138,12 +123,12 @@ export default function Search(props) {
       // Listen for esc
       else if (event.key === "Escape") {
         // If search-input is focused then clear the input
-        if (document.activeElement !== id("search-input")) {
+        if (document.activeElement !== searchInput) {
           changeFocus("search-input");
         }
         // If search-input is focused and has a value, zero it out
-        else if (id("search-input").value.length > 0) {
-          id("search-input").value = "";
+        else if (searchInput.value.length > 0) {
+          searchInput.value = "";
         }
         // If search-input is already empty, navigate back home
         else {
@@ -163,7 +148,7 @@ export default function Search(props) {
 
     window.addEventListener("keydown", keyHandler);
     return () => window.removeEventListener("keydown", keyHandler);
-  }, [props.history, search]);
+  }, [props.history, searchInput, search]);
 
   return (
     <form
@@ -172,10 +157,9 @@ export default function Search(props) {
       autoComplete="off"
       autoCorrect="off"
       spellCheck="false"
-      onChange={event => setSearch(event.target.value)}
       onSubmit={event => {
         event.preventDefault();
-        window.location.href = parseInput(id("search-input").value);
+        window.location.href = parseInput(searchInput.value);
       }}
     >
       <input
@@ -183,6 +167,7 @@ export default function Search(props) {
         type="text"
         autoFocus
         onFocus={event => (event.target.value = search)}
+        onInput={event => setSearch(event.target.value)}
       />
       <div id="search-suggestions">
         {suggestions
@@ -191,10 +176,13 @@ export default function Search(props) {
                 key={"search-suggestion-" + index}
                 id={"search-suggestion-" + index}
                 className="search-suggestion"
-                type="button"
                 onClick={() => (window.location.href = parseInput(suggestion))}
-                onFocus={() => (id("search-input").value = suggestion)}
-                onMouseOver={event => mouseHandler(event.target.id)}
+                onFocus={() => (searchInput.value = suggestion)}
+                onMouseOver={event =>
+                  event.target.addEventListener("mousemove", event =>
+                    event.target.focus()
+                  )
+                }
               >
                 {reactStringReplace(
                   suggestion,

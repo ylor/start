@@ -4,8 +4,9 @@ import React, { useEffect } from "react";
 import { config } from "../../config";
 import "./style.scss";
 
+const { commands } = config;
+
 export default function Links(props) {
-  const { commands } = config;
   const categories = [
     ...new Set([...commands.map(command => command.category)])
   ]

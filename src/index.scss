@@ -5,8 +5,7 @@
   --color-fg: #ccc;
   --color-fg-bright: #fff;
 
-  --font-sans: -apple-system, BlinkMacSystemFont, "Acumin", "Roboto",
-    "Helvetica Neue", sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Acumin", sans-serif;
   --font-mono: "Duo", "SFMono-Regular", Menlo, Monaco, Consolas, "Courier New",
     monospace;
   --font-base-px: 24px;
@@ -55,9 +54,4 @@ a {
 
 code {
   font-family: var(--font-mono);
-}
-
-.highlight {
-  background: var(--color-fg);
-  color: var(--color-bg);
 }

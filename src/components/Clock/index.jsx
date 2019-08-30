@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./style.scss";
 
 export default function Clock(props) {
-  const [time, setTime] = useState(new Date());
+  const [date, setDate] = useState(new Date());
+  const time = date.toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit"
+  });
 
   useEffect(() => {
     function keyHandler(event) {
@@ -24,15 +28,13 @@ export default function Clock(props) {
         "Tab"
       ];
       if (keyBlacklist.includes(event.key)) {
-        event.preventDefault();
-        return;
+        return event.preventDefault();
       }
 
       // Prevent triggering search screen when trying to reload
       else if ((event.metaKey || event.ctrlKey) && event.key === "r") {
         event.preventDefault();
-        window.location.reload();
-        return;
+        return window.location.reload();
       }
 
       // Trigger links on question mark
@@ -42,18 +44,16 @@ export default function Clock(props) {
       }
 
       // Trigger search screen on any keypress other than above
-      if (window.location.pathname !== "/search") {
-        props.history.push("/search");
-      }
+      props.history.push("/search");
     }
-
-    // Init keyHandler
-    window.addEventListener("keydown", keyHandler);
 
     // Update date every second
     const dateUpdater = setInterval(() => {
-      setTime(new Date());
+      setDate(new Date());
     }, 1000);
+
+    // Init keyHandler
+    window.addEventListener("keydown", keyHandler);
 
     // Cleanup dateUpdater interval and keyHandler event listener
     return () => {
@@ -64,22 +64,9 @@ export default function Clock(props) {
 
   return (
     <time id="clock" onClick={() => props.history.push("/search")}>
-      {time
-        .toLocaleTimeString(navigator.language, {
-          hour: "numeric",
-          minute: "2-digit"
-        })
-        .split(" ")[0]
-        .replace(":", " ") + " "}
-      <span id="am-pm">
-        {
-          time
-            .toLocaleTimeString(navigator.language, {
-              hour: "numeric"
-            })
-            .split(" ")[1]
-        }
-      </span>
+      {time.split(" ")[0].replace(":", " ")}
+      &nbsp;
+      <span id="am-pm">{time.split(" ")[1]}</span>
     </time>
   );
 }

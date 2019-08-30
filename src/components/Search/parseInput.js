@@ -1,6 +1,8 @@
 import { config } from "../../config";
+
 export default function parseInput(rawInput) {
   const { commands } = config;
+  
   const input = rawInput.toLowerCase();
   const keys = commands.map(command => command.key);
   const urlPattern = new RegExp(
@@ -14,7 +16,7 @@ export default function parseInput(rawInput) {
   }
 
   // handle search with a matched key
-  else if (input.includes(":") && keys.includes(input.split(":")[0])) {
+  if (input.includes(":") && keys.includes(input.split(":")[0])) {
     const key = input.split(":")[0];
     const query = rawInput.split(":")[1].trimStart();
 
@@ -29,14 +31,14 @@ export default function parseInput(rawInput) {
   }
 
   // handle paths with a matched key
-  else if (input.includes("/") && keys.includes(input.split("/")[0])) {
+  if (input.includes("/") && keys.includes(input.split("/")[0])) {
     const key = input.split("/")[0];
     const path = input.split("/")[1];
     return commands.find(command => command.key === key).url + "/" + path;
   }
 
   // handle urls
-  else if (input.match(urlPattern) || input.includes("localhost")) {
+  if (input.match(urlPattern) || input.includes("localhost")) {
     return input.startsWith("http") ? input : "http://" + input;
   }
 

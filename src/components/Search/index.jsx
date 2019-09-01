@@ -104,7 +104,11 @@ export default function Search(props) {
       // Listen for backspace
       else if (event.key === "Backspace") {
         if (document.activeElement.id !== "search-input") {
-          setSearch(document.activeElement.textContent);
+          setSearch(
+            search.includes(":")
+              ? search.split(":")[0] + ":" + document.activeElement.textContent
+              : document.activeElement.textContent
+          );
           changeFocus("search-input");
         } else if (searchInput.value.length <= 1) {
           props.history.push("/");

@@ -182,7 +182,9 @@ export default function Search(props) {
                 }
               >
                 {reactStringReplace(
-                  suggestion,
+                  suggestion.includes(":")
+                    ? suggestion.split(":")[1]
+                    : suggestion,
                   search.match(new RegExp(/\b(.)+(.)\b/g)),
                   (match, index) => (
                     <span className="match" key={index}>

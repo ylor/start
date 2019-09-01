@@ -28,23 +28,25 @@ export default function Clock(props) {
         "Tab"
       ];
       if (keyBlacklist.includes(event.key)) {
-        return event.preventDefault();
+        event.preventDefault();
       }
 
       // Prevent triggering search screen when trying to reload
       else if ((event.metaKey || event.ctrlKey) && event.key === "r") {
         event.preventDefault();
-        return window.location.reload();
+        window.location.reload();
       }
 
       // Trigger links on question mark
       else if (event.key === "?") {
         event.preventDefault();
-        return props.history.push("/links");
+        props.history.push("/links");
       }
 
       // Trigger search screen on any keypress other than above
-      props.history.push("/search");
+      else {
+        props.history.push("/search");
+      }
     }
 
     // Update date every second

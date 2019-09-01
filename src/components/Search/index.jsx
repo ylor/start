@@ -6,7 +6,6 @@ import parseInput from "./parseInput";
 import "./style.scss";
 
 const mathPattern = new RegExp(/^[()\d\s.+\-*/=]*$/g);
-
 const changeFocus = element => document.getElementById(element).focus();
 
 export default function Search(props) {
@@ -16,21 +15,26 @@ export default function Search(props) {
   const searchInput = document.getElementById("search-input");
 
   useEffect(() => {
+    const query = () => (search.includes(":") ? search.split(":")[1] : search);
     async function fetchSuggestions() {
       const response = await fetchJsonp(
-        "https://duckduckgo.com/ac/?q=" + search,
+        "https://duckduckgo.com/ac/?q=" + query(),
         { jsonpCallbackFunction: "autocompleteCallback" }
       );
       const json = await response.json();
       const data = json
-        // make a simple array
+        // make a simple array out of object
         .map(x => x.phrase)
-        // exclude items that equal what we have already typed in
+        // only include elements that aren't the same as our search, it's redundant
         .filter(x => x !== search)
         // take only the first four results
         .slice(0, 4);
 
-      if (search.includes("%")) {
+      if (search.includes(":")) {
+        setSuggestions(
+          data.map(suggestion => search.split(":")[0] + ":" + suggestion)
+        );
+      } else if (search.includes("%")) {
         setSuggestions([data[0]]);
       } else {
         setSuggestions(data);
@@ -47,8 +51,7 @@ export default function Search(props) {
       const suggestionClass = document.getElementsByClassName(
         "search-suggestion"
       );
-
-      // Change focus as if ArrowUp === Shitf+Tab
+      // Change focus as if ArrowUp === Shitf+Tab & Change focus as if ArrowDown === Tab
       if (event.key === "ArrowUp") {
         if (document.activeElement === searchInput) {
           suggestionClass[suggestionClass.length - 1].focus();
@@ -57,10 +60,7 @@ export default function Search(props) {
             ? document.activeElement.previousElementSibling.focus()
             : searchInput.focus();
         }
-      }
-
-      // Change focus as if ArrowDown === Tab
-      else if (event.key === "ArrowDown") {
+      } else if (event.key === "ArrowDown") {
         if (document.activeElement === searchInput) {
           suggestionClass[0].focus();
         } else {
@@ -80,10 +80,8 @@ export default function Search(props) {
             // eslint-disable-next-line
             const answer = eval(searchInput.value);
             searchInput.value = expression + "=" + answer.toString();
-            return true;
           } catch {
             // Cases where this fails includes incomplete expressions like `2+=`
-            return false;
           }
         }
       }
@@ -110,7 +108,6 @@ export default function Search(props) {
           changeFocus("search-input");
         } else if (searchInput.value.length <= 1) {
           props.history.push("/");
-          event.preventDefault();
         }
       }
 
@@ -148,7 +145,7 @@ export default function Search(props) {
 
     window.addEventListener("keydown", keyHandler);
     return () => window.removeEventListener("keydown", keyHandler);
-  }, [props.history, searchInput, search]);
+  }, [props.history, search, searchInput]);
 
   return (
     <form

@@ -151,13 +151,14 @@ export const config = {
     {
       name: "Hacker News",
       key: "hn",
-      url: "https://news.ycombinator.com/",
+      url: "https://news.ycombinator.com",
       search: "/search?q={}"
     },
     {
       name: "How Long to Beat",
       key: "hltb",
-      url: "https://howlongtobeat.com"
+      url: "https://howlongtobeat.com",
+      search: "/?q={}"
     },
     {
       name: "iCloud",

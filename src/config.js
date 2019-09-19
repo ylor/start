@@ -238,6 +238,12 @@ export const config = {
       url: "https://www.resetera.com"
     },
     {
+      name: "Epic Game Store",
+      key: "egs",
+      url: "https://www.epicgames.com/store",
+      search: "/store-search/?q={}"
+    },
+    {
       name: "Steam",
       key: "steam",
       url: "https://store.steampowered.com",

@@ -103,6 +103,12 @@ export const config = {
       key: "jamf",
       url: "https://kmacdep.kendall.mdcc.edu:8443/"
     },
+    {
+      category: "MDC",
+      name: "Timeclock",
+      key: "timeclock",
+      url: "https://timeclock.mdc.edu/"
+    },
     // Internet
     {
       name: "1Password Password Generator",

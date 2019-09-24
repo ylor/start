@@ -108,6 +108,12 @@ export const config = {
       key: "jamf",
       url: "https://kmacdep.kendall.mdcc.edu:8443/"
     },
+    {
+      category: "MDC",
+      name: "Timeclock",
+      key: "timeclock",
+      url: "https://timeclock.mdc.edu/"
+    },
     // Internet
     {
       name: "1Password Password Generator",
@@ -235,6 +241,12 @@ export const config = {
       name: "ResetERA",
       key: "re",
       url: "https://www.resetera.com"
+    },
+    {
+      name: "Epic Game Store",
+      key: "egs",
+      url: "https://www.epicgames.com/store",
+      search: "/store-search/?q={}"
     },
     {
       name: "Steam",

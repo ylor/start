@@ -30,6 +30,11 @@ export const config = {
       url: "http://docker.local:9000"
     },
     {
+      name: "Radarr",
+      key: "radarr",
+      url: "http://docker.local:7878"
+    },
+    {
       name: "Sonarr",
       key: "sonarr",
       url: "http://docker.local:8989"

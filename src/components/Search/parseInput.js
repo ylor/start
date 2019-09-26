@@ -2,7 +2,7 @@ import { config } from "../../config";
 
 export default function parseInput(rawInput) {
   const { commands } = config;
-  
+
   const input = rawInput.toLowerCase();
   const keys = commands.map(command => command.key);
   const urlPattern = new RegExp(
@@ -21,12 +21,9 @@ export default function parseInput(rawInput) {
     const query = rawInput.split(":")[1].trimStart();
 
     if (commands.find(command => command.key === key).search) {
-      return (
-        commands.find(command => command.key === key).url +
-        commands
-          .find(command => command.key === key)
-          .search.replace("{}", query)
-      );
+      return commands
+        .find(command => command.key === key)
+        .search.replace("{}", query);
     }
   }
 
@@ -44,10 +41,7 @@ export default function parseInput(rawInput) {
 
   // search google
   else
-    return (
-      commands.find(command => command.key === "*").url +
-      commands
-        .find(command => command.key === "*")
-        .search.replace("{}", encodeURIComponent(rawInput))
-    );
+    return commands
+      .find(command => command.key === "*")
+      .search.replace("{}", encodeURIComponent(rawInput));
 }

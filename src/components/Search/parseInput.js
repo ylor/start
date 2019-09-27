@@ -5,7 +5,7 @@ export default function parseInput(rawInput) {
 
   const input = rawInput.toLowerCase();
   const keysList = commands.map(command => command.keys).flat();
-  const ipPattern = new RegExp(/^((2(?!5?[6-9])|1|(?!0\d))\d\d?\.?\b){4}$/g);
+  const ipPattern = new RegExp(/^((2(?!5?[6-9])|1|(?!0\B))\d\d?\.?\b){4}$/g);
   const urlPattern = new RegExp(
     /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/gi
   );

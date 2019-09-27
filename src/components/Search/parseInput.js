@@ -37,6 +37,7 @@ export default function parseInput(rawInput) {
   if (input.includes(":") && keysList.includes(input.split(":")[0])) {
     const key = input.split(":")[0];
     const query = rawInput.split(":")[1].trimStart();
+    console.log(commands.find(command => command.keys.includes(key)).search);
 
     if (commands.find(command => command.keys.includes(key)).search) {
       return commands
@@ -57,6 +58,6 @@ export default function parseInput(rawInput) {
   // search google
   else
     return commands
-      .find(command => command.key === "*")
+      .find(command => command.keys === "*")
       .search.replace("{}", encodeURIComponent(rawInput));
 }

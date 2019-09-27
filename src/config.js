@@ -8,7 +8,7 @@ export const config = {
   commands: [
     {
       name: "Google",
-      key: "*",
+      keys: "*",
       url: "https://google.com",
       search: "https://google.com/search?q={}"
     },

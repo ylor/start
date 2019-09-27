@@ -4,7 +4,7 @@ export default function parseInput(rawInput) {
   const { commands } = config;
 
   const input = rawInput.toLowerCase();
-  const keys = commands.map(command => command.key);
+  const keys = commands.map(command => command.key).flat();
   const urlPattern = new RegExp(
     /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/gi
   );
@@ -12,7 +12,13 @@ export default function parseInput(rawInput) {
   // begin conditionals for the parser
   // handle match to key in config
   if (keys.includes(input)) {
-    return commands.find(x => x.key === input).url;
+    console.log(commands.filter(v => v.key.includes(input)));
+    return;
+  }
+
+  // handle urls
+  if (input.match(urlPattern) || input.includes("localhost")) {
+    return input.startsWith("http") ? input : "http://" + input;
   }
 
   // handle search with a matched key
@@ -20,7 +26,7 @@ export default function parseInput(rawInput) {
     const key = input.split(":")[0];
     const query = rawInput.split(":")[1].trimStart();
 
-    if (commands.find(command => command.key === key).search) {
+    if (commands.find(command => command.key.includes(key)).search) {
       return commands
         .find(command => command.key === key)
         .search.replace("{}", query);
@@ -31,12 +37,7 @@ export default function parseInput(rawInput) {
   if (input.includes("/") && keys.includes(input.split("/")[0])) {
     const key = input.split("/")[0];
     const path = input.split("/")[1];
-    return commands.find(command => command.key === key).url + "/" + path;
-  }
-
-  // handle urls
-  if (input.match(urlPattern) || input.includes("localhost")) {
-    return input.startsWith("http") ? input : "http://" + input;
+    return commands.find(command => command.key.includes(key)).url + "/" + path;
   }
 
   // search google

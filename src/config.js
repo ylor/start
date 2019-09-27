@@ -15,7 +15,7 @@ export const config = {
     // Server
     {
       name: "Pi-hole",
-      key: "pi",
+      key: ["pi", "pihole"],
       url: "http://pi.hole/admin"
     },
     {
@@ -103,7 +103,7 @@ export const config = {
       category: "MDC",
       name: "MDC - Student",
       key: "stu",
-      url: "https://mdcwapi.mdc.edu:8001/ntauthstudent/",
+      url: "https://mdcwapi.mdc.edu:8001/ntauthstudent",
       search:
         "https://mdcwapi.mdc.edu:8001/ntauthstudent/StudentData.aspx?AcctNm={}"
     },
@@ -111,24 +111,24 @@ export const config = {
       category: "MDC",
       name: "JAMF",
       key: "jamf",
-      url: "https://kmacdep.kendall.mdcc.edu:8443/"
+      url: "https://kmacdep.kendall.mdcc.edu:8443"
     },
     {
       category: "MDC",
       name: "Timeclock",
-      key: "timeclock",
-      url: "https://timeclock.mdc.edu/"
+      key: ["tc", "timeclock"],
+      url: "https://timeclock.mdc.edu"
     },
     // Internet
     {
       name: "1Password Password Generator",
       key: "pw",
-      url: "https://1password.com/password-generator/"
+      url: "https://1password.com/password-generator"
     },
     {
       name: "Amazon",
       key: "a",
-      url: "https://www.amazon.com/",
+      url: "https://www.amazon.com",
       search: "https://www.amazon.com/s?k={}"
     },
     {
@@ -144,7 +144,7 @@ export const config = {
     {
       name: "Drive",
       key: "drive",
-      url: "https://drive.google.com/"
+      url: "https://drive.google.com"
     },
     {
       name: "Epic Game Store",
@@ -155,13 +155,13 @@ export const config = {
     {
       name: "Giant Bomb",
       key: "gb",
-      url: "https://www.giantbomb.com/",
+      url: "https://www.giantbomb.com",
       search: "https://www.giantbomb.com/search/?i=&q={}"
     },
     {
       name: "Giant Bomb Infinite",
       key: "gb8",
-      url: "https://www.giantbomb.com/infinite/"
+      url: "https://www.giantbomb.com/infinite"
     },
     {
       name: "Giphy",
@@ -184,7 +184,7 @@ export const config = {
     {
       name: "iCloud",
       key: "icloud",
-      url: "https://www.icloud.com/"
+      url: "https://www.icloud.com"
     },
     {
       name: "iCloud Mail",
@@ -194,18 +194,18 @@ export const config = {
     {
       name: "JSFiddle",
       key: "fiddle",
-      url: "https://jsfiddle.net/"
+      url: "https://jsfiddle.net"
     },
     {
       name: "MyAnimeList",
       key: "mal",
-      url: "https://myanimelist.net/",
+      url: "https://myanimelist.net",
       search: "https://myanimelist.net/search/all?q={}"
     },
     {
       name: "Netflix",
       key: "netflix",
-      url: "https://www.netflix.com/",
+      url: "https://www.netflix.com",
       search: "https://www.netflix.com/search?q={}"
     },
     {
@@ -227,7 +227,7 @@ export const config = {
     },
     {
       name: "Plex.tv",
-      key: "plex",
+      key: "plextv",
       url: "https://app.plex.tv/desktop"
     },
     {
@@ -245,17 +245,17 @@ export const config = {
     {
       name: "Simplenote",
       key: "sn",
-      url: "https://app.simplenote.com/"
+      url: "https://app.simplenote.com"
     },
     {
       name: "Spotify",
       key: "spotify",
-      url: "https://open.spotify.com/"
+      url: "https://open.spotify.com"
     },
     {
       name: "ResetERA",
       key: "re",
-      url: "https://www.resetera.com/"
+      url: "https://www.resetera.com"
     },
 
     {
@@ -283,7 +283,7 @@ export const config = {
     {
       name: "Yarn",
       key: "yarn",
-      url: "https://yarnpkg.com/",
+      url: "https://yarnpkg.com",
       search: "https://yarnpkg.com//en/packages?q={}"
     },
     {
@@ -297,19 +297,19 @@ export const config = {
       category: "Destiny",
       name: "Destiny Item Manager",
       key: "dim",
-      url: "https://app.destinyitemmanager.com/"
+      url: "https://app.destinyitemmanager.com"
     },
     {
       category: "Destiny",
       name: "Destiny Sets",
       key: "sets",
-      url: "https://destinysets.com/"
+      url: "https://destinysets.com"
     },
     {
       category: "Destiny",
       name: "Light.gg",
       key: "light",
-      url: "https://light.gg/"
+      url: "https://light.gg"
     },
     // Reddit
     {

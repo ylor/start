@@ -94,6 +94,12 @@ export const config = {
     },
     {
       category: "MDC",
+      name: "Miami Dade College - NTAuth",
+      keys: ["ntauth"],
+      url: "http://ntauth.mdc.edu"
+    },
+    {
+      category: "MDC",
       name: "MDC - Employee",
       keys: ["emp"],
       url: "https://wapi.mdc.edu/NTAuth/account_admin.asp",
@@ -116,7 +122,7 @@ export const config = {
     {
       category: "MDC",
       name: "Timeclock",
-      keys: ["tc", "timeclock"],
+      keys: ["timeclock", "tc"],
       url: "https://timeclock.mdc.edu"
     },
     // Internet
@@ -143,7 +149,7 @@ export const config = {
     },
     {
       name: "Drive",
-      keys: ["google drive", "drive"],
+      keys: ["drive", "gdrive"],
       url: "https://drive.google.com"
     },
     {
@@ -227,7 +233,7 @@ export const config = {
     },
     {
       name: "Plex.tv",
-      keys: ["plextv"],
+      keys: ["plexapp", "plextv"],
       url: "https://app.plex.tv/desktop"
     },
     {
@@ -295,9 +301,27 @@ export const config = {
     // Destiny
     {
       category: "Destiny",
+      name: "Braytech",
+      keys: ["braytech"],
+      url: "https://braytech.org"
+    },
+    {
+      category: "Destiny",
+      name: "D2Checklist",
+      keys: ["d2checklist", "d2c"],
+      url: "https://www.d2checklist.com"
+    },
+    {
+      category: "Destiny",
       name: "Destiny Item Manager",
       keys: ["destiny item manager", "dim"],
       url: "https://app.destinyitemmanager.com"
+    },
+    {
+      category: "Destiny",
+      name: "Guardian.gg",
+      keys: ["guardian", "ggg"],
+      url: "https://guardian.gg"
     },
     {
       category: "Destiny",

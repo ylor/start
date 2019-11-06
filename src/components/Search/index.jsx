@@ -34,8 +34,6 @@ export default function Search(props) {
         setSuggestions(
           data.map(suggestion => search.split(":")[0] + ":" + suggestion)
         );
-      } else if (search.includes("%")) {
-        setSuggestions([data[0]]);
       } else {
         setSuggestions(data);
       }
@@ -189,7 +187,7 @@ export default function Search(props) {
                   suggestion.includes(":")
                     ? suggestion.split(":")[1]
                     : suggestion,
-                  search.match(new RegExp(/\b(.)+(.)\b/g)),
+                  search.match(new RegExp(/\b.+.\b/g)),
                   (match, index) => (
                     <span className="match" key={index}>
                       {match}

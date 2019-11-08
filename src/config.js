@@ -88,6 +88,33 @@ export const config = {
     //Work
     {
       category: "MDC",
+      name: "CNS Sharepoint",
+      keys: ["cns", "sharepoint"],
+      url:
+        "https://sharepoint.mdc.edu/kendall/departments/cns/SitePages/CNS%20Department%20Policies%20and%20Procedures.aspx"
+    },
+    {
+      category: "MDC",
+      name: "CNS Forms",
+      keys: ["form", "forms", "formgen"],
+      url:
+        "https://forms.office.com/Pages/ResponsePage.aspx?id=BmhisP_Ok0OCHvmj5maJOyMNwrJzQXNJtaMiAgEgrnpURDlNMExYUjZUT1BZSVBSUUtUSVVLMlRGRi4u"
+    },
+    {
+      category: "MDC",
+      name: "Fusion",
+      keys: ["fusion", "kfusion"],
+      url:
+        "http://kfusion1.kendall.mdcc.edu/Fusion/WebClient/monitoring/pages/Default.html?sp=&rr=15"
+    },
+    {
+      category: "MDC",
+      name: "JAMF",
+      keys: ["jamf"],
+      url: "https://kmacdep.kendall.mdcc.edu:8443"
+    },
+    {
+      category: "MDC",
       name: "Miami Dade College",
       keys: ["mdc"],
       url: "http://www.mdc.edu"
@@ -112,12 +139,6 @@ export const config = {
       url: "https://mdcwapi.mdc.edu:8001/ntauthstudent",
       search:
         "https://mdcwapi.mdc.edu:8001/ntauthstudent/StudentData.aspx?AcctNm={}"
-    },
-    {
-      category: "MDC",
-      name: "JAMF",
-      keys: ["jamf"],
-      url: "https://kmacdep.kendall.mdcc.edu:8443"
     },
     {
       category: "MDC",

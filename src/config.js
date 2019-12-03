@@ -109,6 +109,12 @@ export const config = {
     },
     {
       category: "MDC",
+      name: "CNS Kaseya",
+      keys: ["kaseya"],
+      url: "https://kaseya.mdc.edu/"
+    },
+    {
+      category: "MDC",
       name: "JAMF",
       keys: ["jamf"],
       url: "https://kmacdep.kendall.mdcc.edu:8443"

@@ -27,9 +27,9 @@ export default function parseInput(rawInput) {
       input.includes(".local") ||
       input.includes("localhost")
     ) {
-      return input.startsWith("http") ? input : "http://" + input;
+      return input.startsWith("http") ? rawInput : "http://" + rawInput;
     } else {
-      return input.startsWith("http") ? input : "https://" + input;
+      return input.startsWith("http") ? rawInput : "https://" + rawInput;
     }
   }
 

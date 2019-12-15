@@ -49,7 +49,7 @@ export default function parseInput(rawInput) {
   // handle paths with a matched key
   if (input.includes("/") && keysList.includes(input.split("/")[0])) {
     const key = input.split("/")[0];
-    const path = input.split("/")[1];
+    const path = rawInput.split("/")[1];
     return (
       commands.find(command => command.keys.includes(key)).url + "/" + path
     );

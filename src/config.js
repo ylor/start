@@ -35,17 +35,17 @@ export const config = {
     },
     {
       name: "Radarr",
-      keys: ["radarr"],
+      keys: ["radarr", "movies"],
       url: "http://docker.local:7878"
     },
     {
       name: "Sonarr",
-      keys: ["sonarr"],
+      keys: ["sonarr", "tv"],
       url: "http://docker.local:8989"
     },
     {
       name: "Transmission",
-      keys: ["transmission", "bt"],
+      keys: ["transmission", "bt", "bit"],
       url: "http://docker.local:9091"
     },
     {
@@ -260,7 +260,7 @@ export const config = {
     },
     {
       name: "Plex.tv",
-      keys: ["plexapp", "plextv"],
+      keys: ["plexapp", "plextv", "plex.app", "plex.tv"],
       url: "https://app.plex.tv/desktop"
     },
     {

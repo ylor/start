@@ -314,6 +314,11 @@ export const config = {
       search: "https://twitter.com/search?q={}"
     },
     {
+      name: "Wirecutter",
+      keys: ["wirecutter", "wc"],
+      url: "https://thewirecutter.com/"
+    },
+    {
       name: "Yarn",
       keys: ["yarn"],
       url: "https://yarnpkg.com",

@@ -170,6 +170,12 @@ export const config = {
       url: "https://vault.bitwarden.com"
     },
     {
+      name: "CamelCamelCamel",
+      keys: ["camelcamelcamel", "ccc"],
+      url: "https://camelcamelcamel.com/",
+      search: "https://camelcamelcamel.com/search?sq={}"
+    },
+    {
       name: "Discord",
       keys: ["discord"],
       url: "https://discordapp.com/activity"

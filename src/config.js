@@ -231,6 +231,11 @@ export const config = {
       url: "https://www.icloud.com/#mail"
     },
     {
+      name: "Instagram",
+      keys: ["instagram","insta","ig"],
+      url: "https://www.instagram.com"
+    },
+    {
       name: "JSFiddle",
       keys: ["jsfiddle", "fiddle"],
       url: "https://jsfiddle.net"
@@ -318,6 +323,11 @@ export const config = {
       keys: ["twitter"],
       url: "https://twitter.com",
       search: "https://twitter.com/search?q={}"
+    },
+    {
+      name: "WhatsApp",
+      keys: ["whatsapp", "wa"],
+      url: "https://web.whatsapp.com/"
     },
     {
       name: "Wirecutter",

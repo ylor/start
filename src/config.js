@@ -86,6 +86,13 @@ export const config = {
       url: "https://start.rolyreyes.com"
     },
     //Work
+     {
+      category: "MDC",
+      name: "CNS Service Requests",
+      keys: ["sr"],
+      url:
+        "http://k353077/"
+    },
     {
       category: "MDC",
       name: "CNS Sharepoint",
@@ -312,6 +319,18 @@ export const config = {
       name: "Tumblr",
       keys: ["tumblr"],
       url: "https://tumblr.com"
+    },
+    {
+      name: "tmdb",
+      keys: ["tmdb"],
+      url: "https://thetvdb.com",
+      search: "https://www.themoviedb.org/search?query={}&language=en-US"
+    },
+    {
+      name: "The TVDB",
+      keys: ["tvdb"],
+      url: "https://www.themoviedb.org",
+      search: "https://thetvdb.com/search?query={}"
     },
     {
       name: "Twitch",

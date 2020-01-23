@@ -321,10 +321,10 @@ export const config = {
       url: "https://tumblr.com"
     },
     {
-      name: "tmdb",
+      name: "The Movie Database",
       keys: ["tmdb"],
-      url: "https://thetvdb.com",
-      search: "https://www.themoviedb.org/search?query={}&language=en-US"
+      url: "https://www.themoviedb.org",
+      search: "https://thetvdb.com/search?query={}"
     },
     {
       name: "The TVDB",

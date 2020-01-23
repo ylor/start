@@ -324,12 +324,12 @@ export const config = {
       name: "The Movie Database",
       keys: ["tmdb"],
       url: "https://www.themoviedb.org",
-      search: "https://thetvdb.com/search?query={}"
+      search: "https://www.themoviedb.org/search?query={}&language=en-US"
     },
     {
       name: "The TVDB",
       keys: ["tvdb"],
-      url: "https://www.themoviedb.org",
+      url: "https://thetvdb.com",
       search: "https://thetvdb.com/search?query={}"
     },
     {

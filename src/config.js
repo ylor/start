@@ -216,6 +216,11 @@ export const config = {
       search: "https://giphy.com/search/{}"
     },
     {
+      name: "Guess My Word",
+      keys: ["guessmyword", "gmw"],
+      url: "https://hryanjones.com/guess-my-word/",
+    },
+    {
       name: "Hacker News",
       keys: ["hacker news", "hn"],
       url: "https://news.ycombinator.com",

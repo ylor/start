@@ -86,6 +86,12 @@ export const config = {
       url: "https://start.rolyreyes.com"
     },
     //Work
+    {
+      category: "MDC",
+      name: "Apple School Manager",
+      keys: ["apple school manager", "asm"],
+      url: "http://school.apple.com"
+    },
      {
       category: "MDC",
       name: "CNS Service Requests",

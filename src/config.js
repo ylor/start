@@ -104,6 +104,13 @@ export const config = {
       name: "CNS Sharepoint",
       keys: ["cns", "sharepoint"],
       url:
+        "https://miamidadecollegeprod.sharepoint.com/teams/MDC_Kendall_CampusNetworkServices/SitePages/CNS%20Department%20Policies%20and%20Procedures.aspx"
+    },
+    {
+      category: "MDC",
+      name: "CNS Sharepoint",
+      keys: ["cns-old", "sharepoint-old"],
+      url:
         "https://sharepoint.mdc.edu/kendall/departments/cns/SitePages/CNS%20Department%20Policies%20and%20Procedures.aspx"
     },
     {
@@ -111,7 +118,7 @@ export const config = {
       name: "CNS Forms",
       keys: ["form", "forms", "formgen"],
       url:
-        "https://forms.office.com/Pages/ResponsePage.aspx?id=BmhisP_Ok0OCHvmj5maJOyMNwrJzQXNJtaMiAgEgrnpURDlNMExYUjZUT1BZSVBSUUtUSVVLMlRGRi4u"
+        "https://forms.office.com/Pages/ResponsePage.aspx?id=BmhisP_Ok0OCHvmj5maJOxTM7A6YzXlAmKCvVMMrgsFUMzJaTFhGOEY0STlLWkVMR1JKMU4zMThFTC4u"
     },
     {
       category: "MDC",

@@ -118,7 +118,7 @@ export const config = {
       name: "CNS Forms",
       keys: ["form", "forms"],
       url:
-        "https://forms.office.com/Pages/ResponsePage.aspx?id=BmhisP_Ok0OCHvmj5maJOxTM7A6YzXlAmKCvVMMrgsFUMTVWMjAyVEVRTzdXWFdXUDFLWkZQMkpUVi4u"
+        "https://forms.office.com/Pages/ResponsePage.aspx?id=BmhisP_Ok0OCHvmj5maJOxTM7A6YzXlAmKCvVMMrgsFUMzJaTFhGOEY0STlLWkVMR1JKMU4zMThFTC4u"
     },
     {
       category: "MDC",
